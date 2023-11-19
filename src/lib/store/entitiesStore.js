@@ -43,7 +43,7 @@ async function init (quadStream) {
  * @param {string} queryStr
  * @param {string} variable
  */
-async function queryName(variable, queryStr) {
+async function SVSVQuery(variable, queryStr) {
     const store = get(entity);
     if (!store.loading) {
         return await sparqlEngine.queryBindings(`
@@ -57,4 +57,30 @@ async function queryName(variable, queryStr) {
     }
 }
 
-export { entity, init, queryName }
+/**
+ * get multiple object values of a single predict term
+ * 'SVMV' -> 'Single Variable Multiple Values'
+ * @param {string} variable
+ * @param {string} queryStr
+ */
+async function SVMVQuery(variable, queryStr) {
+    const store = get(entity);
+    if (!store.loading) {
+        return await sparqlEngine.queryBindings(`
+        PREFIX : <http://schema.org/>
+        SELECT ?${variable} ${queryStr}`,
+            { sources: [store.rdfStore]})
+        .then(bindingsStream => bindingsStream.toArray())
+        .then(bindings => {
+            return bindings.reduce(
+                // @ts-ignore
+                (arr, binding) => [...arr, binding.get(variable)?.value],
+                []
+            );
+        })
+    } else {
+        return Promise.resolve('loading...');
+    }
+}
+
+export { entity, init, SVSVQuery, SVMVQuery }

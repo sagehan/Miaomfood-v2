@@ -1,7 +1,7 @@
 <script>
     import rdfParser from 'rdf-parse';
     import Streamify from 'streamify-string';
-    import { init, entity, queryName } from '$lib/store/entitiesStore';
+    import { init, entity, SVSVQuery } from '$lib/store/entitiesStore';
     import { get } from 'svelte/store';
     export let data;
 
@@ -24,7 +24,7 @@
     })();
 
     $: store = $entity.rdfStore;
-    $: store, queryName('name',
+    $: store, SVSVQuery('name',
         `{?s ^:mainEntity/:name "喵姆餐厅"@zh; :name ?name}`)
         .then(value => name = value);
 
