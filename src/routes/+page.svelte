@@ -1,5 +1,6 @@
 <script>
     import { entity, SVMVQuery } from '$lib/store/entitiesStore';
+    import ProductItem from '$lib/ProductItem.svelte';
 
     // get ':name' of all the top ':MenuSection's
     const getSections = () => SVMVQuery('MenuSection',
@@ -50,7 +51,7 @@
                             <h1 class="category__title">{section}</h1>
                             {#await getItemIDs(section) then productIDs}
                                 {#each productIDs as productID }
-                                    <p>{productID}</p>
+                                    <ProductItem {productID}></ProductItem>                                
                                 {/each}
                             {/await}
                         </section>

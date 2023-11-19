@@ -1,9 +1,18 @@
+import rdf from '@rdfjs/data-model';
+import PrefixMap from '@rdfjs/prefix-map';
 import { storeStream } from "rdf-store-stream";
 import { RdfStore } from 'rdf-stores';
 import { QueryEngine } from '@comunica/query-sparql-rdfjs';
 import { get, readonly, writable } from 'svelte/store';
 
 const sparqlEngine = new QueryEngine();
+
+// @ts-ignore
+const prefixes = new PrefixMap([
+    ['', rdf.namedNode('http://schema.org/')],
+    ['owl', rdf.namedNode('http://www.w3.org/2002/07/owl#')],
+    ['miaomfood', rdf.namedNode('https://miaomfood.com/')]
+], { factory: rdf });
 
 // reload rdf data exported from server into memory on the client-side
 const entityStore = (() => {
@@ -39,9 +48,12 @@ async function init (quadStream) {
 }
 
 /**
- *
- * @param {string} queryStr
+ * get single object values of a single predict term, return a single string value
+ * 'SVMV' -> 'Single Variable Multiple Values' 
+ * 
  * @param {string} variable
+ * @param {string} queryStr
+ * @returns {Promise<String>}
  */
 async function SVSVQuery(variable, queryStr) {
     const store = get(entity);
@@ -58,10 +70,12 @@ async function SVSVQuery(variable, queryStr) {
 }
 
 /**
- * get multiple object values of a single predict term
+ * get multiple object values of a single predict term, reassemble into an unary array
  * 'SVMV' -> 'Single Variable Multiple Values'
+ * 
  * @param {string} variable
  * @param {string} queryStr
+ * @returns {Promise<Array<string>>}
  */
 async function SVMVQuery(variable, queryStr) {
     const store = get(entity);
@@ -79,8 +93,73 @@ async function SVMVQuery(variable, queryStr) {
             );
         })
     } else {
-        return Promise.resolve('loading...');
+        return Promise.resolve(['loading...']);
     }
 }
 
-export { entity, init, SVSVQuery, SVMVQuery }
+/**
+ * get each single object value of multiple predict term, reassemble into an simple object
+ * 'MVSV' -> 'Multiple Variables Single Value'
+ * 
+ * @param {string} vars - should be two variable concatenated by a space chractor
+ * @param {string} queryStr 
+ * @returns {Promise<object>}
+ */
+async function MVSVQuery(vars, queryStr) {
+    const store = get(entity);
+    if (!store.loading) {
+        return await sparqlEngine.queryBindings(`
+        PREFIX : <http://schema.org/>
+        SELECT * ${queryStr}`,
+            { sources: [store.rdfStore]})
+        .then(bindingsStream => bindingsStream.toArray())
+        .then(bindings => {
+            const [k, v] = Array.from(vars).filter(e => e !== ' ');
+            return bindings.reduce((obj, binding) => (
+                Object.assign(
+                    obj, { [prefixes.shrink(binding.get(k)).value]: binding.get(v)?.value })),
+                {}
+            );
+        })
+    } else {
+        return Promise.resolve({});
+    }
+}
+
+/**
+ * find multiple blanknode values of a single predict term, then get multiple object values 
+ * of multiple predict term for each of those blanknode, reassemble into an array of objects
+ * 'MVMV' -> 'Multiple Variables Single Value'
+ * 
+ * @param {string} vars - should be any non-zero number of variables concatenated by a space chractor
+ * @param {string} queryStr 
+ * @returns {Promise<Array<Array<object>>>}
+ */
+async function MVMVQuery(vars, queryStr) {
+    const store = get(entity);
+    if (!store.loading) {
+        return await sparqlEngine.queryBindings(`
+        PREFIX : <http://schema.org/>
+        SELECT * ${queryStr}`,
+            { sources: [store.rdfStore]})
+        .then(bindingsStream => bindingsStream.toArray())
+        .then(bindings => {
+            const keys = vars.split(/\s+/).filter(s => s !== '');
+            const assembleObj = (binding) =>{
+                const stripURI = (keyStr) => {
+                    const bindingObj = binding.get(keyStr);
+                    return bindingObj.termType === 'NamedNode' ? prefixes.shrink(bindingObj).value : bindingObj.value
+                };
+                return keys.reduce((obj, keyStr)=> Object.assign(obj, {[keyStr]: stripURI(keyStr) }), {});
+            };
+            return bindings.reduce(
+                (arr, binding) => [...arr, assembleObj(binding)],
+                []
+            );
+        })
+    } else {
+        return Promise.resolve([[{}]]);
+    }
+}
+
+export { entity, init, SVSVQuery, SVMVQuery, MVSVQuery, MVMVQuery }

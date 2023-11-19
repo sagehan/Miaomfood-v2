@@ -29,6 +29,8 @@
   "type": "module",
   "dependencies": {
     "@comunica/query-sparql-rdfjs": "^2.10.0",
+    "@rdfjs/data-model": "^2.0.1",
+    "@rdfjs/prefix-map": "^0.1.1",
     "rdf-store-stream": "^2.0.0"
   }
 }
