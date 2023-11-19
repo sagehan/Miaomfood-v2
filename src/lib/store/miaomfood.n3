@@ -1,0 +1,381 @@
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+@prefix miaomfood: <https://miaomfood.com/>.
+@prefix : <http://schema.org/>.
+@base  <https://miaomfood.com/>.
+  
+<> a :WebSite ;
+    :name "喵姆餐厅"@zh ;
+    :alternateName "喵姆餐厅•好多好多的芝士和肉，给你认真生活的力量！"@zh ;
+    :keywords "喵姆餐厅,喵姆,Miaom,pizza,快餐,美味,乌鲁木齐快餐,披萨,焗饭,小吃,烤翅"@zh ;
+    :copyrightYear "2023"^^xsd:date ;
+    :locationCreated "Urumqi" .
+
+<>!:author = <https://heysage.com/about>;
+    a :Person ;
+    :name "松志"@zh ;
+    :url "https://heysage.com/about"^^xsd:anyURI ;
+    :workLocation "Urumqi" .
+
+<>!:mainEntity a :Organization, :Restaurant, :CafeOrCoffeeShop;
+    :name "喵姆餐厅"@zh ;
+    :description "好多好多的芝士和肉，给你认真生活的力量！"@zh ;
+    :url "https://miaomfood.com"^^xsd:anyURI ;
+    :image "https://miaomfood.com/Branding/doorface.jpeg"^^xsd:anyURI ;
+    :logo "https://miaomfood.com/resources/logo.svg"^^xsd:anyURI ;
+    :telephone "+8618690890381" ;
+    :foundingDate "2015-11-15"^^xsd:date ;
+    :openingHours "Mo-Su 11:00-22:00" ;
+    :hasMap "http://f.amap.com/1bwbT_0452CUD" ;
+    :acceptsReservations true;
+    :currenciesAccepted "CNY" ;
+    :priceRange "￥￥" ;
+    :paymentAccepted "现金到付,支付宝" ;
+    :address [
+        a :PostalAddress ;
+        :addressCountry "CHN" ;
+        :addressRegion "新疆"@zh ;
+        :addressLocality "乌鲁木齐"@zh ;
+        :postalCode "830000" ;
+        :streetAddress "高新街桂林路东四巷锦林二巷8号1楼"@zh ];
+    :geo [
+        a :GeoCoordinates ;
+        :latitude "43.853485" ;
+        :longitude "87.573932" ];
+    :contactPoint [
+        = <contact> ;
+        a :ContactPoint ;
+        :contactType "sales", "customer support", "reservations" ;
+        :telephone "+8618199999999" ;
+        :email "miaomfood@example.com" ;
+        :areaServed "乌鲁木齐"@zh ;
+        :hoursAvailable "Mo-Su 11:00-22:00" ;
+        :productSupported "外卖点餐，进店堂食，派对策划，甜品教学，商业合作" ;
+        :availableLanguage "zh-cmn-Hans-CN" ];
+    :servesCuisine "Italian" ;
+    :makesOffer [ :itemOffered [
+        a :Service ;
+        :provider <> ;
+        :description "由喵姆餐厅提供的送餐上门服务,向您收取的送餐费将全额补贴到送餐员，请知悉。"@zh ;
+        :serviceType "送餐上门"@zh ;
+        :areaServed "乌鲁木齐"@zh ;
+        :hoursAvailable "Mo-Su 11:00-22:00" ;
+        :offers [
+            a :Offer ;
+            :price 3 ;
+            :priceCurrency "CNY" ;
+            :seller <> ;
+            :BusinessFunction <http://purl.org/goodrelations/v1#ProvideService> ;
+            :deliveryLeadTime [ 
+                a :QuantitativeValue;
+                :value 20 ; 
+                :unitText "分钟" ;
+                :unitCode "MIN" ]]]] .
+
+<>!:hasMenu = <menu> ; a :Menu ; :inLanguage "zh-CN" ;
+    :hasMenuSection [ = <tasty> ; a :MenuSection ;
+        :name "好吃的"@zh ;
+        :description "" ;
+        :position 1;
+        :hasMenuSection [ = <pizza> ; a :MenuSection ;
+            :name "披萨"@zh ;
+            :description "" ;
+            :position 1;
+            :hasMenuItem 
+                [ = <pizza/JQPG>; a :MenuItem, :Product ;
+                :name "激情培根"@zh ;
+                :alternateName ""@zh ;
+                :productID "JQPG" ;
+                :description "特色:双层培根，圆菇"@zh ;
+                :image <resources/jqpg.jpg> ;
+                :position 1;
+                :offers 
+                    [ :additionalType miaomfood:8inch;  :price 39; :availability :SoldOut],
+                    [ :additionalType miaomfood:10inch; :price 59; :availability :SoldOut]],
+
+                [ = <pizza/FQXWY>; a :MenuItem, :Product ;
+                :name "风情夏威夷"@zh ;
+                :alternateName "" ;
+                :productID "FQXWY" ;
+                :description "特色:培根，菠萝"@zh ;
+                :image <resources/fqxwy.jpg> ;
+                :position 2;
+                :offers
+                    [ :additionalType miaomfood:8inch;  :price 39; :availability :SoldOut],
+                    [ :additionalType miaomfood:10inch; :price 59; :availability :SoldOut]],
+
+                [ = <pizza/NNMM>; a :MenuItem, :Product ;
+                :name "内牛满面"@zh ;
+                :alternateName "" ;
+                :productID "NNMM" ;
+                :description "特色:牛肉"@zh ;
+                :image <resources/nnmm.jpg> ;
+                :position 3;
+                :offers
+                    [ :additionalType miaomfood:8inch;  :price 46; :availability :SoldOut],
+                    [ :additionalType miaomfood:10inch; :price 69; :availability :SoldOut]],
+                
+                [ = <pizza/ITALY>; a :MenuItem, :Product ;
+                :name "意式肉酱披萨"@zh ;
+                :alternateName "" ;
+                :productID "ITALY" ;
+                :description "特色:牛肉，自制辣酱"@zh ;
+                :image <resources/italy.jpg> ;
+                :position 4;
+                :offers
+                    [ :additionalType miaomfood:8inch;  :price 58; :availability :SoldOut],
+                    [ :additionalType miaomfood:10inch; :price 87; :availability :SoldOut]],
+                
+                [ = <pizza/TURKEY>; a :MenuItem, :Product ;
+                :name "土耳其烤鸡肉披萨"@zh ;
+                :alternateName "" ;
+                :productID "TURKEY" ;
+                :description "特色:烤鸡肉，自制辣酱"@zh ;
+                :image <resources/turkey.jpg> ;
+                :position 5;
+                :offers                 
+                    [ :additionalType miaomfood:8inch;  :price 46; :availability :SoldOut],
+                    [ :additionalType miaomfood:10inch; :price 69; :availability :SoldOut]],
+                
+                [ = <pizza/QMJQY>; a :MenuItem, :Product ;
+                :name "情满金枪鱼"@zh ;
+                :alternateName "" ;
+                :productID "QMJQY" ;
+                :description "特色:金枪鱼，酸黄瓜"@zh ;
+                :image <resources/qmjqy.jpg> ;
+                :position 6;
+                :offers       
+                    [ :additionalType miaomfood:8inch;  :price 58; :availability :SoldOut],
+                    [ :additionalType miaomfood:10inch; :price 87; :availability :SoldOut]],
+              
+                [ = <pizza/XJTX>; a :MenuItem, :Product ;
+                :name "席卷天虾"@zh ;
+                :alternateName "" ;
+                :productID "XJTX" ;
+                :description "特色:金枪鱼，虾仁"@zh ;
+                :image <resources/xjtx.jpg> ;
+                :position 7;
+                :offers
+                    [ :additionalType miaomfood:9inch;  :price 58; :availability :SoldOut],
+                    [ :additionalType miaomfood:10inch; :price 87; :availability :SoldOut]],
+                
+                [ = <pizza/MGBC>; a :MenuItem, :Product ;
+                :name "蘑菇菠菜"@zh ;
+                :alternateName "" ;
+                :productID "MGBC" ;
+                :description "特色:菠菜，蘑菇，酸黄瓜"@zh ;
+                :image <resources/mgbc.jpg> ;
+                :position 8;
+                :offers
+                    [ :additionalType miaomfood:8inch;  :price 35; :availability :SoldOut],
+                    [ :additionalType miaomfood:10inch; :price 53; :availability :SoldOut]],
+                
+                [ = <pizza/LLLL>; a :MenuItem, :Product ;
+                :name "榴恋榴莲"@zh ;
+                :alternateName "" ;
+                :productID "LLLL" ;
+                :description "特色:榴莲"@zh ;
+                :image <resources/llll.jpg> ;
+                :position 9;
+                :offers
+                    [ :additionalType miaomfood:8inch;  :price 68; :availability :SoldOut],
+                    [ :additionalType miaomfood:10inch; :price 97; :availability :SoldOut]
+                ]
+            ];
+
+        :hasMenuSection [ = <tasty/meal> ; a :MenuSection ;
+            :name "饭类"@zh ;
+            :description "" ;
+            :position 2;
+            :hasMenuItem
+                [ = <meal/HHNRF>; a :MenuItem, :Product ;
+                :name "红烩牛肉焗饭"@zh ;
+                :alternateName "" ;
+                :productID "HHNRJF" ;
+                :description "特色:牛肉，红酒"@zh ;
+                :image <resources/hhnrf.jpg> ;
+                :offers [ :price 35; :availability :SoldOut];
+                :position 1],
+                
+                [ = <meal/GLJRF>; a :MenuItem, :Product ;
+                :name "咖喱鸡肉焗饭"@zh ;
+                :alternateName "" ;
+                :productID "GLJRF" ;
+                :description "特色:鸡肉，咖喱"@zh ;
+                :image "https://miaomfood.com/resources/gljrf.jpg" ;
+                :offers [ :price 35; :availability :SoldOut];
+                :position 2],
+                
+                [ = <meal/TEQKRF>; a :MenuItem, :Product ;
+                :name "土耳其烤肉焗饭"@zh ;
+                :alternateName "" ;
+                :productID "TEQKRF" ;
+                :description "特色:土耳其风味烤肉"@zh ;
+                :image <resources/teqkrf.jpg> ;
+                :offers [ :price 38; :availability :SoldOut];
+                :position 3],
+                
+                [ = <meal/ITALYJF>; a :MenuItem, :Product ;
+                :name "意式肉酱焗饭"@zh ;
+                :alternateName "" ;
+                :productID "ITALYJF" ;
+                :description "特色:意式肉酱"@zh ;
+                :image <resources/italyjf.jpg> ;
+                :offers [ :price 38; :availability :SoldOut];
+                :position 4],
+
+                [ = <meal/TUDOUROU>; a :MenuItem, :Product ;
+                :name "土豆肉酱千层"@zh ;
+                :alternateName "" ;
+                :productID "TUDOUROU" ;
+                :description "特色:土豆肉酱"@zh ;
+                :image <resources/tudourou.jpg> ;
+                :offers [ :price 42; :availability :SoldOut];
+                :position 5]
+            ];
+                
+        :hasMenuSection [ = <tasty/snack> ; a :MenuSection ;
+            :name "小吃"@zh ;
+            :description "" ;
+            :position 3;
+            :hasMenuItem
+                [ = <snack/TUDOUNI>; a :MenuItem, :Product ;
+                :name "芝士焗土豆泥"@zh ;
+                :alternateName "" ;
+                :productID "TUDOUNI" ;
+                :description ""@zh ;
+                :image <resources/tudouni.jpg> ;
+                :offers [ :price 9; :availability :SoldOut];
+                :position 1],
+
+                [ = <snack/ZXXQ>; a :MenuItem, :Product ;
+                :name "芝心虾球"@zh ;
+                :alternateName "" ;
+                :productID "ZXXQ" ;
+                :description ""@zh ;
+                :image <resources/xia_ball.png> ;
+                :offers [ :price 29; :availability :SoldOut];
+                :position 2],
+                
+                [ = <snack/ZJCH>; a :MenuItem, :Product ;
+                :name "炸鸡翅"@zh ;
+                :alternateName "" ;
+                :productID "ZJCH" ;
+                :description ""@zh ;
+                :image <resources/xia_ball.png> ;
+                :offers [ :price 29; :availability :SoldOut];
+                :position 3],
+                
+                [ = <snack/ZJMH>; a :MenuItem, :Product ;
+                :name "炸鸡米花"@zh ;
+                :alternateName "" ;
+                :productID "ZJMH" ;
+                :description ""@zh ;
+                :image <resources/checken_chunks.png> ;
+                :offers [ :price 22; :availability :SoldOut];
+                :position 4],
+              
+                [ = <snack/ZHJL>; a :MenuItem, :Product ;
+                :name "炸鸡柳"@zh ;
+                :alternateName "" ;
+                :productID "ZHJL" ;
+                :description ""@zh ;
+                :image <resources/chicken-fillet.png> ;
+                :offers [ :price 18; :availability :SoldOut];
+                :position 5]
+            ]
+        ];
+          
+    :hasMenuSection [ = <drinks> ; a :MenuSection ;
+        :name "好喝的"@zh ;
+        :description "" ;
+        :position 2;
+        :hasMenuSection [ = <coffee> ; a :MenuSection ;
+            :name "咖啡"@zh ;
+            :description "" ;
+            :position 1;
+            :hasMenuItem
+                [ = <drinks/QKLMK>; a :MenuItem, :Product ;
+                :name "巧克力摩卡"@zh ;
+                :productID "QKLMK" ;
+                :position 1;
+                :offers [ :price 25; :availability :SoldOut]],
+
+                [ = <drinks/KBQN>; a :MenuItem, :Product ;
+                :name "卡布奇诺"@zh ;
+                :productID "KBQN" ;
+                :position 2;            
+                :offers [ :price 25; :availability :SoldOut]],
+
+                [ = <drinks/KFNT>; a :MenuItem, :Product ;
+                :name "咖啡拿铁"@zh ;
+                :productID "KFNT" ;
+                :position 3;
+                :offers [ :price 25; :availability :SoldOut]],
+
+                [ = <drinks/MSHKF>; a :MenuItem, :Product ;
+                :name "美式咖啡"@zh ;
+                :productID "MSHKF" ;
+                :position 4;
+                :offers [ :price 25; :availability :SoldOut]]
+            ];
+        :hasMenuSection [ = <red_tea> ; a :MenuSection ;
+            :name "红茶"@zh ;
+            :description "" ;
+            :position 2;
+            :hasMenuItem
+                [ = <drinks/HXNCH>; a :MenuItem, :Product ;
+                :name "花香奶茶"@zh ;
+                :productID "HXNCH" ;
+                :position 1;
+                :offers [ :price 15; :availability :SoldOut]],
+
+                [ = <drinks/ZHZHNCH>; a :MenuItem, :Product ;
+                :name "珍珠奶茶"@zh ;
+                :productID "ZHZHNCH" ;
+                :position 2;
+                :offers [ :price 16; :availability :SoldOut]],
+
+                [ = <drinks/YYNCH>; a :MenuItem, :Product ;
+                :name "鸳鸯奶茶"@zh ;
+                :productID "YYNCH" ;
+                :position 3;
+                :offers [ :price 17; :availability :SoldOut]],
+
+                [ = <drinks/YYNCH>; a :MenuItem, :Product ;
+                :name "鸳鸯奶茶"@zh ;
+                :productID "YYNCH" ;
+                :position 4;
+                :offers [ :price 17; :availability :SoldOut]],
+
+                [ = <drinks/BLBJ>; a :MenuItem, :Product ;
+                :name "菠萝伯爵茶"@zh ;
+                :productID "BLBJ" ;
+                :position 5;
+                :offers [ :price 22; :availability :SoldOut]]
+            ];
+        :hasMenuSection [ = <sparkling_water> ; a :MenuSection ;
+            :name "气泡水•冰茶"@zh ;
+            :description "" ;
+            :position 3;
+            :hasMenuItem
+                [ = <drinks/QNQP>; a :MenuItem, :Product ;
+                :name "青柠气泡水"@zh ;
+                :productID "QNQP" ;
+                :position 1;
+                :offers [ :price 18; :availability :SoldOut]],
+
+                [ = <drinks/LZHLH>; a :MenuItem, :Product ;
+                :name "荔枝芦荟气泡水"@zh ;
+                :productID "LZHLH" ;
+                :position 2;
+                :offers [ :price 18; :availability :SoldOut]],
+
+                [ = <drinks/QXMGQP>; a :MenuItem, :Product ;
+                :name "清香玫瑰气泡水"@zh ;
+                :productID "QXMGQP" ;
+                :position 3;
+                :offers [ :price 18; :availability :SoldOut]]
+            ]
+    ]
+.
