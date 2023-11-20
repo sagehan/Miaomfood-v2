@@ -6,8 +6,8 @@
      * get all the ':MenuItem's of a specific ':MenuSection',
      * @param {string} id - ':MenuItem's ':productID' value
     */
-    const getMenuItem = (id) => MVSVQuery('p o',
-        `{ [:productID "${id}"; ?p ?o]
+    const getMenuItem = (id) => MVSVQuery(`
+        ?p ?o { [:productID "${id}"; ?p ?o]
             FILTER (?p != rdf:type && !isBlank(?o)) }`)
 
     /**
@@ -15,8 +15,8 @@
      * @param {string} id - ':MenuItem's ':productID' value
      * @todo eliminate duplicated and discordant variable declaration
      */
-    const getOffers = (id) => MVMVQuery(
-        `?additionalType ?price ?availability
+    const getOffers = (id) => MVMVQuery(`
+        ?additionalType ?price ?availability
         { ?offer ^:offers/:productID '${id}';
             :price ?price;
             :availability ?availability.

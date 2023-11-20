@@ -51,19 +51,18 @@ async function init (quadStream) {
  * get single object values of a single predict term, return a single string value
  * 'SVMV' -> 'Single Variable Multiple Values'
  *
- * @param {string} variable
  * @param {string} queryStr
  * @returns {Promise<String>}
  */
-async function SVSVQuery(variable, queryStr) {
+async function SVSVQuery(queryStr) {
     const store = get(entity);
     if (!store.loading) {
         return await sparqlEngine.queryBindings(`
-        PREFIX : <http://schema.org/>
-        SELECT ?${variable} ${queryStr} LIMIT 1`,
+            PREFIX : <http://schema.org/>
+            SELECT ${queryStr} LIMIT 1`,
             { sources: [store.rdfStore]})
         .then(bindingsStream => bindingsStream.toArray())
-        .then(array => array[0].get(variable)?.value)
+        .then(bindingsArr => [...bindingsArr[0].entries][0][1].value)
     } else {
         return Promise.resolve('loading...');
     }
@@ -73,25 +72,23 @@ async function SVSVQuery(variable, queryStr) {
  * get multiple object values of a single predict term, reassemble into an unary array
  * 'SVMV' -> 'Single Variable Multiple Values'
  *
- * @param {string} variable
  * @param {string} queryStr
  * @returns {Promise<Array<string>>}
  */
-async function SVMVQuery(variable, queryStr) {
+async function SVMVQuery(queryStr) {
     const store = get(entity);
     if (!store.loading) {
         return await sparqlEngine.queryBindings(`
-        PREFIX : <http://schema.org/>
-        SELECT ?${variable} ${queryStr}`,
+            PREFIX : <http://schema.org/>
+            SELECT ${queryStr}`,
             { sources: [store.rdfStore]})
         .then(bindingsStream => bindingsStream.toArray())
-        .then(bindings => {
-            return bindings.reduce(
-                // @ts-ignore
-                (arr, binding) => [...arr, binding.get(variable)?.value],
+        .then(bindingsArr =>
+            bindingsArr.reduce(
+                (arr, bindings) => [...arr, [...bindings.entries][0][1].value],
                 []
-            );
-        })
+            )
+        )
     } else {
         return Promise.resolve(['loading...']);
     }
@@ -101,26 +98,29 @@ async function SVMVQuery(variable, queryStr) {
  * get each single object value of multiple predict term, reassemble into an simple object
  * 'MVSV' -> 'Multiple Variables Single Value'
  *
- * @param {string} vars - should be two variable concatenated by a space chractor
- * @param {string} queryStr
+ * @param {string} queryStr - only support querying a pair of variables, the first should be 
+ *                            a predicate variable, the second should be an object variable
  * @returns {Promise<object>}
  */
-async function MVSVQuery(vars, queryStr) {
+async function MVSVQuery(queryStr) {
     const store = get(entity);
     if (!store.loading) {
         return await sparqlEngine.queryBindings(`
-        PREFIX : <http://schema.org/>
-        SELECT * ${queryStr}`,
-            { sources: [store.rdfStore]})
+            PREFIX : <http://schema.org/>
+            SELECT ${queryStr}`,
+            { sources: [store.rdfStore]}
+        )
         .then(bindingsStream => bindingsStream.toArray())
-        .then(bindings => {
-            const [k, v] = Array.from(vars).filter(e => e !== ' ');
-            return bindings.reduce((obj, binding) => (
-                Object.assign(
-                    obj, { [prefixes.shrink(binding.get(k)).value]: binding.get(v)?.value })),
+        .then(bindingsArr => (
+            bindingsArr.reduce(
+                (obj, bindings) =>
+                    Object.assign(obj, {
+                        [prefixes.shrink([...bindings.entries][0][1]).value]:
+                        [...bindings.entries][1][1].value
+                    }),
                 {}
-            );
-        })
+            )
+        ))
     } else {
         return Promise.resolve({});
     }
@@ -138,24 +138,25 @@ async function MVMVQuery(queryStr) {
     const store = get(entity);
     if (!store.loading) {
         return await sparqlEngine.queryBindings(`
-        PREFIX : <http://schema.org/>
-        SELECT ${queryStr}`,
-            { sources: [store.rdfStore]})
+            PREFIX : <http://schema.org/>
+            SELECT ${queryStr}`,
+            { sources: [store.rdfStore]}
+        )
         .then(bindingsStream => bindingsStream.toArray())
-        .then(bindings => {
-            const assembleObj = (binding) => {
-                const re = {};
-                binding.forEach((term, variable) => Object.assign(
-                    re,
-                    {[variable.value]: 
-                        term.termType === 'NamedNode' ? prefixes.shrink(term).value : term.value} ));
-                return re;
-            };
-            return bindings.reduce(
-                (arr, binding) => [...arr, assembleObj(binding)],
+        .then(bindingsArr =>
+            bindingsArr.reduce(
+                (arr, bindings) =>
+                    [...arr, Object.fromEntries(
+                        [...bindings.entries].reduce(
+                            (arr, term) => [...arr, Array.from(
+                                [term[0],
+                                term[1].termType === 'NamedNode' ? prefixes.shrink(term[1]).value : term[1].value ])],
+                            []
+                        )
+                    )],
                 []
-            );
-        })
+            )
+        )
     } else {
         return Promise.resolve([[{}]]);
     }

@@ -24,8 +24,7 @@
     })();
 
     $: store = $entity.rdfStore;
-    $: store, SVSVQuery('name',
-        `{?s ^:mainEntity/:name "喵姆餐厅"@zh; :name ?name}`)
+    $: store, SVSVQuery(`?name {?s ^:mainEntity/:name "喵姆餐厅"@zh; :name ?name}`)
         .then(value => name = value);
 
 </script>

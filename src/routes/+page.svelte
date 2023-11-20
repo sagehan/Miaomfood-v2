@@ -3,8 +3,8 @@
     import ProductItem from '$lib/ProductItem.svelte';
 
     // get ':name' of all the top ':MenuSection's
-    const getSections = () => SVMVQuery('MenuSection',
-        `{ ?s ^:hasMenuSection/^:hasMenu ?Restaurant;
+    const getSections = () => SVMVQuery(`
+        ?MenuSection { ?s ^:hasMenuSection/^:hasMenu ?Restaurant;
             :name ?MenuSection;
             :position ?pos}
         ORDER BY ?pos`)
@@ -13,8 +13,8 @@
      * get ':name' of all the sub ':MenuSection's
      * @param {string} name - ':MenuSection's ':name' value
      */
-    const getSubSections = (name) => SVMVQuery('SubMenuSection',
-        `{ ?s ^:hasMenuSection/:name "${name}"@zh;
+    const getSubSections = (name) => SVMVQuery(`
+        ?SubMenuSection { ?s ^:hasMenuSection/:name "${name}"@zh;
             :name ?SubMenuSection;
             :position ?pos}
         ORDER BY ?pos`)
@@ -23,8 +23,8 @@
      *
      * @param {string} name - get ':MenuSection's ':name' value
      */
-    const getItemIDs = (name) => SVMVQuery('productID',
-        `{ ?s ^:hasMenuItem/:name "${name}"@zh;
+    const getItemIDs = (name) => SVMVQuery(`
+        ?productID { ?s ^:hasMenuItem/:name "${name}"@zh;
             :productID ?productID;
             :position ?pos}
         ORDER BY ?pos`)
