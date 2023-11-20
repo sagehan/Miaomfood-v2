@@ -342,11 +342,11 @@
                 :position 3;
                 :offers [ :price 17; :availability :SoldOut]],
 
-                [ = <drinks/YYNCH>; a :MenuItem, :Product ;
-                :name "鸳鸯奶茶"@zh ;
-                :productID "YYNCH" ;
+                [ = <drinks/HXNMCH>; a :MenuItem, :Product ;
+                :name "花香柠檬茶"@zh ;
+                :productID "HXNMCH" ;
                 :position 4;
-                :offers [ :price 17; :availability :SoldOut]],
+                :offers [ :price 22; :availability :SoldOut]],
 
                 [ = <drinks/BLBJ>; a :MenuItem, :Product ;
                 :name "菠萝伯爵茶"@zh ;

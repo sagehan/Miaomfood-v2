@@ -49,8 +49,8 @@ async function init (quadStream) {
 
 /**
  * get single object values of a single predict term, return a single string value
- * 'SVMV' -> 'Single Variable Multiple Values' 
- * 
+ * 'SVMV' -> 'Single Variable Multiple Values'
+ *
  * @param {string} variable
  * @param {string} queryStr
  * @returns {Promise<String>}
@@ -72,7 +72,7 @@ async function SVSVQuery(variable, queryStr) {
 /**
  * get multiple object values of a single predict term, reassemble into an unary array
  * 'SVMV' -> 'Single Variable Multiple Values'
- * 
+ *
  * @param {string} variable
  * @param {string} queryStr
  * @returns {Promise<Array<string>>}
@@ -100,9 +100,9 @@ async function SVMVQuery(variable, queryStr) {
 /**
  * get each single object value of multiple predict term, reassemble into an simple object
  * 'MVSV' -> 'Multiple Variables Single Value'
- * 
+ *
  * @param {string} vars - should be two variable concatenated by a space chractor
- * @param {string} queryStr 
+ * @param {string} queryStr
  * @returns {Promise<object>}
  */
 async function MVSVQuery(vars, queryStr) {
@@ -130,27 +130,26 @@ async function MVSVQuery(vars, queryStr) {
  * find multiple blanknode values of a single predict term, then get multiple object values 
  * of multiple predict term for each of those blanknode, reassemble into an array of objects
  * 'MVMV' -> 'Multiple Variables Single Value'
- * 
- * @param {string} vars - should be any non-zero number of variables concatenated by a space chractor
- * @param {string} queryStr 
+ *
+ * @param {string} queryStr
  * @returns {Promise<Array<Array<object>>>}
  */
-async function MVMVQuery(vars, queryStr) {
+async function MVMVQuery(queryStr) {
     const store = get(entity);
     if (!store.loading) {
         return await sparqlEngine.queryBindings(`
         PREFIX : <http://schema.org/>
-        SELECT * ${queryStr}`,
+        SELECT ${queryStr}`,
             { sources: [store.rdfStore]})
         .then(bindingsStream => bindingsStream.toArray())
         .then(bindings => {
-            const keys = vars.split(/\s+/).filter(s => s !== '');
-            const assembleObj = (binding) =>{
-                const stripURI = (keyStr) => {
-                    const bindingObj = binding.get(keyStr);
-                    return bindingObj.termType === 'NamedNode' ? prefixes.shrink(bindingObj).value : bindingObj.value
-                };
-                return keys.reduce((obj, keyStr)=> Object.assign(obj, {[keyStr]: stripURI(keyStr) }), {});
+            const assembleObj = (binding) => {
+                const re = {};
+                binding.forEach((term, variable) => Object.assign(
+                    re,
+                    {[variable.value]: 
+                        term.termType === 'NamedNode' ? prefixes.shrink(term).value : term.value} ));
+                return re;
             };
             return bindings.reduce(
                 (arr, binding) => [...arr, assembleObj(binding)],

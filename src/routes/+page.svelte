@@ -51,7 +51,7 @@
                             <h1 class="category__title">{section}</h1>
                             {#await getItemIDs(section) then productIDs}
                                 {#each productIDs as productID }
-                                    <ProductItem {productID}></ProductItem>                                
+                                    <ProductItem {productID}></ProductItem>
                                 {/each}
                             {/await}
                         </section>
