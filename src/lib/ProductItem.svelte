@@ -30,20 +30,21 @@
 {:then MenuItem}
     <article class="h-product" data-cid={MenuItem[':productID']}>
         <h2 class="p-name">{MenuItem[':name']}</h2>
-        <p>{JSON.stringify(MenuItem)}</p>
         {#await getOffers(productID) then offers}
             {#each offers as offer}
             <ul class="spec-tag">
-            <li class="p-spec"><span><b class="spec-price">{offer.price}</b>{offer?.additionalType}</span></li>
+                <li class="p-spec"><span><b class="spec-price">{offer.price}</b>{offer.additionalType ?? ''}</span></li>
             </ul>
             {/each}
         {/await}
+        {#if MenuItem[':image']}
         <figure >
-        <img class="u-photo" src={MenuItem[':image']} alt="图片描述:{MenuItem[':description']}" />
+        <img class="u-photo" src="./src/lib/assets/{MenuItem[':image']}" alt="图片描述:{MenuItem[':description']}" />            
         <figcaption class="e-description">
             <p>{MenuItem[':description']}</p>
         </figcaption>
         </figure>
+        {/if}
     </article>
 {/await}
 

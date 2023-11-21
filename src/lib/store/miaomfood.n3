@@ -87,7 +87,7 @@
                 :alternateName ""@zh ;
                 :productID "JQPG" ;
                 :description "特色:双层培根，圆菇"@zh ;
-                :image <resources/jqpg.jpg> ;
+                :image "pizza.png" ;
                 :position 1;
                 :offers 
                     [ :additionalType miaomfood:8inch;  :price 39; :availability :SoldOut],
@@ -98,7 +98,7 @@
                 :alternateName "" ;
                 :productID "FQXWY" ;
                 :description "特色:培根，菠萝"@zh ;
-                :image <resources/fqxwy.jpg> ;
+                :image "pizza.png" ;
                 :position 2;
                 :offers
                     [ :additionalType miaomfood:8inch;  :price 39; :availability :SoldOut],
@@ -109,7 +109,7 @@
                 :alternateName "" ;
                 :productID "NNMM" ;
                 :description "特色:牛肉"@zh ;
-                :image <resources/nnmm.jpg> ;
+                :image "pizza.png" ;
                 :position 3;
                 :offers
                     [ :additionalType miaomfood:8inch;  :price 46; :availability :SoldOut],
@@ -120,7 +120,7 @@
                 :alternateName "" ;
                 :productID "ITALY" ;
                 :description "特色:牛肉，自制辣酱"@zh ;
-                :image <resources/italy.jpg> ;
+                :image "pizza.png" ;
                 :position 4;
                 :offers
                     [ :additionalType miaomfood:8inch;  :price 58; :availability :SoldOut],
@@ -131,7 +131,7 @@
                 :alternateName "" ;
                 :productID "TURKEY" ;
                 :description "特色:烤鸡肉，自制辣酱"@zh ;
-                :image <resources/turkey.jpg> ;
+                :image "pizza.png" ;
                 :position 5;
                 :offers                 
                     [ :additionalType miaomfood:8inch;  :price 46; :availability :SoldOut],
@@ -142,7 +142,7 @@
                 :alternateName "" ;
                 :productID "QMJQY" ;
                 :description "特色:金枪鱼，酸黄瓜"@zh ;
-                :image <resources/qmjqy.jpg> ;
+                :image "pizza.png" ;
                 :position 6;
                 :offers       
                     [ :additionalType miaomfood:8inch;  :price 58; :availability :SoldOut],
@@ -153,7 +153,7 @@
                 :alternateName "" ;
                 :productID "XJTX" ;
                 :description "特色:金枪鱼，虾仁"@zh ;
-                :image <resources/xjtx.jpg> ;
+                :image "pizza.png" ;
                 :position 7;
                 :offers
                     [ :additionalType miaomfood:9inch;  :price 58; :availability :SoldOut],
@@ -164,7 +164,7 @@
                 :alternateName "" ;
                 :productID "MGBC" ;
                 :description "特色:菠菜，蘑菇，酸黄瓜"@zh ;
-                :image <resources/mgbc.jpg> ;
+                :image "pizza.png" ;
                 :position 8;
                 :offers
                     [ :additionalType miaomfood:8inch;  :price 35; :availability :SoldOut],
@@ -175,7 +175,7 @@
                 :alternateName "" ;
                 :productID "LLLL" ;
                 :description "特色:榴莲"@zh ;
-                :image <resources/llll.jpg> ;
+                :image "pizza.png" ;
                 :position 9;
                 :offers
                     [ :additionalType miaomfood:8inch;  :price 68; :availability :SoldOut],
@@ -193,7 +193,7 @@
                 :alternateName "" ;
                 :productID "HHNRJF" ;
                 :description "特色:牛肉，红酒"@zh ;
-                :image <resources/hhnrf.jpg> ;
+                :image "rice.png" ;
                 :offers [ :price 35; :availability :SoldOut];
                 :position 1],
                 
@@ -211,7 +211,7 @@
                 :alternateName "" ;
                 :productID "TEQKRF" ;
                 :description "特色:土耳其风味烤肉"@zh ;
-                :image <resources/teqkrf.jpg> ;
+                :image "turkey_chicken_rice.png" ;
                 :offers [ :price 38; :availability :SoldOut];
                 :position 3],
                 
@@ -253,7 +253,7 @@
                 :alternateName "" ;
                 :productID "ZXXQ" ;
                 :description ""@zh ;
-                :image <resources/xia_ball.png> ;
+                :image "xia_ball.png" ;
                 :offers [ :price 29; :availability :SoldOut];
                 :position 2],
                 
@@ -262,7 +262,7 @@
                 :alternateName "" ;
                 :productID "ZJCH" ;
                 :description ""@zh ;
-                :image <resources/xia_ball.png> ;
+                :image "chicken-wings.png" ;
                 :offers [ :price 29; :availability :SoldOut];
                 :position 3],
                 
@@ -271,7 +271,7 @@
                 :alternateName "" ;
                 :productID "ZJMH" ;
                 :description ""@zh ;
-                :image <resources/checken_chunks.png> ;
+                :image "checken_chunks.png" ;
                 :offers [ :price 22; :availability :SoldOut];
                 :position 4],
               
@@ -280,7 +280,7 @@
                 :alternateName "" ;
                 :productID "ZHJL" ;
                 :description ""@zh ;
-                :image <resources/chicken-fillet.png> ;
+                :image "chicken-fillet.png" ;
                 :offers [ :price 18; :availability :SoldOut];
                 :position 5]
             ]
