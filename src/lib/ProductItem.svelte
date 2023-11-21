@@ -48,6 +48,49 @@
     </article>
 {/await}
 
-<style>
+<style lang='scss'>
+    @use 'src/styles/themes/defaults' as *;
+    @use 'src/styles/variables' as *;
+    @use 'src/styles/mixins' as *;
 
+    #pizza .h-product{
+        .spec-tag {
+            position  : relative;
+            margin-top: -#{((2*$row_height - 3px + $row_height/2)/12px)}em;
+        }
+
+    figure {
+        display: block;
+        position: relative;
+        margin: 3em auto 0;
+        height: #{153px/$rem_size}em;
+        width: #{153px/$rem_size}em;
+
+    &:after,
+    &:before {
+        @include absolutly__centered;
+        display: block;
+        background-color: white;
+        border-radius: 100%;
+        height : 100%;
+        width  : 100%;
+        content: '';
+    }
+    &:after {
+        width: 140px;
+        height: 140px;
+        box-shadow: 1px 1px 1px 1px adjust-color($shadow_bg, $alpha: -0.5);
+    }
+    &:before { box-shadow: 1px 2px 1px 1px adjust-color($shadow_bg, $alpha: -0.5); }
+
+    .u-photo {
+      @include absolutly__centered;
+        display: block;
+        z-index: 700;
+        height : auto;
+        width  : 140px;
+        /*shape-outside: circle();*/
+    }
+  }
+}
 </style>

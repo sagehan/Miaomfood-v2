@@ -73,11 +73,13 @@
                 :unitCode "MIN" ]]]] .
 
 <>!:hasMenu = <menu> ; a :Menu ; :inLanguage "zh-CN" ;
-    :hasMenuSection [ = <tasty> ; a :MenuSection ;
+    :hasMenuSection [ a :MenuSection ;
+        :identifier 'TASTY' ;
         :name "好吃的"@zh ;
         :description "" ;
         :position 1;
-        :hasMenuSection [ = <pizza> ; a :MenuSection ;
+        :hasMenuSection [ a :MenuSection ;
+            :identifier 'PIZZA' ;
             :name "披萨"@zh ;
             :description "" ;
             :position 1;
@@ -183,7 +185,8 @@
                 ]
             ];
 
-        :hasMenuSection [ = <tasty/meal> ; a :MenuSection ;
+        :hasMenuSection [ a :MenuSection ;
+            :identifier 'MEAL' ;
             :name "饭类"@zh ;
             :description "" ;
             :position 2;
@@ -234,7 +237,8 @@
                 :position 5]
             ];
                 
-        :hasMenuSection [ = <tasty/snack> ; a :MenuSection ;
+        :hasMenuSection [ a :MenuSection ;
+            :identifier 'SNACK' ;
             :name "小吃"@zh ;
             :description "" ;
             :position 3;
@@ -286,11 +290,13 @@
             ]
         ];
           
-    :hasMenuSection [ = <drinks> ; a :MenuSection ;
+    :hasMenuSection [ a :MenuSection ;
+        :identifier 'DRINKS' ;
         :name "好喝的"@zh ;
         :description "" ;
         :position 2;
-        :hasMenuSection [ = <coffee> ; a :MenuSection ;
+        :hasMenuSection [ a :MenuSection ;
+            :identifier 'COFFEE' ;
             :name "咖啡"@zh ;
             :description "" ;
             :position 1;
@@ -319,7 +325,8 @@
                 :position 4;
                 :offers [ :price 25; :availability :SoldOut]]
             ];
-        :hasMenuSection [ = <red_tea> ; a :MenuSection ;
+        :hasMenuSection [ a :MenuSection ;
+            :identifier 'RED_TEA' ;
             :name "红茶"@zh ;
             :description "" ;
             :position 2;
@@ -354,7 +361,8 @@
                 :position 5;
                 :offers [ :price 22; :availability :SoldOut]]
             ];
-        :hasMenuSection [ = <sparkling_water> ; a :MenuSection ;
+        :hasMenuSection [ a :MenuSection ;
+            :identifier 'SPARKLING_WATER' ;
             :name "气泡水•冰茶"@zh ;
             :description "" ;
             :position 3;

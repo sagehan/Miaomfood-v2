@@ -1,30 +1,34 @@
 <script>
-    import { entity, SVMVQuery } from '$lib/store/entitiesStore';
+    import { entity, SVMVQuery, MVMVQuery } from '$lib/store/entitiesStore';
     import ProductItem from '$lib/ProductItem.svelte';
 
-    // get ':name' of all the top ':MenuSection's
-    const getSections = () => SVMVQuery(`
-        ?MenuSection { ?s ^:hasMenuSection/^:hasMenu ?Restaurant;
-            :name ?MenuSection;
+    /**
+     * get ':name' & ':identifier' of all the top ':MenuSection's
+     */ 
+    const getSections = () => MVMVQuery(`
+        ?name ?identifier { ?s ^:hasMenuSection/^:hasMenu ?Restaurant;
+            :name ?name;
+            :identifier ?identifier;
             :position ?pos}
         ORDER BY ?pos`)
 
     /**
-     * get ':name' of all the sub ':MenuSection's
-     * @param {string} name - ':MenuSection's ':name' value
+     * get ':name' & ':identifier' of all the sub ':MenuSection's
+     * @param {string} identifier - ':MenuSection's ':identifier' value
      */
-    const getSubSections = (name) => SVMVQuery(`
-        ?SubMenuSection { ?s ^:hasMenuSection/:name "${name}"@zh;
-            :name ?SubMenuSection;
+    const getSubSections = (identifier) => MVMVQuery(`
+        ?name ?identifier { ?s ^:hasMenuSection/:identifier "${identifier}";
+            :name ?name;
+            :identifier ?identifier;
             :position ?pos}
         ORDER BY ?pos`)
 
     /**
-     *
-     * @param {string} name - get ':MenuSection's ':name' value
+     * get ':name' & ':identifier' of a ':Product'
+     * @param {string} identifier - ':MenuSection's ':identifier' value
      */
-    const getItemIDs = (name) => SVMVQuery(`
-        ?productID { ?s ^:hasMenuItem/:name "${name}"@zh;
+    const getItemIDs = (identifier) => SVMVQuery(`
+        ?productID { ?s ^:hasMenuItem/:identifier "${identifier}";
             :productID ?productID;
             :position ?pos}
         ORDER BY ?pos`)
@@ -43,13 +47,13 @@
                 <p>loading...</p>
             {:then menuSections}
                 {#each menuSections as section}
-                <section id="sectino" class="category">
-                    <h1 class="category__title">{section}</h1>
-                    {#await getSubSections(section) then menuSections}
+                <section id="{section.identifier}" class="category">
+                    <h1 class="category__title">{section.name}</h1>
+                    {#await getSubSections(section.identifier) then menuSections}
                         {#each menuSections as section}
-                        <section id="sectino" class="category">
-                            <h1 class="category__title">{section}</h1>
-                            {#await getItemIDs(section) then productIDs}
+                        <section id="{section.identifier}" class="category">
+                            <h1 class="category__title">{section.name}</h1>
+                            {#await getItemIDs(section.identifier) then productIDs}
                                 {#each productIDs as productID }
                                     <ProductItem {productID}></ProductItem>
                                 {/each}

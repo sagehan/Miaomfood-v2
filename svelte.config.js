@@ -1,5 +1,6 @@
 import adapter from '@sveltejs/adapter-auto';
-import { importAssets } from 'svelte-preprocess-import-assets'
+import { importAssets } from 'svelte-preprocess-import-assets';
+import preprocess from 'svelte-preprocess';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -9,7 +10,12 @@ const config = {
 		// See https://kit.svelte.dev/docs/adapters for more information about adapters.
 		adapter: adapter()
 	},
-	preprocess: [importAssets()]
+	preprocess: [
+		importAssets(), 
+		preprocess({
+			scss: { includePaths: ['src/lib/styles'] }
+		}),
+	],
 };
 
 export default config;
