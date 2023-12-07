@@ -92,8 +92,8 @@
                 :image "pizza.png" ;
                 :position 1;
                 :offers 
-                    [ :additionalType miaomfood:8inch;  :price 39; :availability :SoldOut],
-                    [ :additionalType miaomfood:10inch; :price 59; :availability :SoldOut]],
+                    [ :additionalType miaomfood:八寸;  :price 39; :availability :SoldOut],
+                    [ :additionalType miaomfood:十寸; :price 59; :availability :SoldOut]],
 
                 [ = <pizza/FQXWY>; a :MenuItem, :Product ;
                 :name "风情夏威夷"@zh ;
@@ -103,8 +103,8 @@
                 :image "pizza.png" ;
                 :position 2;
                 :offers
-                    [ :additionalType miaomfood:8inch;  :price 39; :availability :SoldOut],
-                    [ :additionalType miaomfood:10inch; :price 59; :availability :SoldOut]],
+                    [ :additionalType miaomfood:八寸;  :price 39; :availability :SoldOut],
+                    [ :additionalType miaomfood:十寸; :price 59; :availability :SoldOut]],
 
                 [ = <pizza/NNMM>; a :MenuItem, :Product ;
                 :name "内牛满面"@zh ;
@@ -114,8 +114,8 @@
                 :image "pizza.png" ;
                 :position 3;
                 :offers
-                    [ :additionalType miaomfood:8inch;  :price 46; :availability :SoldOut],
-                    [ :additionalType miaomfood:10inch; :price 69; :availability :SoldOut]],
+                    [ :additionalType miaomfood:八寸;  :price 46; :availability :SoldOut],
+                    [ :additionalType miaomfood:十寸; :price 69; :availability :SoldOut]],
                 
                 [ = <pizza/ITALY>; a :MenuItem, :Product ;
                 :name "意式肉酱披萨"@zh ;
@@ -125,8 +125,8 @@
                 :image "pizza.png" ;
                 :position 4;
                 :offers
-                    [ :additionalType miaomfood:8inch;  :price 58; :availability :SoldOut],
-                    [ :additionalType miaomfood:10inch; :price 87; :availability :SoldOut]],
+                    [ :additionalType miaomfood:八寸;  :price 58; :availability :SoldOut],
+                    [ :additionalType miaomfood:十寸; :price 87; :availability :SoldOut]],
                 
                 [ = <pizza/TURKEY>; a :MenuItem, :Product ;
                 :name "土耳其烤鸡肉披萨"@zh ;
@@ -136,8 +136,8 @@
                 :image "pizza.png" ;
                 :position 5;
                 :offers                 
-                    [ :additionalType miaomfood:8inch;  :price 46; :availability :SoldOut],
-                    [ :additionalType miaomfood:10inch; :price 69; :availability :SoldOut]],
+                    [ :additionalType miaomfood:八寸;  :price 46; :availability :SoldOut],
+                    [ :additionalType miaomfood:十寸; :price 69; :availability :SoldOut]],
                 
                 [ = <pizza/QMJQY>; a :MenuItem, :Product ;
                 :name "情满金枪鱼"@zh ;
@@ -147,8 +147,8 @@
                 :image "pizza.png" ;
                 :position 6;
                 :offers       
-                    [ :additionalType miaomfood:8inch;  :price 58; :availability :SoldOut],
-                    [ :additionalType miaomfood:10inch; :price 87; :availability :SoldOut]],
+                    [ :additionalType miaomfood:八寸;  :price 58; :availability :SoldOut],
+                    [ :additionalType miaomfood:十寸; :price 87; :availability :SoldOut]],
               
                 [ = <pizza/XJTX>; a :MenuItem, :Product ;
                 :name "席卷天虾"@zh ;
@@ -158,8 +158,8 @@
                 :image "pizza.png" ;
                 :position 7;
                 :offers
-                    [ :additionalType miaomfood:9inch;  :price 58; :availability :SoldOut],
-                    [ :additionalType miaomfood:10inch; :price 87; :availability :SoldOut]],
+                    [ :additionalType miaomfood:八寸;  :price 58; :availability :SoldOut],
+                    [ :additionalType miaomfood:十寸; :price 87; :availability :SoldOut]],
                 
                 [ = <pizza/MGBC>; a :MenuItem, :Product ;
                 :name "蘑菇菠菜"@zh ;
@@ -169,8 +169,8 @@
                 :image "pizza.png" ;
                 :position 8;
                 :offers
-                    [ :additionalType miaomfood:8inch;  :price 35; :availability :SoldOut],
-                    [ :additionalType miaomfood:10inch; :price 53; :availability :SoldOut]],
+                    [ :additionalType miaomfood:八寸;  :price 35; :availability :SoldOut],
+                    [ :additionalType miaomfood:十寸; :price 53; :availability :SoldOut]],
                 
                 [ = <pizza/LLLL>; a :MenuItem, :Product ;
                 :name "榴恋榴莲"@zh ;
@@ -180,8 +180,8 @@
                 :image "pizza.png" ;
                 :position 9;
                 :offers
-                    [ :additionalType miaomfood:8inch;  :price 68; :availability :SoldOut],
-                    [ :additionalType miaomfood:10inch; :price 97; :availability :SoldOut]
+                    [ :additionalType miaomfood:八寸;  :price 68; :availability :SoldOut],
+                    [ :additionalType miaomfood:十寸; :price 97; :availability :SoldOut]
                 ]
             ];
 

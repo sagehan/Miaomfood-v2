@@ -23,74 +23,100 @@
             OPTIONAL { ?offer :additionalType ?additionalType }
         }`)
 
+    /**
+     * extract the local part from the QName string of the given offe object 
+     * @param {Object} offer
+     */
+    const sanitizedOffedType = (offer) =>
+        (/\w?:(?<additionalType>.*)$/g).exec(offer.additionalType)?.groups?.additionalType;
 </script>
 
 {#await getMenuItem(productID)}
     <p>loading...</p>
 {:then MenuItem}
-    <article class="h-product" data-cid={MenuItem[':productID']}>
-        <h2 class="p-name">{MenuItem[':name']}</h2>
+    <article data-cid={MenuItem[':productID']}>
+        <h2>{MenuItem[':name']}</h2>
         {#await getOffers(productID) then offers}
+        <ul class="spec-tag">
             {#each offers as offer}
-            <ul class="spec-tag">
-                <li class="p-spec"><span><b class="spec-price">{offer.price}</b>{offer.additionalType ?? ''}</span></li>
-            </ul>
+            <li class="p-spec">
+                <small class="spec-price">{offer.price}</small>
+                {#if offer.additionalType}
+                <small>{sanitizedOffedType(offer)}</small>
+                {/if}
+            </li>
             {/each}
+        </ul>
         {/await}
+        {#if MenuItem[':description']}
+        <small class="e-description">{MenuItem[':description']}</small>
+        {/if}
         {#if MenuItem[':image']}
-        <figure >
-        <img class="u-photo" src="./src/lib/assets/{MenuItem[':image']}" alt="图片描述:{MenuItem[':description']}" />            
-        <figcaption class="e-description">
-            <p>{MenuItem[':description']}</p>
-        </figcaption>
+        <figure class="u-photo">
+            <img src="./src/lib/assets/{MenuItem[':image']}" alt="图片描述:{MenuItem[':description']}" />
         </figure>
         {/if}
     </article>
 {/await}
 
 <style lang='scss'>
-    @use 'src/styles/themes/defaults' as *;
-    @use 'src/styles/variables' as *;
-    @use 'src/styles/mixins' as *;
+    //Typesetting
+    article {
+        h2    { font-size: var(--s0 ); }
+        ul { font-size: var(--s-1); }
+        .p-spec { align-self: center;}
 
-    #pizza .h-product{
-        .spec-tag {
-            position  : relative;
-            margin-top: -#{((2*$row_height - 3px + $row_height/2)/12px)}em;
+        .spec-price {
+            text-combine-upright: all;
+            text-combine-upright: digits;
+        }
+    }
+
+    //Layout
+    article {
+        writing-mode: vertical-rl;
+        display: flex;
+        flex-flow: wrap;
+        inline-size: calc(var(--grid-gutter) * 5);
+        align-content: center;
+
+        .e-description { order: 4;}
+
+        :is([role="group"] :nth-child(odd) &) {
+            writing-mode: vertical-lr;
         }
 
+        :is(#TASTY &) {
+            aspect-ratio: 1.618;
+
+            .spec-tag {
+                inline-size: 100%;
+                display: inline-flex;
+                align-self: center;
+            }
+        }
+
+        :is(#DRINKS & > :last-child) {
+            margin-inline-start: var(--s-1);
+        }
+    }
+
     figure {
-        display: block;
-        position: relative;
-        margin: 3em auto 0;
-        height: #{153px/$rem_size}em;
-        width: #{153px/$rem_size}em;
+        block-size: calc(var(--grid-gutter) * 4);
+        aspect-ratio: 1 / 1;
+        overflow: hidden;
+        display: flex;
+        justify-content: start;
+        align-items: center;
 
-    &:after,
-    &:before {
-        @include absolutly__centered;
-        display: block;
-        background-color: white;
-        border-radius: 100%;
-        height : 100%;
-        width  : 100%;
-        content: '';
+        > img {
+            object-fit: cover;
+        }
     }
-    &:after {
-        width: 140px;
-        height: 140px;
-        box-shadow: 1px 1px 1px 1px adjust-color($shadow_bg, $alpha: -0.5);
-    }
-    &:before { box-shadow: 1px 2px 1px 1px adjust-color($shadow_bg, $alpha: -0.5); }
 
-    .u-photo {
-      @include absolutly__centered;
-        display: block;
-        z-index: 700;
-        height : auto;
-        width  : 140px;
-        /*shape-outside: circle();*/
-    }
-  }
-}
+    // Appearance
+    :is(article):hover {
+        outline: calc(var(--outline_thickness) * var(--OUTLINE_SWITCH)) solid;
+        & > * + * { outline: calc(var(--outline_thickness) * var(--OUTLINE_SWITCH)) solid };
+    } /*for debuging*/
 </style>

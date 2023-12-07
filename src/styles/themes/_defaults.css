@@ -1,0 +1,66 @@
+:root {
+    /* Layout
+    */
+    /* @link https://utopia.fyi/grid/calculator?c=320,18,1.2,1240,20,1.25,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
+    --grid-max-width: 77.50rem;
+    --grid-gutter   : var(--space-s-l, clamp(1.125rem, 0.6467rem + 2.3913vw, 2.5rem));
+    --grid-columns  : 12;
+
+    --outline_thickness: 1px;
+    --OUTLINE_SWITCH: 1;
+    --debug_bg      : oklch(94.91% 0 0 / 50%);
+
+    /* Typesetting 
+    */
+    /* @link https://utopia.fyi/type/calculator?c=320,18,1.2,1240,20,1.25,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
+    --s-2   : clamp(0.7813rem, 0.7747rem + 0.0326vw, 0.8rem);
+    --s-1   : clamp(0.9375rem, 0.9158rem + 0.1087vw, 1rem);
+    --s0    : clamp(1.125rem, 1.0815rem + 0.2174vw, 1.25rem);
+    --s1    : clamp(1.35rem, 1.2761rem + 0.3696vw, 1.5625rem);
+    --s2    : clamp(1.62rem, 1.5041rem + 0.5793vw, 1.9531rem);
+    --s3    : clamp(1.9438rem, 1.7707rem + 0.8652vw, 2.4413rem);
+    --s4    : clamp(2.3325rem, 2.0823rem + 1.2511vw, 3.0519rem);
+    --s5    : clamp(2.7994rem, 2.4461rem + 1.7663vw, 3.815rem);
+
+    --leading       : calc(1em + var(--s1, 1.5rem));
+    --measure       : 60ch;
+    --writing-mode  : vertical-lr;
+
+    /* Palette 
+    */
+    --black:       oklch(20%     0       0);
+    --primary_cl:  oklch(80%     0.116   351.5);
+    --cart_bg:     oklch(100%    0       0);
+    --panel_bg:    oklch(100%    0       0);
+    --page_bg:     oklch(93.89%  0       0);
+    --tasty_bg:    oklch(98.37%  0.025   112.26);
+    --drinks_bg:   oklch(95%     0.025   356);
+    --lazycat_bg:  oklch(89%     0.012   205);
+    --activity_bg: oklch(56%     0       0);
+    --border_bg:   oklch(80%     0       0);
+    --shadow_bg:         oklch(60  0       0);
+    --tag-border_color:  oklch(60% 0.10    185);
+}
+
+@property --OUTLINE_SWITCH {
+    syntax: "<numble>";
+    inherits:  true;
+    initial-value: 1;
+}
+
+* { outline-offset: calc(var(--outline_thickness) * -1); }
+
+body {
+    writing-mode: var(--writing-mode);
+    display: flex;
+    flex-flow: column;
+    color: oklch(from var(--activity_bg)
+        calc(l * pow(1.618, -1)) c h
+    );
+    background-color: var(--activity_bg);
+}
+
+::selection {
+    color:  oklch(100% 0 0);
+    background: var(--primary_cl);
+}

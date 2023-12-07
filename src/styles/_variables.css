@@ -1,0 +1,27 @@
+:root {
+    --rem_size     : 16px;
+    --small_size   : 12px;
+    --line-height  : calc(1em + 0.5rem);
+    --measure      : 60ch;
+    --row_height   : 27px;
+    --grid_size    : 32px;
+    --canvas_width : 320px;
+    --min_cover_ht : 320px - 92px;
+    --topbar_ht    : calc(var(--row_height) / var(--rem_size) * 3em);
+
+    --poster-col2  : 12 calc(6.8 / 20.4);
+    --poster-col4  : 24 calc(6.8 / 20.4);
+
+    --column_width : 20.4px;
+    --gutter_width :  6.8px;
+    --layout_width : calc(12 * var(--column_width) + 11 * var(--gutter_width));
+    --menu_width   : calc(11 * var(--column_width) + 10 * var(--gutter_width));
+    --group_width  : calc( 8 * var(--column_width) +  7 * var(--gutter_width));
+    --drink_width  : calc(10 * var(--column_width) + 11 * var(--gutter_width));
+}
+
+@property --OUTLINE_SWITCH {
+    syntax: "<numble>";
+    inherits:  true;
+    initial-value: 1;
+}
