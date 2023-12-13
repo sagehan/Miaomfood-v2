@@ -10,7 +10,7 @@
     --OUTLINE_SWITCH: 1;
     --debug_bg      : oklch(94.91% 0 0 / 50%);
 
-    /* Typesetting 
+    /* Typesetting
     */
     /* @link https://utopia.fyi/type/calculator?c=320,18,1.2,1240,20,1.25,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
     --s-2   : clamp(0.7813rem, 0.7747rem + 0.0326vw, 0.8rem);
@@ -26,16 +26,16 @@
     --measure       : 60ch;
     --writing-mode  : vertical-lr;
 
-    /* Palette 
+    /* Appearance 
     */
     --black:       oklch(20%     0       0);
     --primary_cl:  oklch(80%     0.116   351.5);
     --cart_bg:     oklch(100%    0       0);
     --panel_bg:    oklch(100%    0       0);
-    --page_bg:     oklch(93.89%  0       0);
+    --page_bg:     oklch(90%     0.025   193);
     --tasty_bg:    oklch(98.37%  0.025   112.26);
     --drinks_bg:   oklch(95%     0.025   356);
-    --lazycat_bg:  oklch(89%     0.012   205);
+    --card_bg:     oklch(20%     0.025   193);
     --activity_bg: oklch(56%     0       0);
     --border_bg:   oklch(80%     0       0);
     --shadow_bg:         oklch(60  0       0);
@@ -43,7 +43,7 @@
 }
 
 @property --OUTLINE_SWITCH {
-    syntax: "<numble>";
+    syntax: "<number>";
     inherits:  true;
     initial-value: 1;
 }
@@ -51,14 +51,13 @@
 * { outline-offset: calc(var(--outline_thickness) * -1); }
 
 body {
-    writing-mode: var(--writing-mode);
     display: flex;
-    flex-flow: column;
-    color: oklch(from var(--activity_bg)
-        calc(l * pow(1.618, -1)) c h
-    );
-    background-color: var(--activity_bg);
+    writing-mode: var(--writing-mode);
+    color: var(--activity_bg);
+    background-color: var(--page_bg);
 }
+
+h1, h2, p, li { letter-spacing: 0.2rem; }
 
 ::selection {
     color:  oklch(100% 0 0);

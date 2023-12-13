@@ -23,7 +23,7 @@
     :url "https://miaomfood.com"^^xsd:anyURI ;
     :image "https://miaomfood.com/Branding/doorface.jpeg"^^xsd:anyURI ;
     :logo "https://miaomfood.com/resources/logo.svg"^^xsd:anyURI ;
-    :telephone "+8618690890381" ;
+    :telephone "+8618199999999" ;
     :foundingDate "2015-11-15"^^xsd:date ;
     :openingHours "Mo-Su 11:00-22:00" ;
     :hasMap "http://f.amap.com/1bwbT_0452CUD" ;

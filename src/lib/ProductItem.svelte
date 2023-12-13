@@ -1,5 +1,7 @@
 <script>
     import { MVSVQuery, MVMVQuery } from '$lib/store/entitiesStore';
+
+    /** @type { string } */
     export let productID;
 
     /**
@@ -24,7 +26,7 @@
         }`)
 
     /**
-     * extract the local part from the QName string of the given offe object 
+     * extract the local part from the QName string of the given offer object
      * @param {Object} offer
      */
     const sanitizedOffedType = (offer) =>
@@ -34,26 +36,26 @@
 {#await getMenuItem(productID)}
     <p>loading...</p>
 {:then MenuItem}
-    <article data-cid={MenuItem[':productID']}>
-        <h2>{MenuItem[':name']}</h2>
+    <article data-cid={productID}>
+        <h2>{MenuItem[':name'] ?? ''}</h2>
         {#await getOffers(productID) then offers}
         <ul class="spec-tag">
             {#each offers as offer}
             <li class="p-spec">
-                <small class="spec-price">{offer.price}</small>
+                <small class="spec-price">{offer.price ?? ''} </small>
                 {#if offer.additionalType}
-                <small>{sanitizedOffedType(offer)}</small>
+                <small>{sanitizedOffedType(offer) ?? ''}</small>
                 {/if}
             </li>
             {/each}
         </ul>
         {/await}
         {#if MenuItem[':description']}
-        <small class="e-description">{MenuItem[':description']}</small>
+        <small class="e-description">{MenuItem[':description'] ?? ''}</small>
         {/if}
         {#if MenuItem[':image']}
         <figure class="u-photo">
-            <img src="./src/lib/assets/{MenuItem[':image']}" alt="图片描述:{MenuItem[':description']}" />
+            <img src="./src/lib/assets/{MenuItem[':image' ?? '404.html']}" alt="图片描述:{MenuItem[':description'] ?? ''}" />
         </figure>
         {/if}
     </article>
@@ -62,7 +64,7 @@
 <style lang='scss'>
     //Typesetting
     article {
-        h2    { font-size: var(--s0 ); }
+        h2 { font-size: var(--s0 ); }
         ul { font-size: var(--s-1); }
         .p-spec { align-self: center;}
 
@@ -86,14 +88,10 @@
             writing-mode: vertical-lr;
         }
 
-        :is(#TASTY &) {
-            aspect-ratio: 1.618;
-
-            .spec-tag {
-                inline-size: 100%;
-                display: inline-flex;
-                align-self: center;
-            }
+        :is(#TASTY & .spec-tag) {
+            inline-size: 100%;
+            display: inline-flex;
+            align-self: center;
         }
 
         :is(#DRINKS & > :last-child) {

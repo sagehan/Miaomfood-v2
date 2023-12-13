@@ -20,6 +20,7 @@ html, body, div, header, nav, main, footer {
 
 body {
     min-height: 100vh;
+    min-width: 100vw;
     -webkit-font-smoothing: antialiased;
 }
 
@@ -35,16 +36,16 @@ img, picture, video, canvas, svg {
     display: block;
     max-inline-size: 100%;
 }
-  
+
 input,textarea, select, button, option {
     font: inherit;
 }
 
-a { 
+a {
     text-decoration:none;
 }
   
-ol,ul { 
+ol,ul {
     list-style-type: none;
     margin:0;
     padding: 0;
@@ -54,4 +55,3 @@ fieldset { margin: 0;
     border-width: 0;
     padding: 0;
 }
- 
