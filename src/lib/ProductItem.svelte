@@ -107,9 +107,7 @@
         justify-content: start;
         align-items: center;
 
-        > img {
-            object-fit: cover;
-        }
+        > img { object-fit: cover; }
     }
 
     // Appearance

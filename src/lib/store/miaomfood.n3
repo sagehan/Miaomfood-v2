@@ -19,13 +19,13 @@
 
 <>!:mainEntity a :Organization, :Restaurant, :CafeOrCoffeeShop;
     :name "喵姆餐厅"@zh ;
-    :description "好多好多的芝士和肉，给你认真生活的力量！"@zh ;
+    :description "好多好多的芝士和肉 给你认真生活的力量"@zh ;
     :url "https://miaomfood.com"^^xsd:anyURI ;
     :image "https://miaomfood.com/Branding/doorface.jpeg"^^xsd:anyURI ;
     :logo "https://miaomfood.com/resources/logo.svg"^^xsd:anyURI ;
-    :telephone "+8618199999999" ;
+    :telephone "+8618123456789" ;
     :foundingDate "2015-11-15"^^xsd:date ;
-    :openingHours "Mo-Su 11:00-22:00" ;
+    :openingHours "Tu––Su 11:00––22:00" ;
     :hasMap "http://f.amap.com/1bwbT_0452CUD" ;
     :acceptsReservations true;
     :currenciesAccepted "CNY" ;
@@ -46,7 +46,7 @@
         = <contact> ;
         a :ContactPoint ;
         :contactType "sales", "customer support", "reservations" ;
-        :telephone "+8618199999999" ;
+        :telephone "+8618123456789" ;
         :email "miaomfood@example.com" ;
         :areaServed "乌鲁木齐"@zh ;
         :hoursAvailable "Mo-Su 11:00-22:00" ;
