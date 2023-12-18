@@ -25,7 +25,7 @@
     :logo "https://miaomfood.com/resources/logo.svg"^^xsd:anyURI ;
     :telephone "+8618123456789" ;
     :foundingDate "2015-11-15"^^xsd:date ;
-    :openingHours "Tu––Su 11:00––22:00" ;
+    :openingHours "Tu––Su 11:00––22:00" ; #TODO R6/{2015..2017}-WXX-02T11:00+08/T22:00+08
     :hasMap "http://f.amap.com/1bwbT_0452CUD" ;
     :acceptsReservations true;
     :currenciesAccepted "CNY" ;

@@ -32,7 +32,7 @@
 {#if $entity.loading}
 <p>loading data ...</p>
 {:else}
-<header id="VCARD" role="banner">
+<div class="this.vcard" style="display:contents;">
   <figure class="card--cover">
     <img src="./src/lib/assets/logo.svg" alt="logo"/>
     <figcaption>{RestaurantInfo[':name']}<small>{RestaurantInfo[':description']}</small></figcaption>
@@ -56,37 +56,33 @@
   </figure>
   <figure>
     <img src="./src/lib/assets/location.png" alt="location map" />
-    <dl>
-      <dt class="icon__openingHours">开放时间</dt><dd>{@html sullyOpeningHours(RestaurantInfo[':openingHours'])}</dd>
-      <dt class="icon__telephone">订餐电话</dt><dd>{@html sullyPhoneNumber(RestaurantInfo[':telephone'])}</dd>
-      <dt class="icon__address">餐厅位置</dt><dd>
-        <span>{addrInfo[':addressLocality'] ?? ''}</span>
-        <span>{addrInfo[':streetAddress'] ?? ''}</span>
-      </dd>
-    </dl>
+    <address>
+      <dl>
+        <dt class="icon__openingHours">开放时间</dt><dd>
+          <time datetime="R6/&#123;2015..2017&#125;-WXX-02T11:00+08/T22:00+08">
+            {@html sullyOpeningHours(RestaurantInfo[':openingHours'])}
+            <!--TODO R6/{2015..2017}-WXX-02T11:00+08/T22:00+08-->
+          </time></dd>
+        <dt class="icon__telephone">订餐电话</dt><dd>{@html sullyPhoneNumber(RestaurantInfo[':telephone'])}</dd>
+        <dt class="icon__address">餐厅位置</dt><dd>
+          <span>{addrInfo[':addressLocality'] ?? ''}</span>
+          <span>{addrInfo[':streetAddress'] ?? ''}</span>
+        </dd>
+      </dl>
+    </address>
   </figure>
-</header>
+</div>
 {/if}
 
 <style lang='scss'>
   //Typesetting
-  .card--cover { font-size: var(--s3); }
-  .card--cover small { font-size: var(--s-2); line-height:normal; }
+  .card--cover figcaption { font-size: var(--s3); text-wrap:nowrap; }
+  .card--cover small { font-size: var(--s-2); line-height:normal; text-wrap:wrap; }
   .card--cover ~ figure * { line-height: var(--s0); }
   figure > figure > figcaption small span { text-combine-upright: all; }
 
   //Layout
-  img { max-block-size: 100%; object-fit: contain; }
-
-  header {
-    //position: fixed; inset-block-end: 2em;
-    z-index: 10;
-    position: absolute;
-    inset-block-end: 1em;
-    display: flex;
-    transform: translate(0, calc(var(--grid-gutter) * -1));
-
-    > * {
+  .this\.vcard > * {
       //aspect-ratio: 55 / 85;
       inline-size: calc(100vh * 1 / 3);
       block-size: calc(100vh * 1 / 3 * 55 / 85);
@@ -96,7 +92,8 @@
 
       > * + * { margin-inline-start: var(--s0); }
     }
-  }
+
+  img { max-block-size: 100%; object-fit: contain; }
 
   .card--cover figcaption small {
     display: block;
@@ -130,9 +127,6 @@
 
   figure dl dd span { display: inline-block; }
 
-  //figure:not(:has(> img[alt='location map'])) > * + *,
-  dl :nth-child(2n+3) { margin-block-start: var(--s-1); }
-
   :has(> img[alt='location map']) {
     position: relative;
 
@@ -146,7 +140,7 @@
   }
 
   // Appearance
-  header > * {
+  .this\.vcard > * {
     color: oklch(from white l c h);
     background-color: var(--card_bg);
   }
@@ -154,7 +148,7 @@
   .card--cover { color: var(--primary_cl); }
 
   figure figcaption:first-child::after {
-    content: ''; position: absolute; inset: 0;
+    content:'';position:absolute;inset:0;
     outline: 1px solid;
     outline-offset: calc(var(--outline_thickness) * 3);
     translate: (0.2ex);

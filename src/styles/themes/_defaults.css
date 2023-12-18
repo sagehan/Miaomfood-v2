@@ -5,6 +5,8 @@
     --grid-max-width: 77.50rem;
     --grid-gutter   : var(--space-s-l, clamp(1.125rem, 0.6467rem + 2.3913vw, 2.5rem));
     --grid-columns  : 12;
+    --inline-offset : 50vh;
+    --block-offset  : 256px;
 
     --outline_thickness: 1px;
     --OUTLINE_SWITCH: 1;
@@ -67,6 +69,13 @@ body {
 h1, h2, p, li { letter-spacing: 0.2rem; }
 
 [alt] { font-size: var(--s-2) !important; }
+
+img + figcaption,
+dl :nth-child(2n+3) {
+    margin-block-start: 0;
+    font-size: var(--s-2);
+    line-height:normal;
+}
 
 ::selection {
     color:  oklch(100% 0 0);

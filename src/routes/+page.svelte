@@ -2,6 +2,7 @@
     import { entity, SVMVQuery, MVMVQuery } from '$lib/store/entitiesStore';
     import ProductItem from '$lib/ProductItem.svelte';
     import StickyBanner from '$lib/StickyBanner.svelte';
+    import Campaign from '$lib/Campaign.svelte';
     
     /**
      * get ':name' & ':identifier' of all the top ':MenuSection's
@@ -38,44 +39,15 @@
 
 </script>
 
-<main id="poster">
-    <div id="campaign" class="section">
-        <section id="catering" class="subsection">
-            <h1 class="category__title">联谊策划</h1>
-            <article>
-                <p>喵姆餐厅提供生日聚会，公司聚餐，派对联谊场地及策划</p>
-                <p>店内免费提供桌上足球，棋牌桌游等娱乐设施</p>
-            </article>
-            <div class="gallery">
-                <figure itemprop="associatedMedia">
-                    <img src="./src/lib/assets/fellowship_1__thumb.jpg" alt="Image description" />
-                    <figcaption itemprop="caption description">
-                        小伙伴们的快乐时光
-                    </figcaption>
-                </figure>
-                <figure>
-                    <img src="./src/lib/assets/fellowship_2__thumb.png" alt="Image description" />
-                    <figcaption itemprop="caption description">描述</figcaption>
-                </figure>
-            </div>
-        </section>
-        <section id="teaching" class="subsection">
-            <h1 class="category__title">烘焙教学</h1>
-            <article>
-                <p>你希望有一天能辞掉工作，开一家小店，用一杯咖啡唤醒清晨，用发呆打发一整个下午，和顾客聊聊天，和朋友吹吹牛，音乐挑自己爱听的，员工找自己喜欢的，没有无止境的加班和讨人厌的上司，生活安静而美好。</p>
-                <p>经常在朋友圈看到好友的留言，喜欢我家披萨的，喜欢我家店铺的，喜欢我们同事的，一切按照自己理想中的样子来做的喵姆餐厅快三年了，每天忙而不乱，充实有趣。</p>
-                <p>喵姆家现在开放开店教学了。如果你想开一家这样的店，又没有经验，来找我吧，我可以带你绕过我走过的那些弯路，教你做我们店里的所有菜品，吧台所有饮品，告诉你行业内的一些陷阱，定制自己的包装盒宣传品。</p>
-                <p>来找我吧，胖喵手把手教你做披萨！</p>
-            </article>
-        </section>
-    </div>
-    <StickyBanner/>
+<header id="VCARD"><StickyBanner /></header>
+<main>
+    <div id="CAMPAIGN"><Campaign /></div>
     {#if $entity.loading}
     <h1>loading data ...</h1>
 {:else} {#await getSections()}
-    <p>loading...</p>
+    <p>loading menu...</p>
     {:then menuSections}
-    <ul id="menu">
+    <ul id="MENU">
         {#each menuSections as section}
         <li id="{section.identifier}" class="section">
             <h1>{section.name}</h1>
@@ -110,22 +82,57 @@
     }
 
     //Typesetting
-    #menu li > h1    { font-size: var(--s2); }
-    #menu li > ul h1 { font-size: var(--s1); }
+    #MENU li > h1    { font-size: var(--s2); }
+    #MENU li > ul h1 { font-size: var(--s1); }
 
     // Layout
-    #poster {
-        margin-block: auto;
-        position: relative;
-        padding: var(--grid-gutter);
+    :global {
+        //TODO: mean to be ':has(> [style="display: contents"] > #VCARD)', but it didn't work
+        :has(#VCARD):has([style="display: contents"]) {
+            position: relative;
+            inline-size: fit-content;
+            flex-flow: wrap;
+            align-content: center;
+
+            &::before {content:"";flex-basis:100%;width:0;order:2;} // simulate <hr>
+        }
+
+        main {
+            order: -1;
+            margin-block: auto;
+            position: relative;
+            padding: var(--grid-gutter);
+            display: flex;
+            flex-flow: wrap;
+            gap: var(--grid-gutter);
+        }
+
+        @media only screen and (max-width: 320px) {
+            #main { inline-size: max-content;}
+        }
+
+        #CAMPAIGN {
+            position: absolute;
+            inset-block: var(--s1);
+            inset-block-end: calc(100vh * 1 / 3 * 55 / 85 + var(--grid-gutter) * 2);;
+            /*max-block-size: calc(
+                (var(--grid-max-width) - var(--grid-gutter) * 3) * 4/12
+            );*/
+            display: flex;
+            //flex-flow: column wrap;
+            max-inline-size: 60vh;
+        }
+
+        #VCARD {
+            order: 3;
+            position: sticky; inset-inline-start: 0;
+            display:flex;
+            align-items:center;
+        }
     }
 
-    @media only screen and (max-width: 320px) {
-        #poster { inline-size: max-content;}
-    }
-
-    ul#menu,
-    ul#menu :is(ul,li) {
+    ul#MENU,
+    ul#MENU :is(ul,li) {
         max-inline-size: none;
 
         h1 {
@@ -134,27 +141,23 @@
         }
     }
 
-    #menu { //TODO: clamp max/min inline/block flex intrinsic ratio stuff
+    #MENU {
+        order: 1;
+        padding-inline-end: var(--inline-offset);
         display: flex;
         flex-flow: wrap;
         gap: calc(var(--grid-gutter) / 2);
-        inline-size: fit-content;
 
-        &::before {
-            content: "";
-            flex-basis: 100%;
-            width: 0;
-            order: 2;
-        }
+        &::before {content:"";flex-basis:100%;width:0;order:2;} // simulate <hr>
     }
 
-    #menu .section {
+    #MENU .section {
         padding: var(--grid-gutter);
 
         &#TASTY {
             flex: 999;
             order: 3;
-            transform: translate(-265px, calc(50vh + 5px));
+            transform: translate(0, calc(var(--inline-offset) + 5px));
         }
 
         &#DRINKS {
@@ -166,7 +169,7 @@
             );
             position: sticky;
             inset-inline-start: var(--s1);
-            transform: translate(0, 50vh);
+            transform: translate(var(--block-offset), var(--inline-offset));
             will-change: transform;
 
             @media (min-width: 320px) {
@@ -183,16 +186,6 @@
         inline-size: max-content;
         display: flex;
         //overflow: hidden;
-    }
-
-    #campaign {
-        position: fixed;
-        inset-block: var(--s1);
-        display: flex;
-        flex-flow: column;
-        /*max-block-size: calc(
-            (var(--grid-max-width) - var(--grid-gutter) * 3) * 4/12
-        );*/
     }
 
     .subsection {
@@ -216,7 +209,7 @@
     }
 
     // Appearance
-    /*:is(#menu, .submenu, .section, .subsection, article):hover {
+    /*:is(#MENU, .submenu, .section, .subsection, article):hover {
         outline: calc(var(--outline_thickness) * var(--OUTLINE_SWITCH)) solid;
     } /*for debuging*/
 
