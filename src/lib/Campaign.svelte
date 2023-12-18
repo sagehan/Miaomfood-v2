@@ -36,13 +36,15 @@
 </div>
 
 <style lang="scss">
-  //Typesetting
+  /**Typesetting
+   */
   h1 { line-height:var(--s2); }
   article p { line-height:var(--s1); white-space: unset; text-wrap: balance; }
   article p::first-letter { font-size:var(--s1); color: oklch(from var(--activity_bg) calc(l - 15) c h); }
   article p + p { margin-block-start:var(--s1); }
 
-  //Layout
+  /**Layout
+   */
   .this\.campaign > *,
   .gallery {
     display: flex;
@@ -61,13 +63,5 @@
     inline-size: 2lh;
     block-size: 2lh;
     text-align-last: right;
-  }
-
-  // Appearance
-  section h1::after {
-    content:'';position:absolute;inset:0;
-    outline: 1px solid;
-    outline-offset: calc(var(--outline_thickness) * 3);
-    translate: (0.1ex);
   }
 </style>

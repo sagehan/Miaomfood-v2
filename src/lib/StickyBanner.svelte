@@ -29,10 +29,10 @@
       .then(value => addrInfo = value);
 </script>
 
+<div class="this.vcard" style="display:contents;">
 {#if $entity.loading}
 <p>loading data ...</p>
 {:else}
-<div class="this.vcard" style="display:contents;">
   <figure class="card--cover">
     <img src="./src/lib/assets/logo.svg" alt="logo"/>
     <figcaption>{RestaurantInfo[':name']}<small>{RestaurantInfo[':description']}</small></figcaption>
@@ -71,17 +71,19 @@
       </dl>
     </address>
   </figure>
-</div>
 {/if}
+</div>
 
 <style lang='scss'>
-  //Typesetting
+  /**Typesetting
+   */
   .card--cover figcaption { font-size: var(--s3); text-wrap:nowrap; }
   .card--cover small { font-size: var(--s-2); line-height:normal; text-wrap:wrap; }
   .card--cover ~ figure * { line-height: var(--s0); }
   figure > figure > figcaption small span { text-combine-upright: all; }
 
-  //Layout
+  /**Layout
+   */
   .this\.vcard > * {
       //aspect-ratio: 55 / 85;
       inline-size: calc(100vh * 1 / 3);
@@ -139,7 +141,8 @@
     }
   }
 
-  // Appearance
+  /**Appearance
+   */
   .this\.vcard > * {
     color: oklch(from white l c h);
     background-color: var(--card_bg);
