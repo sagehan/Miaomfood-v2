@@ -39,7 +39,6 @@
     }
 
     #CAMPAIGN {position:absolute;inset-block:var(--s1);}
-    //}
 
     /**Appearance
      */

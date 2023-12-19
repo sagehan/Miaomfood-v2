@@ -43,7 +43,7 @@
   /**Typesetting
    */
   h1 { line-height:var(--s2); }
-  article p { line-height:var(--s1); inline-size: 15ic; white-space: unset; text-wrap: balance; }
+  article p { line-height:var(--s1); white-space: unset; text-wrap: balance; }
   article p::first-letter { font-size:var(--s1); color: oklch(from var(--activity_bg) calc(l - 15) c h); }
   article * { max-inline-size: none; }
 
@@ -51,37 +51,32 @@
    */
   :global(:has(> .this\.campaign)) {
     display: flex;
-    flex-flow: wrap;
-    gap:0;
-
-    &::before {content:"";flex-basis:100%;width:0;} // simulate <hr>
+    flex-flow: column-reverse;
+    justify-content: center;
+    gap:calc(var(--grid-gutter) * 1.5 );
   }
 
   .this\.campaign > * {
+    min-inline-size: 100vh;
     align-items: center;
-    gap:var(--grid-gutter);
+    gap: var(--grid-gutter);
   }
 
-  .this\.campaign section > article {display: contents;}
+  .this\.campaign section > h1 ~ * {display: contents;}
+  .this\.campaign section > h1 ~ * > * {inline-size: 16ic;}
+
   
   .this\.campaign > :first-child {
-    max-inline-size: calc((var(--grid-max-width) - var(--grid-gutter) * 3) * 4 / 12);
-    translate: calc(15ic / 2 - 2ic) 0;
+    //translate: calc(15ic / 2 - 2ic) 0;
     will-change: transform;
     display: flex;
-    flex-flow: column;
   }
 
   .this\.campaign > :last-child  {
-    max-block-size: calc((var(--grid-max-width) - var(--grid-gutter) * 3) * 4 / 12);
-    min-inline-size: 100vh;
-    align-self: flex-start;
-    translate: 0 var(--grid-gutter);
+    //translate: 0 var(--grid-gutter);
     will-change: transform;
     display: flex;
   }
-
-  .gallery > * + * { margin-block-start: var(--s1); }
 
   section h1 {
     position: relative;
