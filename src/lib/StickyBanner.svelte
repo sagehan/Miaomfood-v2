@@ -84,16 +84,21 @@
 
   /**Layout
    */
-  .this\.vcard > * {
-      //aspect-ratio: 55 / 85;
-      inline-size: calc(100vh * 1 / 3);
-      block-size: calc(100vh * 1 / 3 * 55 / 85);
-      padding: calc(var(--s1));
-      display: flex;
-      align-items: center;
+  :global(:has(> .this\.vcard)) {
+    display:flex;
+    align-items:center;
+  }
 
-      > * + * { margin-inline-start: var(--s0); }
-    }
+  .this\.vcard > * {
+    //aspect-ratio: 55 / 85;
+    inline-size: calc(100vh * 1 / 3);
+    block-size: calc(100vh * 1 / 3 * 55 / 85);
+    padding: calc(var(--s1));
+    display: flex;
+    align-items: center;
+
+    > * + * { margin-inline-start: var(--s0); }
+  }
 
   img { max-block-size: 100%; object-fit: contain; }
 
@@ -108,6 +113,7 @@
       position: relative;
       inline-size: 2lh;
       block-size: 2lh;
+      flex: 0 0 auto;
       text-align-last:right;
     }
 
@@ -154,7 +160,7 @@
     content:'';position:absolute;inset:0;
     outline: 1px solid;
     outline-offset: calc(var(--outline_thickness) * 3);
-    translate: (0.2ex);
+    translate: 0.2ex;
   }
 
   figure figcaption:first-child,

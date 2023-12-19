@@ -16,6 +16,10 @@
         <img src="./src/lib/assets/fellowship_2__thumb.png" alt="Image description" />
         <figcaption itemprop="caption description">描述</figcaption>
       </figure>
+      <figure itemprop="associatedMedia">
+        <img src="./src/lib/assets/fellowship_1__thumb.jpg" alt="Image description" />
+        <figcaption itemprop="caption description">小伙伴们的快乐时光</figcaption>
+      </figure>
     </div>
   </section>
   <section id="teaching" class="subsection">
@@ -39,29 +43,51 @@
   /**Typesetting
    */
   h1 { line-height:var(--s2); }
-  article p { line-height:var(--s1); white-space: unset; text-wrap: balance; }
+  article p { line-height:var(--s1); inline-size: 15ic; white-space: unset; text-wrap: balance; }
   article p::first-letter { font-size:var(--s1); color: oklch(from var(--activity_bg) calc(l - 15) c h); }
-  article p + p { margin-block-start:var(--s1); }
+  article * { max-inline-size: none; }
 
   /**Layout
    */
-  .this\.campaign > *,
-  .gallery {
+  :global(:has(> .this\.campaign)) {
     display: flex;
-    flex-flow: column;
-    align-items: center;
+    flex-flow: wrap;
+    gap:0;
 
-    > * + * {
-      margin-block-start: var(--s1);
-    }
+    &::before {content:"";flex-basis:100%;width:0;} // simulate <hr>
   }
 
-  .this\.campaign > * { margin: var(--s1); }
+  .this\.campaign > * {
+    align-items: center;
+    gap:var(--grid-gutter);
+  }
+
+  .this\.campaign section > article {display: contents;}
+  
+  .this\.campaign > :first-child {
+    max-inline-size: calc((var(--grid-max-width) - var(--grid-gutter) * 3) * 4 / 12);
+    translate: calc(15ic / 2 - 2ic) 0;
+    will-change: transform;
+    display: flex;
+    flex-flow: column;
+  }
+
+  .this\.campaign > :last-child  {
+    max-block-size: calc((var(--grid-max-width) - var(--grid-gutter) * 3) * 4 / 12);
+    min-inline-size: 100vh;
+    align-self: flex-start;
+    translate: 0 var(--grid-gutter);
+    will-change: transform;
+    display: flex;
+  }
+
+  .gallery > * + * { margin-block-start: var(--s1); }
 
   section h1 {
     position: relative;
     inline-size: 2lh;
     block-size: 2lh;
+    flex: 0 0 auto;
     text-align-last: right;
   }
 </style>

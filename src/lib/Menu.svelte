@@ -102,7 +102,7 @@
 	}
 
 	.this\.menu #TASTY {
-		transform: translate(0, calc(var(--inline-offset) + 5px));
+		transform: translate(112px, calc(var(--inline-offset) + 5px));
 		will-change: transform;
 	}
 

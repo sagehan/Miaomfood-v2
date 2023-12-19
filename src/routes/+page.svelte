@@ -18,45 +18,28 @@
 
     /**Layout
      */
-    :global {
-        //TODO: mean to be ':has(> [style="display: contents"] > #VCARD)', but it didn't work
-        :has(#VCARD):has([style="display: contents"]) {
-            position: relative;
-            inline-size: fit-content;
-            flex-flow: wrap;
-            align-content: center;
+    :global(:has(> [style="display: contents"] > #VCARD)) {
+        inline-size: fit-content;
+        flex-flow: wrap;
+        align-content: center;
 
-            &::before {content:"";flex-basis:100%;width:0;order:2;} // simulate <hr>
-        }
-
-        #VCARD {
-            position: sticky; inset-inline-start: 0;
-            display:flex;
-            align-items:center;
-        }
-
-        main {
-            order: -1;
-            margin-block: auto;
-            position: relative;
-            padding: var(--grid-gutter);
-            padding-inline-end: var(--inline-offset);
-            display: flex;
-            flex-flow: wrap;
-            gap: var(--grid-gutter);
-        }
-
-        #CAMPAIGN {
-            position: absolute;
-            inset-block: var(--s1);
-            inset-block-end: calc(100vh * 1 / 3 * 55 / 85 + var(--grid-gutter) * 2);;
-            /*max-block-size: calc(
-                (var(--grid-max-width) - var(--grid-gutter) * 3) * 4/12
-            );*/
-            display: flex;
-            max-inline-size: 60vh;
-        }
+        &::before {content:"";flex-basis:100%;width:0;order:2;} // simulate <hr>
     }
+
+    #VCARD {position:sticky;inset-inline-start:0;}
+
+    main {
+        order: -1;
+        position: relative;
+        padding: var(--grid-gutter);
+        padding-inline-end: var(--inline-offset);
+        display: flex;
+        flex-flow: wrap;
+        gap: var(--grid-gutter);
+    }
+
+    #CAMPAIGN {position:absolute;inset-block:var(--s1);}
+    //}
 
     /**Appearance
      */
