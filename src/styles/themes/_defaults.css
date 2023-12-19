@@ -5,7 +5,6 @@
     --grid-max-width: 77.50rem;
     --grid-gutter   : var(--space-s-l, clamp(1.125rem, 0.6467rem + 2.3913vw, 2.5rem));
     --grid-columns  : 12;
-    --inline-offset : 61.8vh;
     --block-offset  : 128px;
 
     --outline_thickness: 1px;
@@ -26,6 +25,7 @@
 
     --leading       : calc(1em + var(--s1, 1.5rem));
     --measure       : 60ch;
+    --stamp-size    : 2lh;
     --writing-mode  : vertical-lr;
 
     /* Appearance

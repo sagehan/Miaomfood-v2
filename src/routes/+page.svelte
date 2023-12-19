@@ -23,31 +23,42 @@
         flex-flow: wrap;
         align-content: center;
 
-        &::before {content:"";flex-basis:100%;width:0;order:2;} // simulate <hr>
+        &::before {content:"";flex-basis:100%;width:0;} // simulate <hr>
     }
 
     #VCARD {position:sticky;inset-inline-start:0;}
 
     main {
+        --inline-offset: 61.8vh;
         order: -1;
-        position: relative;
         padding: var(--grid-gutter);
-        padding-inline-end: var(--inline-offset);
         display: flex;
-        flex-flow: wrap;
-        gap: var(--grid-gutter);
-    }
+        gap: calc(var(--grid-gutter)*0.5);
 
-    #CAMPAIGN {position:absolute;inset-block:var(--s1);}
+        //#MENU {order:-1;}
+        #CAMPAIGN {
+            position: relative;
+            inset-inline:var(--s1);
+            inline-size: var(--inline-offset);
+            overflow: hidden;
+        }
+    }
 
     /**Appearance
      */
     :global{
-        section h1::after {
-            content:'';position:absolute;inset:0;
-            outline: 1px solid;
-            outline-offset: calc(var(--outline_thickness) * 3);
-            translate: (0.1ex);
+        .stamped {
+            position: relative;
+            inline-size: var(--stamp-size);
+            block-size: var(--stamp-size);
+            flex: 0 0 auto;
+            text-align-last: right;
+
+            &::after {
+                content:'';position:absolute;inset:0;
+                outline: 1px solid;
+                outline-offset: calc(var(--outline_thickness) * 3);
+            }
         }
         /*:is(#MENU, .submenu, .section, .subsection, article):hover {
         outline: calc(var(--outline_thickness) * var(--OUTLINE_SWITCH)) solid;

@@ -102,7 +102,7 @@
 	}
 
 	.this\.menu #TASTY {
-		transform: translate(calc(var(--block-offset) * -1), calc(var(--inline-offset) + 5px));
+		transform: translate(calc(var(--block-offset) * -1), 5px);
 		will-change: transform;
 	}
 
@@ -111,7 +111,7 @@
 		position: sticky;
 		inset-inline-start: var(--s1);
 		max-block-size: calc((var(--grid-max-width) - var(--grid-gutter) * 3) * 4 / 12);
-		transform: translate(var(--block-offset), var(--inline-offset));
+		transform: translate(var(--block-offset));
 		will-change: transform;
 	}
 

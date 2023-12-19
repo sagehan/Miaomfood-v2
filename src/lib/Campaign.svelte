@@ -1,10 +1,10 @@
 
 <div class="this.campaign" style="display:contents;">
   <section id="catering" class="subsection">
-    <h1 class="category__title">联谊策划</h1>
+    <h1 class="stamped">联谊策划</h1>
     <article>
       <p>
-        喵姆餐厅提供生日聚会，公司聚餐，派对联谊场地及策划，店内免费提供桌上足球，棋牌桌游等娱乐设施
+        喵姆餐厅提供生日聚会，公司聚餐，派对联谊场地及策划，店内免费提供桌上足球，棋牌桌游等娱乐设施。
       </p>
     </article>
     <div class="gallery">
@@ -23,7 +23,7 @@
     </div>
   </section>
   <section id="teaching" class="subsection">
-    <h1 class="category__title">烘焙教学</h1>
+    <h1 class="stamped">烘焙教学</h1>
     <article>
       <p>
         你希望有一天能辞掉工作，开一家小店，用一杯咖啡唤醒清晨，用发呆打发一整个下午，和顾客聊聊天，和朋友吹吹牛，音乐挑自己爱听的，员工找自己喜欢的，没有无止境的加班和讨人厌的上司，生活安静而美好。
@@ -50,6 +50,7 @@
   /**Layout
    */
   :global(:has(> .this\.campaign)) {
+    --padding-inline: calc(var(--grid-gutter) * 2);
     display: flex;
     flex-flow: column-reverse;
     justify-content: center;
@@ -57,7 +58,8 @@
   }
 
   .this\.campaign > * {
-    min-inline-size: 100vh;
+    min-inline-size: calc(18ic * 5);
+    padding-inline: var(--padding-inline);
     align-items: center;
     gap: var(--grid-gutter);
   }
@@ -67,22 +69,37 @@
 
   
   .this\.campaign > :first-child {
-    //translate: calc(15ic / 2 - 2ic) 0;
+    transform: translateY(calc(
+      -100% + var(--inline-offset)/2 + (var(--padding-inline) + var(--stamp-size)/2 - var(--grid-gutter)/4)));
     will-change: transform;
     display: flex;
+    flex-flow: row-reverse;
   }
 
   .this\.campaign > :last-child  {
-    //translate: 0 var(--grid-gutter);
+    transform: translateY(calc(
+      var(--inline-offset)/2 - (var(--padding-inline) + var(--stamp-size)/2 - var(--grid-gutter)/4)));
     will-change: transform;
     display: flex;
   }
 
-  section h1 {
-    position: relative;
-    inline-size: 2lh;
-    block-size: 2lh;
-    flex: 0 0 auto;
-    text-align-last: right;
+  /**Animation
+   */
+  @keyframes move-up { // TODO: optimization is needed
+    to { transform: translateY(calc(350% + var(--inline-offset) * 2)); }
+  }
+
+  @keyframes move-down { // TODO: optimization is needed
+    to { transform: translateY(calc(-350% + var(--inline-offset))); }
+  }
+
+  .this\.campaign > :first-child {
+    animation: move-up linear forwards;
+		animation-timeline: scroll(root inline);
+  }
+
+  .this\.campaign > :last-child {
+    animation: move-down linear forwards;
+		animation-timeline: scroll(root inline);
   }
 </style>

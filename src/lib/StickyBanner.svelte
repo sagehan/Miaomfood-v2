@@ -38,7 +38,7 @@
     <figcaption>{RestaurantInfo[':name']}<small>{RestaurantInfo[':description']}</small></figcaption>
   </figure>
   <figure>
-    <figcaption>关注微信</figcaption>
+    <figcaption class="stamped">关注微信</figcaption>
     <figure>
       <img class="qrcode" src="./src/lib/assets/QR-1.png" alt="喵姆餐厅微信:点餐、订单、售后"/>
       <figcaption >
@@ -109,14 +109,6 @@
   }
   
   figure:has(> figure > img) {
-    figcaption:first-child {
-      position: relative;
-      inline-size: 2lh;
-      block-size: 2lh;
-      flex: 0 0 auto;
-      text-align-last:right;
-    }
-
     :nth-child(1 of figure) {
       display: flex;
       flex-flow: column;
@@ -155,13 +147,6 @@
   }
 
   .card--cover { color: var(--primary_cl); }
-
-  figure figcaption:first-child::after {
-    content:'';position:absolute;inset:0;
-    outline: 1px solid;
-    outline-offset: calc(var(--outline_thickness) * 3);
-    translate: 0.2ex;
-  }
 
   figure figcaption:first-child,
   figure figcaption:first-child ~ figure :is(p, small),
