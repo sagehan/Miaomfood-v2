@@ -1,6 +1,6 @@
 
 <div class="this.campaign" style="display:contents;">
-  <section id="catering" class="subsection">
+  <section id="catering">
     <h1 class="stamped">联谊策划</h1>
     <article>
       <p>
@@ -22,7 +22,7 @@
       </figure>
     </div>
   </section>
-  <section id="teaching" class="subsection">
+  <section id="teaching">
     <h1 class="stamped">烘焙教学</h1>
     <article>
       <p>
@@ -46,6 +46,7 @@
   article p { line-height:var(--s1); white-space: unset; text-wrap: balance; }
   article p::first-letter { font-size:var(--s1); color: oklch(from var(--activity_bg) calc(l - 15) c h); }
   article * { max-inline-size: none; }
+  .this\.campaign section > :last-child::after { content: '❦'; font-size: var(--s1); }
 
   /**Layout
    */
@@ -66,12 +67,11 @@
 
   .this\.campaign section > h1 ~ * {display: contents;}
   .this\.campaign section > h1 ~ * > * {inline-size: 16ic;}
-
   
   .this\.campaign > :first-child {
     transform: translateY(calc(
       -100% + var(--inline-offset)/2 + (var(--padding-inline) + var(--stamp-size)/2 - var(--grid-gutter)/4)));
-    will-change: transform;
+    //will-change: transform;
     display: flex;
     flex-flow: row-reverse;
   }
@@ -79,7 +79,7 @@
   .this\.campaign > :last-child  {
     transform: translateY(calc(
       var(--inline-offset)/2 - (var(--padding-inline) + var(--stamp-size)/2 - var(--grid-gutter)/4)));
-    will-change: transform;
+    //will-change: transform;
     display: flex;
   }
 

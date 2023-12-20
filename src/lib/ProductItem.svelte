@@ -111,8 +111,4 @@
     }
 
     // Appearance
-    :is(article):hover {
-        outline: calc(var(--outline_thickness) * var(--OUTLINE_SWITCH)) solid;
-        & > * + * { outline: calc(var(--outline_thickness) * var(--OUTLINE_SWITCH)) solid };
-    } /*for debuging*/
 </style>

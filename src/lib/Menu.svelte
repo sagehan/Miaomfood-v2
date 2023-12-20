@@ -93,6 +93,7 @@
 	}
 
 	.this\.menu > ul {
+		position: relative;
 		inline-size: max-content;
 		display: flex;
 		flex-flow: wrap;
@@ -103,16 +104,16 @@
 
 	.this\.menu #TASTY {
 		transform: translate(calc(var(--block-offset) * -1), 5px);
-		will-change: transform;
+		//will-change: transform;
 	}
 
 	.this\.menu #DRINKS {
 		order: -1;
-		position: sticky;
+		//position: sticky;
 		inset-inline-start: var(--s1);
 		max-block-size: calc((var(--grid-max-width) - var(--grid-gutter) * 3) * 4 / 12);
-		transform: translate(var(--block-offset));
-		will-change: transform;
+		transform: translateX(var(--block-offset));
+		//will-change: transform;
 	}
 
 	.this\.menu :has(> .submenu) {
@@ -127,4 +128,16 @@
 			aspect-ratio: 1.618033;
 		}
 	}
+
+	/**Animation
+   */
+	 @keyframes expand { // TODO: optimization is needed
+    to { transform: translateX(0); }
+  }
+
+  .this\.menu :is(#TASTY, #DRINKS) {
+    animation: expand ease-out both;
+		animation-timeline: view(inline);
+		animation-range: entry 95% exit-crossing 0%;
+  }
 </style>
