@@ -130,8 +130,9 @@
 	}
 
 	/**Animation
+	 // TODO: optimization is needed
    */
-	 @keyframes expand { // TODO: optimization is needed
+	 @keyframes expand {
     to { transform: translateX(0); }
   }
 

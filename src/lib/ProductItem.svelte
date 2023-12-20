@@ -64,51 +64,35 @@
 <style lang='scss'>
     //Typesetting
     article {
-        h2 { font-size: var(--s0 ); }
-        ul { font-size: var(--s-1); }
-        .p-spec { align-self: center;}
-
-        .spec-price {
-            text-combine-upright: all;
-            text-combine-upright: digits;
-        }
+        h2 { font-size:var(--s0 ); }
+        ul { font-size:var(--s-1); }
+        .spec-price { text-combine-upright:all; text-combine-upright:digits; }
+        figure img::after { font-size:x-small; line-height:var(--s0); }
     }
 
     //Layout
     article {
         writing-mode: vertical-rl;
-        display: flex;
-        flex-flow: wrap;
+        :is([role="group"] :nth-child(odd) &) { writing-mode:vertical-lr; }
+
         inline-size: calc(var(--grid-gutter) * 5);
-        align-content: center;
-
-        .e-description { order: 4;}
-
-        :is([role="group"] :nth-child(odd) &) {
-            writing-mode: vertical-lr;
-        }
-
-        :is(#TASTY & .spec-tag) {
-            inline-size: 100%;
-            display: inline-flex;
-            align-self: center;
-        }
-
-        :is(#DRINKS & > :last-child) {
-            margin-inline-start: var(--s-1);
-        }
-    }
-
-    figure {
-        block-size: calc(var(--grid-gutter) * 4);
-        aspect-ratio: 1 / 1;
-        overflow: hidden;
         display: flex;
-        justify-content: start;
-        align-items: center;
+        flex-flow: column;
+        :is(#DRINKS &) { flex-flow: initial; }
 
-        > img { object-fit: cover; }
+        .e-description { order: 4; }
+
+        .p-spec { display: inline-block; }
+        :is(#TASTY & .spec-tag) { inline-size:100%; }
+
+        figure {
+            aspect-ratio: 1;
+            inline-size: calc(var(--grid-gutter) * 3);
+        }
+
+        :is(#DRINKS & > :last-child) { margin-inline-start:var(--s-1); }
     }
 
     // Appearance
+    figure img::after { color: oklch(from var(--debug_cl) calc(l * -1) c h ); }
 </style>

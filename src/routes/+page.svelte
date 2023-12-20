@@ -26,6 +26,20 @@
         &::before {content:"";flex-basis:100%;width:0;} // simulate <hr>
     }
 
+    :global{
+        figure {
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+
+            > img {
+                position: relative;
+                object-fit: cover;
+                inline-size: 100%; block-size: 100%;
+            }
+        }
+    }
+
     #VCARD {position:sticky;inset-inline-start:0;}
 
     main {
@@ -47,6 +61,16 @@
     /**Appearance
      */
     :global{
+        figure > img {
+            &::before {
+                content:''; position:absolute; inset:0;
+                background-color: hsl(0, 0%, 93.3%);
+                outline: calc(var(--outline_thickness) * var(--OUTLINE_SWITCH)) dashed hsl(0, 0%, 66.7%);
+                outline-offset: calc(var(--outline_thickness) * -1);
+            }
+            &::after { content: attr(alt); position:absolute; inset:0; }
+        }
+
         .stamped {
             position: relative;
             inline-size: var(--stamp-size);
@@ -66,7 +90,6 @@
 
         #TASTY  { background-color: var(--tasty_bg ); }
         #DRINKS { background-color: var(--drinks_bg); }
-        /*#TASTY:has(+ #DRINKS:hover) { overflow-y: hidden; } /* be daunted by this rule */
 
         :is(#VCARD, #TASTY, #DRINKS) {
             box-shadow: 0 1px 3px rgba(0,0,0,0.15);
