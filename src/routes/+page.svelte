@@ -65,10 +65,14 @@
             &::before {
                 content:''; position:absolute; inset:0;
                 background-color: hsl(0, 0%, 93.3%);
-                outline: calc(var(--outline_thickness) * var(--OUTLINE_SWITCH)) dashed hsl(0, 0%, 66.7%);
-                outline-offset: calc(var(--outline_thickness) * -1);
+                border-radius: var(--border-radius);
+                box-shadow: inset 0 0 0
+                    calc(var(--outline_thickness) * 0.1 * var(--OUTLINE_SWITCH))
+                    oklch(from var(--debug_cl) calc(l * -1) c h );
             }
-            &::after { content: attr(alt); position:absolute; inset:0; }
+            &::after {
+                content: attr(alt); position:absolute; inset:0;
+                color: oklch(from var(--debug_cl) calc(l * -1) c h ); }
         }
 
         .stamped {

@@ -133,7 +133,7 @@
                 :alternateName "" ;
                 :productID "TURKEY" ;
                 :description "特色:烤鸡肉，自制辣酱"@zh ;
-                :image "pizza.png" ;
+                :image "404.png" ;
                 :position 5;
                 :offers                 
                     [ :additionalType miaomfood:八寸;  :price 46; :availability :SoldOut],
@@ -166,7 +166,7 @@
                 :alternateName "" ;
                 :productID "MGBC" ;
                 :description "特色:菠菜，蘑菇，酸黄瓜"@zh ;
-                :image "pizza.png" ;
+                :image "404.png" ;
                 :position 8;
                 :offers
                     [ :additionalType miaomfood:八寸;  :price 35; :availability :SoldOut],

@@ -88,11 +88,12 @@
         figure {
             aspect-ratio: 1;
             inline-size: calc(var(--grid-gutter) * 3);
+
+            :is(#PIZZA & > img) { --border-radius:50%; border-radius:var(--border-radius); }
         }
 
         :is(#DRINKS & > :last-child) { margin-inline-start:var(--s-1); }
     }
 
     // Appearance
-    figure img::after { color: oklch(from var(--debug_cl) calc(l * -1) c h ); }
 </style>

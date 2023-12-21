@@ -2,7 +2,7 @@
   import { entity, MVSVQuery } from '$lib/store/entitiesStore';
 
   /** @type {Object} */
-  let RestaurantInfo = {}, addrInfo = {};
+  let eateryInfo = {}, addrInfo = {};
 
   /**
    * sully the 'openingHours' string by wrapping each date(time) unit with a span tag
@@ -24,7 +24,7 @@
 
   $: $entity.rdfStore,
     MVSVQuery(`?p ?o { [^:mainEntity/:name "喵姆餐厅"@zh] ?p ?o. FILTER (?p != rdf:type && !isBlank(?o)) }`)
-      .then(value => RestaurantInfo = value),
+      .then(value => eateryInfo = value),
     MVSVQuery(`?p ?o { ?_s ^:mainEntity/:name "喵姆餐厅"@zh. [^:address ?_s; ?p ?o]. FILTER (?p != rdf:type && !isBlank(?o))}`)
       .then(value => addrInfo = value);
 </script>
@@ -35,7 +35,7 @@
 {:else}
   <figure class="card--cover">
     <img src="./src/lib/assets/logo.svg" alt="logo"/>
-    <figcaption>{RestaurantInfo[':name']}<small>{RestaurantInfo[':description']}</small></figcaption>
+    <figcaption>{eateryInfo[':name']}<small>{eateryInfo[':description']}</small></figcaption>
   </figure>
   <figure>
     <figcaption class="stamped">关注微信</figcaption>
@@ -60,10 +60,10 @@
       <dl>
         <dt class="icon__openingHours">开放时间</dt><dd>
           <time datetime="R6/&#123;2015..2017&#125;-WXX-02T11:00+08/T22:00+08">
-            {@html sullyOpeningHours(RestaurantInfo[':openingHours'])}
+            {@html sullyOpeningHours(eateryInfo[':openingHours'])}
             <!--TODO R6/{2015..2017}-WXX-02T11:00+08/T22:00+08-->
           </time></dd>
-        <dt class="icon__telephone">订餐电话</dt><dd>{@html sullyPhoneNumber(RestaurantInfo[':telephone'])}</dd>
+        <dt class="icon__telephone">订餐电话</dt><dd>{@html sullyPhoneNumber(eateryInfo[':telephone'])}</dd>
         <dt class="icon__address">餐厅位置</dt><dd>
           <span>{addrInfo[':addressLocality'] ?? ''}</span>
           <span>{addrInfo[':streetAddress'] ?? ''}</span>
