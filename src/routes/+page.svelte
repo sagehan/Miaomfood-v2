@@ -18,7 +18,7 @@
 
     /**Layout
      */
-    :global(:has(> [style="display: contents"] > #VCARD)) {
+    :global(:has(> [style*="contents"] > #VCARD)) {
         inline-size: fit-content;
         flex-flow: wrap;
         align-content: center;
@@ -95,18 +95,20 @@
         #TASTY  { background-color: var(--tasty_bg ); }
         #DRINKS { background-color: var(--drinks_bg); }
 
-        :is(#VCARD, #TASTY, #DRINKS) {
+        #VCARD > [style*="contents"] > *, #TASTY, #DRINKS {
+            overflow: visible;
             box-shadow: 0 1px 3px rgba(0,0,0,0.15);
             will-change: transform;
         }
-        #TASTY, #DRINKS:hover { transform: scale(1.01); }
-        #TASTY::after, #DRINKS::after {
-            content: ""; position: absolute; inset: 0;
+        #TASTY:hover, #DRINKS:hover { transform: scale(1.01); }
+        #VCARD > [style*="contents"]:hover > *::after, #TASTY::after, #DRINKS::after {
+            content:""; position:absolute; inset:0;
             z-index: -1;
             opacity: 0;
             transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
             box-shadow: var(--poster-shadow);
         }
+        #VCARD > [style*="contents"]:hover > *::after,
         #TASTY:hover::after,
         #DRINKS:hover::after { opacity: 1; }
     }

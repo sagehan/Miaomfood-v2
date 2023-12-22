@@ -103,16 +103,16 @@
 	}
 
 	.this\.menu #TASTY {
-		transform: translate(calc(var(--block-offset) * -1), 5px);
+		--translate: calc(var(--block-offset) * -1) 5px;
 		//will-change: transform;
 	}
 
 	.this\.menu #DRINKS {
+		--translate: var(--block-offset);
 		order: -1;
 		//position: sticky;
 		inset-inline-start: var(--s1);
 		max-block-size: calc((var(--grid-max-width) - var(--grid-gutter) * 3) * 4 / 12);
-		transform: translateX(var(--block-offset));
 		//will-change: transform;
 	}
 
@@ -132,8 +132,8 @@
 	/**Animation
 	 // TODO: optimization is needed
    */
-	 @keyframes expand {
-    to { transform: translateX(0); }
+	@keyframes expand {
+		from {translate:var(--translate);} to {translate:unset;}
   }
 
   .this\.menu :is(#TASTY, #DRINKS) {

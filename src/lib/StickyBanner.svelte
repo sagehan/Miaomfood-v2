@@ -85,14 +85,17 @@
   /**Layout
    */
   :global(:has(> .this\.vcard)) {
+    --numcards: 3;
+    --banner-block-size: calc(100vh * 1 / 3 * 55 / 85);
+    --banner-inline-size: calc(100vh * 1 / 3);
     display:flex;
     align-items:center;
   }
 
   .this\.vcard > * {
     //aspect-ratio: 55 / 85;
-    inline-size: calc(100vh * 1 / 3);
-    block-size: calc(100vh * 1 / 3 * 55 / 85);
+    inline-size: var(--banner-inline-size);
+    block-size: var(--banner-block-size);
     padding: calc(var(--s1));
     display: flex;
     align-items: center;
@@ -163,5 +166,36 @@
     grayscale(0.6)
     blur(3px)
     opacity(85%);
+  }
+
+  /**Animation
+   */
+  :global(:has(> .this\.vcard)) {
+    transform-style: preserve-3d;
+    perspective: calc(
+      max(var(--banner-inline-size), var(--banner-block-size)) * 1.618033 * 1.618033);
+  }
+
+  .this\.vcard {
+    > * {
+      z-index:calc(var(--numcards) - var(--index) + 1);
+      transition:1s;
+      //will-change: transform;
+    }
+
+    > :nth-child(1) { --index:1; }
+    &:hover > :nth-child(1) { transform: translateY(var(--banner-inline-size)); }
+
+    > :nth-child(2n+2) { --index:2; }
+    &:hover > :nth-child(2n+2) { transform:
+      translateZ(calc(var(--banner-inline-size) * -1))
+      rotateX(-180deg);
+    }
+
+    > :nth-child(2n+3) { --index:3; }
+    &:hover > :nth-child(2n+3) { transform:
+      translateY(calc(var(--banner-inline-size) * -1))
+      translateZ(calc(var(--banner-inline-size) * -1))
+    }
   }
 </style>
