@@ -177,25 +177,31 @@
   }
 
   .this\.vcard {
+    &:hover > * {--sw:1;}
     > * {
-      z-index:calc(var(--numcards) - var(--index) + 1);
-      transition:1s;
+      --sw: 0;
+      z-index: calc(var(--numcards) - var(--index) + 1);
+      transition: 1s;
       //will-change: transform;
     }
 
-    > :nth-child(1) { --index:1; }
-    &:hover > :nth-child(1) { transform: translateY(var(--banner-inline-size)); }
-
-    > :nth-child(2n+2) { --index:2; }
-    &:hover > :nth-child(2n+2) { transform:
-      translateZ(calc(var(--banner-inline-size) * -1))
-      rotateX(-180deg);
+    > :nth-child(1) {
+      --index:1;
+      transform: translateY(calc(var(--sw) * var(--banner-inline-size)));
     }
 
-    > :nth-child(2n+3) { --index:3; }
-    &:hover > :nth-child(2n+3) { transform:
-      translateY(calc(var(--banner-inline-size) * -1))
-      translateZ(calc(var(--banner-inline-size) * -1))
+    > :nth-child(2n+2) {
+      --index:2;
+      transform:
+        translateZ(calc(var(--sw) * var(--banner-inline-size) * -1))
+        rotateX(calc(var(--sw) * -180deg));
+    }
+
+    > :nth-child(2n+3) {
+      --index:3;
+      transform:
+        translateY(calc(var(--sw) * var(--banner-inline-size) * -1))
+        translateZ(calc(var(--sw) * var(--banner-inline-size) * -1))
     }
   }
 </style>

@@ -137,8 +137,8 @@
   }
 
   .this\.menu :is(#TASTY, #DRINKS) {
-    animation: expand ease-out both;
+    animation: expand cubic-bezier(0.175, 0.885, 0.320, 1.275) both;
 		animation-timeline: view(inline);
-		animation-range: entry 95% exit-crossing 0%;
+		animation-range: entry 85% exit-crossing 0%;
   }
 </style>

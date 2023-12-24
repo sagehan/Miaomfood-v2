@@ -67,8 +67,8 @@
                 background-color: hsl(0, 0%, 93.3%);
                 border-radius: var(--border-radius);
                 box-shadow: inset 0 0 0
-                    calc(var(--outline_thickness) * 0.1 * var(--OUTLINE_SWITCH))
-                    oklch(from var(--debug_cl) calc(l * -1) c h );
+                    calc(var(--outline_thickness) * 0.5 * var(--OUTLINE_SWITCH))
+                    currentcolor;
             }
             &::after {
                 content: attr(alt); position:absolute; inset:0;
@@ -100,16 +100,18 @@
             box-shadow: 0 1px 3px rgba(0,0,0,0.15);
             will-change: transform;
         }
-        #TASTY:hover, #DRINKS:hover { transform: scale(1.01); }
+        #TASTY, #DRINKS { transform: scale(calc(var(--sw) * 0.01 + 1)); }
         #VCARD > [style*="contents"]:hover > *::after, #TASTY::after, #DRINKS::after {
+            --sw: 0;
             content:""; position:absolute; inset:0;
             z-index: -1;
-            opacity: 0;
+            opacity: calc(var(--sw) + 0);
             transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
             box-shadow: var(--poster-shadow);
         }
         #VCARD > [style*="contents"]:hover > *::after,
+        #TASTY:hover, #DRINKS:hover,
         #TASTY:hover::after,
-        #DRINKS:hover::after { opacity: 1; }
+        #DRINKS:hover::after {--sw:1;}
     }
 </style>
