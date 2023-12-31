@@ -24,7 +24,6 @@
         --banner-block-size: calc(100vh * 1 / 3 * 55 / 85);
         --banner-inline-size: calc(100vh * 1 / 3);
         --padding-inline: calc(var(--grid-gutter) * 2);
-        --inline-offset: 61.8vh;
         --block-offset: calc((var(--grid-gutter) + var(--s2) + var(--s1) + var(--s1, 1.5rem) * 2) * 2);
         inline-size: fit-content;
         flex-flow: wrap;
@@ -57,6 +56,7 @@
         order: -1;
         position: relative;
         overflow: clip;
+        padding-block: var(--grid-gutter);
 
         #CAMPAIGN {
             z-index: calc(var(--base-i) - 1);
@@ -65,8 +65,9 @@
             inset-block-end: calc(var(--grid-gutter) * 1.5 + var(--block-offset));
         }
 
-        #MENU {
-            translate: calc(100% - var(--block-offset)) calc(50cqi - var(--grid-gutter) - var(--s1));
+        #MENU { --translate:
+            calc(100%  + var(--grid-gutter) - var(--block-offset)) 
+            calc(50cqi - var(--grid-gutter) - var(--s1));
         }
     }
 
@@ -126,4 +127,14 @@
         #TASTY:hover::after,
         #DRINKS:hover::after {--sw:1;}
     }
+
+    /**Animation
+    */
+    @keyframes -global-expand { from {translate:var(--translate);} to {translate:unset;} }
+
+    #MENU {
+        animation: expand ease-out both;
+		animation-timeline: view(inline);
+		animation-range: contain calc(50cqi - var(--grid-gutter) - var(--s1)) contain 90%;
+  }
 </style>

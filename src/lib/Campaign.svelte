@@ -96,21 +96,16 @@
 
   /**Animation
    */
-  @keyframes move-up { // TODO: optimization is needed
-    to { transform: translateY(calc(350% + var(--inline-offset) * 2)); }
-  }
-
-  @keyframes move-down { // TODO: optimization is needed
-    to { transform: translateY(calc(-350% + var(--inline-offset))); }
-  }
+  @keyframes move-up   { to {transform:translateY(-100%);} }
+  @keyframes move-down { to {transform:translateY(350%);} }
 
   .this\.campaign > :first-child {
-    animation: move-down linear forwards;
+    animation: move-up linear forwards;
 		animation-timeline: scroll(root inline);
   }
 
   .this\.campaign > :last-child {
-    animation: move-up linear forwards;
+    animation: move-down linear forwards;
 		animation-timeline: scroll(root inline);
   }
 </style>

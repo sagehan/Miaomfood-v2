@@ -96,6 +96,7 @@
 	.this\.menu > ul {
 		//position: relative;
 		inline-size: max-content;
+		padding-inline-end: var(--s1);
 		display: flex;
 		flex-flow: wrap;
 		gap: calc(var(--grid-gutter) / 2);
@@ -106,14 +107,12 @@
 	.this\.menu #TASTY {
 		--translate: calc(
 			(var(--grid-gutter) + var(--drinky-block-size) - var(--block-offset) * .5) * -1);
-		translate: var(--translate);
 		position:sticky; inset-inline-start:var(--s1);
 		//will-change: transform;
 	}
 
 	.this\.menu #DRINKS {
-		//--translate: 0;
-		translate: var(--translate);
+		--translate: 0;
 		order: -1;
 		position:sticky; inset-inline-start:var(--s1);
 		block-size: var(--drinky-block-size);
@@ -136,13 +135,9 @@
 	/**Animation
 	 // TODO: optimization is needed
   */
-	@keyframes expand {
-		from {translate:var(--translate);} to {translate:unset;}
-  }
-
   .this\.menu :is(#TASTY, #DRINKS) {
-    //animation: expand ease-out both;
+    animation: expand ease-out both;
 		animation-timeline: view(inline);
-		animation-range: entry 85% exit-crossing 0%;
+		animation-range: entry 85% entry 90%;
   }
 </style>
