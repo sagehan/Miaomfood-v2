@@ -86,8 +86,6 @@
    */
   :global(:has(> .this\.vcard)) {
     --numcards: 3;
-    --banner-block-size: calc(100vh * 1 / 3 * 55 / 85);
-    --banner-inline-size: calc(100vh * 1 / 3);
     display:flex;
     align-items:center;
   }
@@ -169,6 +167,7 @@
   }
 
   /**Animation
+   * TODO: use cubic-bezier to implement seamless folding
    */
   :global(:has(> .this\.vcard)) {
     transform-style: preserve-3d;
@@ -192,8 +191,9 @@
 
     > :nth-child(2n+2) {
       --index:2;
+      transform-origin: top;
       transform:
-        translateZ(calc(var(--sw) * var(--banner-inline-size) * -1))
+        translateY(calc(var(--sw) * var(--banner-inline-size) * 1))
         rotateX(calc(var(--sw) * -180deg));
     }
 
@@ -201,7 +201,7 @@
       --index:3;
       transform:
         translateY(calc(var(--sw) * var(--banner-inline-size) * -1))
-        translateZ(calc(var(--sw) * var(--banner-inline-size) * -1))
+        translateZ(calc(var(--sw) * var(--banner-inline-size) * -1));
     }
   }
 </style>

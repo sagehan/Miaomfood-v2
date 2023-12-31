@@ -18,7 +18,14 @@
 
     /**Layout
      */
-    :global(:has(> [style*="contents"] > #VCARD)) {
+    :global(:has(> [style*="contents"] > header + main)) {
+        --base-i: 0;
+        /***/ //TODO: optimize the following properties formula
+        --banner-block-size: calc(100vh * 1 / 3 * 55 / 85);
+        --banner-inline-size: calc(100vh * 1 / 3);
+        --padding-inline: calc(var(--grid-gutter) * 2);
+        --inline-offset: 61.8vh;
+        --block-offset: calc((var(--grid-gutter) + var(--s2) + var(--s1) + var(--s1, 1.5rem) * 2) * 2);
         inline-size: fit-content;
         flex-flow: wrap;
         align-content: center;
@@ -40,21 +47,26 @@
         }
     }
 
-    #VCARD {position:sticky;inset-inline-start:0;}
+    #VCARD {
+        z-index: calc(var(--base-i) + 1);
+        position: sticky;
+        inset-inline-start: 0;
+    }
 
     main {
-        --inline-offset: 61.8vh;
         order: -1;
-        padding: var(--grid-gutter);
-        display: flex;
-        gap: calc(var(--grid-gutter)*0.5);
+        position: relative;
+        overflow: clip;
 
-        //#MENU {order:-1;}
         #CAMPAIGN {
-            position: relative;
-            inset-inline:var(--s1);
-            inline-size: var(--inline-offset);
-            overflow: hidden;
+            z-index: calc(var(--base-i) - 1);
+            inline-size: 100vh;
+            position: absolute;
+            inset-block-end: calc(var(--grid-gutter) * 1.5 + var(--block-offset));
+        }
+
+        #MENU {
+            translate: calc(100% - var(--block-offset)) calc(50cqi - var(--grid-gutter) - var(--s1));
         }
     }
 
@@ -96,11 +108,11 @@
         #DRINKS { background-color: var(--drinks_bg); }
 
         #VCARD > [style*="contents"] > *, #TASTY, #DRINKS {
-            overflow: visible;
+            //overflow: visible;
             box-shadow: 0 1px 3px rgba(0,0,0,0.15);
             will-change: transform;
         }
-        #TASTY, #DRINKS { transform: scale(calc(var(--sw) * 0.01 + 1)); }
+        //#TASTY, #DRINKS { transform: scale(calc(var(--sw) * 0.01 + 1)); }
         #VCARD > [style*="contents"]:hover > *::after, #TASTY::after, #DRINKS::after {
             --sw: 0;
             content:""; position:absolute; inset:0;

@@ -5,7 +5,6 @@
     --grid-max-width: 77.50rem;
     --grid-gutter   : var(--space-s-l, clamp(1.125rem, 0.6467rem + 2.3913vw, 2.5rem));
     --grid-columns  : 12;
-    --block-offset  : 128px;
 
     --outline_thickness: 1px;
     --debug_cl      : oklch(94.91% 0 0 / 50%);

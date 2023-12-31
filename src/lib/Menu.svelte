@@ -81,6 +81,7 @@
 
 	/**Layout
    */
+	.this\.menu { --drinky-block-size: calc((var(--grid-max-width) - var(--grid-gutter) * 3) * 4 / 12); }
 	.this\.menu :is(ul, li) {max-inline-size: none;}
 	.this\.menu .section    {padding: var(--grid-gutter);}
 	.this\.menu .subsection {display: inline-block;}
@@ -93,7 +94,7 @@
 	}
 
 	.this\.menu > ul {
-		position: relative;
+		//position: relative;
 		inline-size: max-content;
 		display: flex;
 		flex-flow: wrap;
@@ -103,16 +104,19 @@
 	}
 
 	.this\.menu #TASTY {
-		--translate: calc(var(--block-offset) * -1) 5px;
+		--translate: calc(
+			(var(--grid-gutter) + var(--drinky-block-size) - var(--block-offset) * .5) * -1);
+		translate: var(--translate);
+		position:sticky; inset-inline-start:var(--s1);
 		//will-change: transform;
 	}
 
 	.this\.menu #DRINKS {
-		--translate: var(--block-offset);
+		//--translate: 0;
+		translate: var(--translate);
 		order: -1;
-		//position: sticky;
-		inset-inline-start: var(--s1);
-		max-block-size: calc((var(--grid-max-width) - var(--grid-gutter) * 3) * 4 / 12);
+		position:sticky; inset-inline-start:var(--s1);
+		block-size: var(--drinky-block-size);
 		//will-change: transform;
 	}
 
@@ -131,13 +135,13 @@
 
 	/**Animation
 	 // TODO: optimization is needed
-   */
+  */
 	@keyframes expand {
 		from {translate:var(--translate);} to {translate:unset;}
   }
 
   .this\.menu :is(#TASTY, #DRINKS) {
-    animation: expand cubic-bezier(0.175, 0.885, 0.320, 1.275) both;
+    //animation: expand ease-out both;
 		animation-timeline: view(inline);
 		animation-range: entry 85% exit-crossing 0%;
   }

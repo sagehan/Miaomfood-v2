@@ -51,7 +51,6 @@
   /**Layout
    */
   :global(:has(> .this\.campaign)) {
-    --padding-inline: calc(var(--grid-gutter) * 2);
     display: flex;
     flex-flow: column-reverse;
     justify-content: center;
@@ -67,26 +66,32 @@
 
   .this\.campaign section > h1 ~ * {display: contents;}
   .this\.campaign section > h1 ~ * > * {inline-size: 16ic;}
+  .this\.campaign section > h1 ~ * > * figcaption {display: none;}
   
-  .this\.campaign > :first-child {
+  .this\.campaign > :first-child  {
     transform: translateY(calc(
-      -100% + var(--inline-offset)/2 + (var(--padding-inline) + var(--stamp-size)/2 - var(--grid-gutter)/4)));
+      50cqi - var(--padding-inline)));
+    //will-change: transform;
+    display: flex;
+  }
+
+  .this\.campaign > :last-child {
+    transform: translateY(calc(
+      -100% + 50cqi + (var(--padding-inline) + var(--stamp-size)/1.3))); //TODO: eliminate dirty number 1.3
     //will-change: transform;
     display: flex;
     flex-flow: row-reverse;
-  }
-
-  .this\.campaign > :last-child  {
-    transform: translateY(calc(
-      var(--inline-offset)/2 - (var(--padding-inline) + var(--stamp-size)/2 - var(--grid-gutter)/4)));
-    //will-change: transform;
-    display: flex;
   }
 
   /**Appearance
    */
   .this\.campaign > * { box-shadow:
     rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  }
+
+  .this\.campaign figure img {
+    border: var(--s-2) solid oklch(96% 0 0);
+    box-shadow: 0 0 4px oklch(0% 0 0 / 46%);
   }
 
   /**Animation
@@ -100,12 +105,12 @@
   }
 
   .this\.campaign > :first-child {
-    animation: move-up linear forwards;
+    animation: move-down linear forwards;
 		animation-timeline: scroll(root inline);
   }
 
   .this\.campaign > :last-child {
-    animation: move-down linear forwards;
+    animation: move-up linear forwards;
 		animation-timeline: scroll(root inline);
   }
 </style>
