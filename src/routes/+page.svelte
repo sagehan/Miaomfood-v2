@@ -2,13 +2,25 @@
     import StickyBanner from '$lib/StickyBanner.svelte';
     import Campaign from '$lib/Campaign.svelte';
     import Menu from '$lib/Menu.svelte';
+    import Cart from '$lib/Cart.svelte';
+
+    /**
+     * @type {boolean}
+     */
+    export let collapsed = true, isEmptyCart = true;
+
+    $: open = isEmptyCart;
 </script>
 
 <header id="VCARD"><StickyBanner /></header>
-<main>
+<main class:collapsed>
     <div id="CAMPAIGN"><Campaign /></div>
     <div id="MENU"><Menu /></div>
 </main>
+<aside>
+    <dialog id="CART" {open}><Cart /></dialog>
+    <div id="CONSOLE"></div><!--TODO: login & user settings-->
+</aside>
 
 <style lang="scss">
     :global {
@@ -26,6 +38,7 @@
         --padding-inline: calc(var(--grid-gutter) * 2);
         --block-offset: calc((var(--grid-gutter) + var(--s2) + var(--s1) + var(--s1, 1.5rem) * 2) * 2);
         inline-size: fit-content;
+        overflow-x: hidden; // to fix browser scroll overflow bug ?
         flex-flow: wrap;
         align-content: center;
 
@@ -64,10 +77,24 @@
             position: absolute;
             inset-block-end: calc(var(--grid-gutter) * 1.5 + var(--block-offset));
         }
+        &.collapsed > #CAMPAIGN { z-index:var(--base-i); }
 
         #MENU { --translate:
             calc(100%  + var(--grid-gutter) - var(--block-offset)) 
             calc(50cqi - var(--grid-gutter) - var(--s1));
+        }
+    }
+
+    aside {
+        inline-size: 100%;
+        position: absolute;
+        inset-block-start: 50%;
+        translate: -50%;
+        inset-inline-start: var(--grid-gutter);
+
+        dialog {
+            position: sticky;
+            inset-inline-start: var(--grid-gutter);
         }
     }
 
