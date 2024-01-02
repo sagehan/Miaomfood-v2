@@ -1,6 +1,6 @@
 <script>
 	export let 
-		DateRange = new Date().toISOString().slice(0, -8), //TODO: get local iso datetime string
+		DateRange = new Date().toISOString().slice(0, -8), //TODO: get local ISO datetime string
 		min = DateRange,
 		max = DateRange;
 </script>
@@ -104,7 +104,7 @@
 <style lang="scss">
 	/**Typesetting
    */
-	.this\.cart > h1    {font-size: var(--s2);}
+	.this\.cart > h1 {font-size: var(--s2);}
 
 	/**Layout
    */

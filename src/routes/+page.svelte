@@ -18,8 +18,8 @@
     <div id="MENU"><Menu /></div>
 </main>
 <aside>
+    <div id="CONSOLE">设置</div><!--TODO: login & user settings-->
     <dialog id="CART" {open}><Cart /></dialog>
-    <div id="CONSOLE"></div><!--TODO: login & user settings-->
 </aside>
 
 <style lang="scss">
@@ -30,7 +30,7 @@
 
     /**Layout
      */
-    :global(:has(> [style*="contents"] > header + main)) {
+    :global(:has(> [style*="contents"] > header + main + aside)) {
         --base-i: 0;
         /***/ //TODO: optimize the following properties formula
         --banner-block-size: calc(100vh * 1 / 3 * 55 / 85);
@@ -70,6 +70,7 @@
         position: relative;
         overflow: clip;
         padding-block: var(--grid-gutter);
+        &:has(#MENU.isExpanded) { z-index:calc(var(--base-i) + 1); }
 
         #CAMPAIGN {
             z-index: calc(var(--base-i) - 1);
@@ -86,16 +87,16 @@
     }
 
     aside {
-        inline-size: 100%;
-        position: absolute;
-        inset-block-start: 50%;
-        translate: -50%;
+        order: -2;
+        z-index: calc(var(--base-i) + 1);
+        inline-size: 0;
+        position: sticky;
         inset-inline-start: var(--grid-gutter);
+        display: flex;
 
-        dialog {
-            position: sticky;
-            inset-inline-start: var(--grid-gutter);
-        }
+        > * { inline-size: fit-content;}
+        > * + * { margin-inline-start:var(--grid-gutter); }
+        dialog { position:static; }
     }
 
     /**Appearance
