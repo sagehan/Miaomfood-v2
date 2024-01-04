@@ -36,7 +36,7 @@
 
     /**Typesetting
      */
-    [role="tab"] > label { font-size:var(--s1); font-weight:bold; letter-spacing:0.2rem; }
+    [role="tab"] { font-size:var(--s1); font-weight:bold; letter-spacing:0.2rem; }
 
     /**Layout
      */
@@ -98,24 +98,20 @@
     [role="tablist"] {
         --display: none;
         --visibility: hidden;
-        --padding: var(--s-1);
+        --padding: calc(var(--grid-gutter) * .5);
         order: -1;
         block-size: fit-content;
-        position: sticky;
-        inset-inline-start: var(--grid-gutter);
         margin-inline-start: calc(-100% + var(--grid-gutter));
-        padding: var(--padding);
-        overflow-x: clip;
-        clear: both;
-        //display: flex;
-
-        //[role="tablist"] { ;}
+        align-self: center;
+        position: sticky;
+        inset-inline-start: calc(var(--grid-gutter) + var(--compensate));
+        overflow:clip; overflow-clip-margin:border-box; //overflow-clip-margin:calc(2.5em + 1.25em); 
     }
 
     [role="tab"] {
         position: absolute;
-        inset-inline-start: calc(var(--padding) * 2);
-        inset-block-start:  calc(var(--padding) * 2);
+        inset-inline-start: var(--padding);
+        inset-block-start:  var(--padding);
 
         label { display: block; }
         [type="radio"] { display:var(--display); visibility:var(--visibility); }
@@ -182,16 +178,15 @@
         #DRINKS:hover::after {--sw:1;}
 
         [role="tablist"] {
-            //border: solid .5em transparent;
+            --compensate:.2em; //go to the trouble for getting inner round corner
+            border: solid calc(var(--padding) - var(--compensate)) oklch(from var(--page_bg) l c h / .65);
             border-radius: var(--border-radius);
-            box-shadow: 0 0 0 .2em var(--primary_cl);
-            background: oklch(from var(--page_bg) l c h / .65) padding-box;
+            box-shadow: inset 0 0 0 var(--compensate) oklch(from var(--page_bg) l c h / .65); padding: var(--compensate);
+            outline:var(--primary_cl) solid var(--compensate); outline-offset:0;
+            background: oklch(from var(--page_bg) l c h / .65) content-box;
         }
 
-        label:has([type="radio"]:checked) {
-            background:white;
-            margin-block-end: -1em;
-        }
+        //label:has([type="radio"]:checked) {}
     }
 
     /**Animation

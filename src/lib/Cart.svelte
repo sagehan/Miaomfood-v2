@@ -119,7 +119,7 @@
 
 	/**Appearance
    */
-	.this\.cart  { color:inherit; border:0; }
+	.this\.cart  { color:inherit; border:0; border-radius:var(--border-radius); }
 	.this\.cart h1 { visibility:var(--visibility); font-size:var(--s1); }
 	td.number { text-combine-upright:all; }
 </style>

@@ -107,14 +107,14 @@
 	.this\.menu #TASTY {
 		--translate: calc(
 			(var(--grid-gutter) + var(--drinky-block-size) - var(--block-offset) * .5) * -1);
-		position:sticky; inset-inline-start:var(--s1);
+		position:sticky; inset-inline-start:var(--grid-gutter);
 		//will-change: transform;
 	}
 
 	.this\.menu #DRINKS {
 		--translate: 0;
 		order: -1;
-		position:sticky; inset-inline-start:var(--s1);
+		position:sticky; inset-inline-start:var(--grid-gutter);
 		block-size: var(--drinky-block-size);
 		//will-change: transform;
 	}
