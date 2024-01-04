@@ -101,7 +101,7 @@
     > * + * { margin-inline-start: var(--s0); }
   }
 
-  img { max-block-size: 100%; object-fit: contain; }
+  img { max-block-size:100%; object-fit:contain; align-self:flex-start; }
 
   .card--cover figcaption small {
     display: block;

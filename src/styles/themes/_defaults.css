@@ -40,6 +40,8 @@
     --border_bg:   oklch(80%     0       0);
     --shadow_bg:         oklch(60  0       0);
     --tag-border_color:  oklch(60% 0.10    185);
+    /*--border-radius: 50% 40% / 10% 20%;*/
+    --border-radius: .2em / .2em;
     --poster-shadow:
         1.2px 1.2px 2.2px rgba(0, 0, 0, 0.02),
         3px 3px 5.3px rgba(0, 0, 0, 0.028),
@@ -79,3 +81,7 @@ dl :nth-child(2n+3) {
     color:  oklch(100% 0 0);
     background: var(--primary_cl);
 }
+
+table { border-collapse:collapse; font-variant-numeric:lining-nums tabular-nums; }
+caption, th, td { text-align:start; text-wrap:nowrap; letter-spacing:0.2em; }
+tr > * { line-height:1; padding-inline:0.25em 0.25em; padding-block:0.125em 0.25em; }

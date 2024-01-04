@@ -1,11 +1,15 @@
 <script>
-	export let 
+	/**
+     * @type {boolean}
+     */
+	export let open;
+	export let
 		DateRange = new Date().toISOString().slice(0, -8), //TODO: get local ISO datetime string
 		min = DateRange,
 		max = DateRange;
 </script>
 
-<article class="this.cart" style="display:contents;">
+<dialog {open} class="this.cart">
 	<h1>购物车</h1>
 
 	<form>
@@ -20,26 +24,27 @@
 				</tr>
 			</thead>
 			<tbody>
-				<!--template v-for="i in cartItems"-->
+				<template>
 					<tr class="h-item">
-						<td class="p-name"></td>
-						<td class="spec-price"></td>
-						<td class="qty"></td>
-						<td class="sub-total money"></td>
+						<td class="p-name">土耳其烤鸡肉披萨</td>
+						<td class="spec-price number">69</td>
+						<td class="qty number">2</td>
+						<td class="sub-total number">138</td>
 					</tr>
-				<!--/template-->
+				</template>
 			</tbody>
 			<tfoot>
 				<tr><th colspan="4">优惠蜜语</th></tr>
 				<tr>
 					<td colspan="3"><label>
-						<input type="text" name="coupon-code" maxlength="15" />
-					</label><td>
+						<input type="text" name="coupon-code" maxlength="15" placeholder="唯有美食与爱不可辜负" />
+					</label>
+					<td class="number">-3</td>
 				</tr>
-				<tr><th colspan="3">送餐费</th><td></tr>
-				<tr><th colspan="3">总计</th><td></tr>
+				<tr><th colspan="3">送餐费</th><td class="number">3</td></tr>
+				<tr><th colspan="3">总计</th><td class="number">138</td></tr>
 				<tr><th colspan="4">
-					<label for="comment">备注说明
+					<label for="comment">备注
 						<input type="text" name="comment" maxlength="15" />
 					</label>
 				</th></tr>
@@ -99,14 +104,22 @@
 
 		<button type="submit">提交订单</button>
 	</form>
-</article>
+</dialog>
 
 <style lang="scss">
 	/**Typesetting
    */
-	.this\.cart > h1 {font-size: var(--s2);}
 
 	/**Layout
    */
-	
+	dialog {
+		position:static;
+		padding: var(--padding);
+	}
+
+	/**Appearance
+   */
+	.this\.cart  { color:inherit; border:0; }
+	.this\.cart h1 { visibility:var(--visibility); font-size:var(--s1); }
+	td.number { text-combine-upright:all; }
 </style>

@@ -7,9 +7,9 @@
     /**
      * @type {boolean}
      */
-    export let collapsed = true, isEmptyCart = true;
+    export let collapsed = true, isEmptyCart = false;
 
-    $: open = isEmptyCart;
+    $: open = !isEmptyCart;
 </script>
 
 <header id="VCARD"><StickyBanner /></header>
@@ -17,10 +17,16 @@
     <div id="CAMPAIGN"><Campaign /></div>
     <div id="MENU"><Menu /></div>
 </main>
-<aside>
-    <div id="CONSOLE">设置</div><!--TODO: login & user settings-->
-    <dialog id="CART" {open}><Cart /></dialog>
-</aside>
+<div role="tablist" aria-label="Tab Widgets for Shopping Cart & User Settings">
+    <!--tabs-->
+    <div role="tab" style="visibility:hidden;">
+        <label>设置<input type="radio" name="tab-grp"></label></div>
+    <div role="tab">
+        <label>购物车<input type="radio" name="tab-grp"></label></div>
+    <!--tabpanels-->
+    <div role="tabpanel" id="CONSOLE"></div><!--TODO: login & user settings-->
+    <div role="tabpanel" id="CART" ><Cart {open}/></div>
+</div>
 
 <style lang="scss">
     :global {
@@ -28,9 +34,13 @@
         @import 'src/styles/themes/defaults';
     }
 
+    /**Typesetting
+     */
+    [role="tab"] > label { font-size:var(--s1); font-weight:bold; letter-spacing:0.2rem; }
+
     /**Layout
      */
-    :global(:has(> [style*="contents"] > header + main + aside)) {
+    :global(:has(> [style*="contents"] > header + main)) {
         --base-i: 0;
         /***/ //TODO: optimize the following properties formula
         --banner-block-size: calc(100vh * 1 / 3 * 55 / 85);
@@ -68,17 +78,16 @@
     main {
         order: -1;
         position: relative;
-        overflow: clip;
+        overflow-x: clip;
         padding-block: var(--grid-gutter);
-        &:has(#MENU.isExpanded) { z-index:calc(var(--base-i) + 1); }
+        &:not(.collapsed) { z-index:calc(var(--base-i) + 1); }
 
         #CAMPAIGN {
             z-index: calc(var(--base-i) - 1);
-            inline-size: 100vh;
             position: absolute;
             inset-block-end: calc(var(--grid-gutter) * 1.5 + var(--block-offset));
+            overflow: hidden;
         }
-        &.collapsed > #CAMPAIGN { z-index:var(--base-i); }
 
         #MENU { --translate:
             calc(100%  + var(--grid-gutter) - var(--block-offset)) 
@@ -86,17 +95,34 @@
         }
     }
 
-    aside {
-        order: -2;
-        z-index: calc(var(--base-i) + 1);
-        inline-size: 0;
+    [role="tablist"] {
+        --display: none;
+        --visibility: hidden;
+        --padding: var(--s-1);
+        order: -1;
+        block-size: fit-content;
         position: sticky;
         inset-inline-start: var(--grid-gutter);
-        display: flex;
+        margin-inline-start: calc(-100% + var(--grid-gutter));
+        padding: var(--padding);
+        overflow-x: clip;
+        clear: both;
+        //display: flex;
 
-        > * { inline-size: fit-content;}
-        > * + * { margin-inline-start:var(--grid-gutter); }
-        dialog { position:static; }
+        //[role="tablist"] { ;}
+    }
+
+    [role="tab"] {
+        position: absolute;
+        inset-inline-start: calc(var(--padding) * 2);
+        inset-block-start:  calc(var(--padding) * 2);
+
+        label { display: block; }
+        [type="radio"] { display:var(--display); visibility:var(--visibility); }
+    }
+
+    [role="tab"] label:has([type="radio"]:checked) + [role="tabpanel"] {
+
     }
 
     /**Appearance
@@ -133,8 +159,8 @@
         outline: calc(var(--outline_thickness) * var(--OUTLINE_SWITCH)) solid;
         } /*for debuging*/
 
-        #TASTY  { background-color: var(--tasty_bg ); }
-        #DRINKS { background-color: var(--drinks_bg); }
+        #TASTY  { background: var(--tasty_bg ); }
+        #DRINKS { background: var(--drinks_bg); }
 
         #VCARD > [style*="contents"] > *, #TASTY, #DRINKS {
             //overflow: visible;
@@ -154,6 +180,18 @@
         #TASTY:hover, #DRINKS:hover,
         #TASTY:hover::after,
         #DRINKS:hover::after {--sw:1;}
+
+        [role="tablist"] {
+            //border: solid .5em transparent;
+            border-radius: var(--border-radius);
+            box-shadow: 0 0 0 .2em var(--primary_cl);
+            background: oklch(from var(--page_bg) l c h / .65) padding-box;
+        }
+
+        label:has([type="radio"]:checked) {
+            background:white;
+            margin-block-end: -1em;
+        }
     }
 
     /**Animation
