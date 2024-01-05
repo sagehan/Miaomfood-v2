@@ -178,15 +178,15 @@
         #DRINKS:hover::after {--sw:1;}
 
         [role="tablist"] {
-            --compensate:.2em; //go to the trouble for getting inner round corner
-            border: solid calc(var(--padding) - var(--compensate)) oklch(from var(--page_bg) l c h / .65);
+            --compensate:.2em;
+            border: solid calc(var(--padding)) oklch(from var(--page_bg) l c h / .65);
             border-radius: var(--border-radius);
-            box-shadow: inset 0 0 0 var(--compensate) oklch(from var(--page_bg) l c h / .65); padding: var(--compensate);
-            outline:var(--primary_cl) solid var(--compensate); outline-offset:0;
+            box-shadow: 0 0 0 var(--compensate) var(--primary_cl);
             background: oklch(from var(--page_bg) l c h / .65) content-box;
         }
-
         //label:has([type="radio"]:checked) {}
+
+        [role="tabpanel"] > * { border-radius:var(--border-radius); }
     }
 
     /**Animation
