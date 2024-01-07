@@ -4,7 +4,7 @@
 
 * {
     line-height: var(--leading);
-    max-inline-size: var(--measure);
+    /*max-inline-size: var(--measure);*/
     margin: 0;
 }
 

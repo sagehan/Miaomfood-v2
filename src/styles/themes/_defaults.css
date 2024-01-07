@@ -28,15 +28,15 @@
 
     /* Appearance
     */
-    --black:       oklch(20%     0       0);
+    --dark:        oklch(32%     0       0);
+    --alert_cl:    oklch(56.6%   0.22    30);
+    --card_bg:     var(--dark);
+    --activity_bg: oklch(56%     0       0);
     --primary_cl:  oklch(80%     0.116   351.5);
-    --cart_bg:     oklch(100%    0       0);
-    --panel_bg:    oklch(100%    0       0);
     --page_bg:     oklch(90%     0.025   193);
+    --tabpanel_bg: oklch(97%     0.006   75);
     --tasty_bg:    oklch(98.37%  0.025   112.26);
     --drinks_bg:   oklch(95%     0.025   356);
-    --card_bg:     oklch(20%     0.025   193);
-    --activity_bg: oklch(56%     0       0);
     --border_bg:   oklch(80%     0       0);
     --shadow_bg:         oklch(60  0       0);
     --tag-border_color:  oklch(60% 0.10    185);
