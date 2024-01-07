@@ -43,20 +43,21 @@
 							type="text"
 							maxlength="15" />
 					</label></th>
-					<td class="number">-3</td>
+					<td class="number">-3
 				</tr>
 				<tr role="row"><th role="rowheader" colspan="3">总计</th><td class="number">138</td></tr>
-				<tr role="row"><th role="rowheader" colspan="3">
-					<label for="comment">
+				<tr role="row">
+					<th role="rowheader" colspan="3"><label for="comment">
 						备注
 						<input
 							type="text"
 							name="comment"
 							maxlength="15"/>
-					</label>
-				</th></tr>
-				<tr role="row"><th role="rowheader" colspan="3">
-					<fieldset>
+					</label></th>
+					<td>
+				</tr>
+				<tr role="row">
+					<th role="rowheader" colspan="3"><fieldset>
 						<legend id="if-Preorder">预订</legend>
 						<label aria-hidden="true"><input type="checkbox" />预订</label><!--this dedicated label is for styling purpose-->
 						<input
@@ -65,8 +66,9 @@
 							name="preorder-time"
 							step="600000"
 							bind:value={DateRange} {min} {max} />
-					</fieldset>
-				</th></tr>
+					</fieldset></th>
+					<td>
+				</tr>
 			</tfoot>
 		</table>
 
@@ -129,6 +131,7 @@
 </dialog>
 
 <style lang="scss">
+	$numcol: 4;
 	/**Typesetting
    */
 
@@ -137,34 +140,48 @@
 	.this\.cart {
 		position:static;
 		padding: var(--padding);
-	}
 
-	.this\.cart {
 		table {
-			--numr:4;
+			--numcol: #{$numcol};
+			--numcol1:8; --numcol2:2; --numcol3:2; --numcol4:2;
 			inline-size: min-content;
 			display: flex;
 			flex-flow: wrap;
 
-			> * { flex:100%; justify-content:space-between; }
+			> * { flex:100%; }//justify-content:space-between; }
+			tr > * { box-sizing: content-box; }
 
 			thead, tbody {
 				inline-size: max-content;
 				display: flex;
 				flex-wrap: wrap;
+
+				@for $i from 1 to $numcol {
+					tr :nth-child(#{$i}) {
+						inline-size: calc(var(--numcol#{$i}) * 1em + (var(--numcol#{$i}) - 1) * var(--letter-spacing)); 
+					}
+				}
 			}
 
 			tfoot {
 				display: flex;
 				flex-flow: wrap;
 
-				th[colspan="3"] { flex: calc(3 / var(--numr) * 100%); }
+				th[colspan="3"] {
+					flex:calc(3 / var(--numcol) * 100%);
+					> :is(label,fieldset) > * { flex-grow:1; }
+				}
+
 				fieldset label { order:-1; display:flex; }
+			}
+
+			tr :not(:first-child):last-child {
+				inline-size: calc(var(--numcol4) * 1em + (var(--numcol4) - 1) * var(--letter-spacing));
 			}
 
 			th:has(label,fieldset) { display:flex; flex-flow:wrap; /*inline-size:min-content;*/ }
 			th > fieldset legend { display:none; } //TODO: a11y
-			th > label input { order:1; }
+			th label input { order:1; }
 			th:has(label,fieldset) + td { align-self:flex-end; }
 
 			tr,
