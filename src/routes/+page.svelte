@@ -183,6 +183,7 @@
             border-radius: var(--border-radius);
             box-shadow: 0 0 0 var(--compensate) var(--primary_cl);
             background: oklch(from var(--page_bg) l c h / .65) content-box;
+            backdrop-filter: blur(1px);
         }
         //label:has([type="radio"]:checked) {}
 

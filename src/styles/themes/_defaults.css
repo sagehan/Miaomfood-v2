@@ -84,4 +84,4 @@ dl :nth-child(2n+3) {
 }
 
 table { border-collapse:collapse; font-variant-numeric:lining-nums tabular-nums; }
-caption, th, td { text-align:start; text-wrap:nowrap; letter-spacing:var(--letter-spacing); }
+caption, th, td, input { text-align:start; text-wrap:nowrap; letter-spacing:var(--letter-spacing); }
