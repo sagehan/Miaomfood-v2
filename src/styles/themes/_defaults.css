@@ -7,7 +7,7 @@
     --grid-columns  : 12;
 
     --outline_thickness: 1px;
-    --debug_cl      : oklch(94.91% 0 0 / 50%);
+    --debug_cl      : oklch(80% 0 0 / 50%);
 
     /* Typesetting
     */
@@ -23,7 +23,7 @@
 
     --leading       : calc(1em + var(--s1, 1.5rem));
     --measure       : 60ch;
-    --letter-spacing: .2em;
+    --letter-spacing: .35em;
     --stamp-size    : 2lh;
     --writing-mode  : vertical-lr;
 

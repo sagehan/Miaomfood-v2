@@ -17,12 +17,25 @@
     <div id="CAMPAIGN"><Campaign /></div>
     <div id="MENU"><Menu /></div>
 </main>
-<div role="tablist" aria-label="Tab Widgets for Shopping Cart & User Settings">
-    <!--tabs-->
-    <div role="tab" style="visibility:hidden;">
-        <label>设置<input type="radio" name="tab-grp"></label></div>
-    <div role="tab">
-        <label>购物车<input type="radio" name="tab-grp"></label></div>
+<div role="tablist" aria-labelledby="tablist_controls">
+    <!--tabs group-->
+    <fieldset>
+        <legend id="tablist_controls">Tablist Widget for toggling the Shopping Cart & User Settings panels</legend>
+        <div role="tab" style="translate:-2em -1em;">
+            <input
+                id="tablist_settings"
+                type="radio"
+                name="tab-grp"
+                value="tablist_settings"
+            ><label for="tablist_settings">设置</label></div>
+        <div role="tab">
+            <input
+                id="tablist_cart"
+                type="radio"
+                name="tab-grp"
+                value="tablist_cart"
+            ><label for="tablist_cart">购物车</label></div>
+    </fieldset>
     <!--tabpanels-->
     <div role="tabpanel" id="CONSOLE"></div><!--TODO: login & user settings-->
     <div role="tabpanel" id="CART" ><Cart {open}/></div>
@@ -105,7 +118,9 @@
         align-self: center;
         position: sticky;
         inset-inline-start: calc(var(--grid-gutter) + var(--compensate));
-        overflow:clip; overflow-clip-margin:border-box; //overflow-clip-margin:calc(2.5em + 1.25em); 
+        //overflow:clip; overflow-clip-margin:border-box; //overflow-clip-margin:calc(2.5em + 1.25em);
+
+        legend { display:none; } //TODO: a11y
     }
 
     [role="tab"] {
@@ -113,7 +128,7 @@
         inset-inline-start: var(--padding);
         inset-block-start:  var(--padding);
 
-        label { display: block; }
+        label { position:relative; z-index:1; display: block;}
         [type="radio"] { display:var(--display); visibility:var(--visibility); }
     }
 
@@ -127,7 +142,7 @@
         figure > img {
             &::before {
                 content:''; position:absolute; inset:0;
-                background-color: hsl(0, 0%, 93.3%);
+                background: hsl(0, 0%, 93.3%);
                 border-radius: var(--border-radius);
                 box-shadow: inset 0 0 0
                     calc(var(--outline_thickness) * 0.5 * var(--OUTLINE_SWITCH))
