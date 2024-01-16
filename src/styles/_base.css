@@ -39,6 +39,8 @@ img, picture, video, canvas, svg {
 
 input,textarea, select, button, option {
     font: inherit;
+    letter-spacing: inherit;
+    word-spacing: inherit;
 }
 
 a {

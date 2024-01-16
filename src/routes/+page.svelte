@@ -21,24 +21,39 @@
     <!--tabs group-->
     <fieldset>
         <legend id="tablist_controls">Tablist Widget for toggling the Shopping Cart & User Settings panels</legend>
-        <div role="tab" style="translate:-2em -1em;">
+        <div
+            role="tab"
+            aria-selected="false"
+            aria-controls="CONSOLE"
+            style="translate:-2em -1em;">
             <input
                 id="tablist_settings"
                 type="radio"
                 name="tab-grp"
                 value="tablist_settings"
-            ><label for="tablist_settings">设置</label></div>
-        <div role="tab">
+            ><label for="tablist_settings" id="tab-1">设置</label></div>
+        <div
+            role="tab"
+            aria-selected="true"
+            aria-controls="CART">
             <input
                 id="tablist_cart"
                 type="radio"
                 name="tab-grp"
                 value="tablist_cart"
-            ><label for="tablist_cart">购物车</label></div>
+            ><label for="tablist_cart" id="tab-2">订购单</label></div>
     </fieldset>
     <!--tabpanels-->
-    <div role="tabpanel" id="CONSOLE"></div><!--TODO: login & user settings-->
-    <div role="tabpanel" id="CART" ><Cart {open}/></div>
+    <div
+        role="tabpanel"
+        tabindex="0"
+        id="CONSOLE"
+        aria-labelledby="tab-1"></div><!--TODO: login & user settings-->
+    <div
+        role="tabpanel"
+        tabindex="0"
+        id="CART"
+        aria-labelledby="tab-2"><Cart {open}/></div>
 </div>
 
 <style lang="scss">

@@ -29,8 +29,10 @@
 
     /* Appearance
     */
+    accent-color:  var(--primary_cl);
+    scrollbar-color: var(--primary_cl) Canvas;
     --dark:        oklch(32%     0       0);
-    --alert_cl:    oklch(56.6%   0.22    30);
+    --alert_cl:    oklch(62.8%   0.25    30);
     --card_bg:     var(--dark);
     --activity_bg: oklch(56%     0       0);
     --primary_cl:  oklch(80%     0.116   351.5);
@@ -41,6 +43,7 @@
     --border_bg:   oklch(80%     0       0);
     --shadow_bg:         oklch(60  0       0);
     --tag-border_color:  oklch(60% 0.10    185);
+    --input_normal_cl: oklch(from var(--primary_cl) calc(l + 10) calc(c * .65) h);
     /*--border-radius: 50% 40% / 10% 20%;*/
     --border-radius: .2em / .2em;
     --poster-shadow:
@@ -71,17 +74,30 @@ h1, h2, p, li { letter-spacing: 0.2rem; }
 
 [alt] { font-size: var(--s-2) !important; }
 
-img + figcaption,
-dl :nth-child(2n+3) {
+img + figcaption {
     margin-block-start: 0;
     font-size: var(--s-2);
     line-height:normal;
 }
+
+table { border-collapse:collapse; font-variant-numeric:lining-nums tabular-nums; }
+caption, th, td, input { text-align:start; text-wrap:nowrap; letter-spacing:var(--letter-spacing); }
 
 ::selection {
     color:  oklch(100% 0 0);
     background: var(--primary_cl);
 }
 
-table { border-collapse:collapse; font-variant-numeric:lining-nums tabular-nums; }
-caption, th, td, input { text-align:start; text-wrap:nowrap; letter-spacing:var(--letter-spacing); }
+:is(input,textarea):not([type="radio"]):not([type="checkbox"]) {
+    border: 1px solid var(--primary_cl);
+    background-color: var(--drinks_bg);
+    padding: .2em !important;
+}
+
+:focus-visible {
+    outline: thin solid var(--primary_cl);
+    background-color: var(--input_normal_cl);
+    box-shadow: 1px 1px 0 0 var(--primary_cl);
+}
+/*:user-valid    { border: 1px solid green; background-color: var(--input_normal_cl); }*/
+:user-invalid  { background: linear-gradient(135deg, var(--alert_cl) 0, var(--alert_cl) .4em, var(--input_normal_cl) .4em); }
