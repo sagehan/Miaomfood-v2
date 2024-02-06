@@ -54,7 +54,7 @@
     display: flex;
     flex-flow: column-reverse;
     justify-content: center;
-    gap:calc(var(--grid-gutter) * 1.5 );
+    gap:calc(var(--grid-gutter) * 1);
   }
 
   .this\.campaign > * {

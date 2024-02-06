@@ -81,6 +81,7 @@
   .card--cover small { font-size: var(--s-2); line-height:normal; text-wrap:wrap; }
   .card--cover ~ figure * { line-height: var(--s0); }
   figure > figure > figcaption small span { text-combine-upright: all; }
+  address dd span { text-orientation:upright; }
 
   /**Layout
    */

@@ -25,12 +25,12 @@
     --measure       : 60ch;
     --letter-spacing: .35em;
     --stamp-size    : 2lh;
-    --writing-mode  : vertical-lr;
+    --writing-mode  : vertical-rl;
 
     /* Appearance
     */
     accent-color:  var(--primary_cl);
-    scrollbar-color: var(--primary_cl) Canvas;
+    scrollbar-color: var(--primary_cl) transparent;
     --dark:        oklch(32%     0       0);
     --alert_cl:    oklch(62.8%   0.25    30);
     --card_bg:     var(--dark);

@@ -15,7 +15,7 @@
 	<form title="订购单" id="order_form">
 		<table role="grid">
 			<caption id="cart_cap" class="step__hd">
-				<strong>订购信息</strong>
+				<h2>订购信息</h2>
 				<!--details>TODO: a11y</details-->
 			</caption>
 			<tfoot role="rowgroup">
@@ -82,7 +82,7 @@
 							id="preorder-time" name="preorder-time"
 							size="4"
 							oninput="this.parentNode.dataset.content = this.value" />
-					<td role="cell"></td>				
+					<td role="cell"></td>
 				<tr role="row">
 					<th role="rowheader"><label for="addressLocality">城市</label><td role="cell" colspan="2"><input
 						value="乌鲁木齐" disabled size="4" list="cities">
@@ -159,7 +159,7 @@
 						value="wx_pub"
 						type="radio"
 						required
-						/><label for="wechat-payment" id="wechat-label">微信支付</label>			
+						/><label for="wechat-payment" id="wechat-label">微信支付</label>
 					<td>
 		</table>
 		<button type="submit">提交订单</button>
@@ -181,8 +181,10 @@
 	.this\.cart {
 		position:static;
 		padding: var(--padding);
+		max-inline-size: calc(50cqi - var(--grid-gutter) * 2 - var(--s1));
 
-		caption, [id="addressLocality"] { display:none; } //TODO: a11y
+		caption, [id="addressLocality"] {
+			position:absolute;overflow:hidden;height:1px;width:1px;border:0;padding:0;white-space:nowrap;clip:rect(0 0 0 0);margin:-1px;}
 		form { --padding:.2em; --line-height:var(--s0); display:contents; }
 		:is(form,[role="grid"]) > * + * {  margin-block-start:var(--s1); }
 		:is([role="grid"] > *)  > * + * {  margin-block-start:.35em; }
@@ -261,6 +263,9 @@
 			inline-size: fit-content;
 			padding-block-start:  .2em;
 			padding-inline-start: .5em;
+			border-radius: .35em 0 0 .35em;
+			box-shadow:0 0 .35em rgba(0, 0, 0, 0.2);
+			background: var(--drinks_bg);
 		}
 	}
 </style>
