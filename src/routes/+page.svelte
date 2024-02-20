@@ -7,7 +7,7 @@
     /**
      * @type {boolean}
      */
-    export let collapsed = true, isEmptyCart = false;
+    export let collapsed = true, isEmptyCart = true;
 
     $: open = !isEmptyCart;
 </script>
@@ -25,7 +25,7 @@
             role="tab"
             aria-selected="false"
             aria-controls="CONSOLE"
-            style="translate:-2em -1em;">
+            style="translate:-2em;">
             <input
                 id="tablist_settings"
                 type="radio"
@@ -65,58 +65,69 @@
     /**Typesetting
      */
     [role="tab"] { font-size:var(--s1); font-weight:bold; letter-spacing:0.2rem; }
+    [role="tab"] label { text-wrap:nowrap; }
 
     /**Layout
      */
     :global(:has(> [style*="contents"] > header + main)) {
         --base-i: 0;
         /***/ //TODO: optimize the following properties formula
-        --banner-block-size: calc(100vh * 1 / 3 * 55 / 85);
         --banner-inline-size: calc(100vh * 1 / 3);
+        --banner-block-size: calc(var(--banner-inline-size) * 55 / 85);
+        --pannel-inline-size: 30em; //TODO: calculate on real time
         --padding-inline: calc(var(--grid-gutter) * 2);
         --block-offset: calc((var(--grid-gutter) + var(--s2) + var(--s1) + var(--s1, 1.5rem) * 2) * 2);
+        --bp_l :calc(100vw - var(--banner-block-size) * 4 - var(--grid-gutter) * 4);
+        --bp_m :calc(100vw - var(--banner-block-size) * 3 - var(--grid-gutter) * 3);
+        --bp_s :calc(100vw - var(--banner-block-size) * 2 - var(--grid-gutter) * 2);
+        --bp_xs:calc(100vw - var(--banner-block-size) * 1 - var(--grid-gutter) * 1);
+        block-size: 100cqb;
         inline-size: fit-content;
+        //padding-inline-end: var(--pannel-inline-size);
         overflow-x: hidden; // to fix browser scroll overflow bug ?
         flex-flow: wrap;
         align-content: center;
-
-        &::before {content:"";flex-basis:100%;width:0;} // simulate <hr>
     }
 
     :global{
         figure {
-            overflow: hidden;
-            display: flex;
-            align-items: center;
+            //overflow: hidden;
+            //display: flex;
+            //align-items: center;
 
             > img {
                 position: relative;
                 object-fit: cover;
-                inline-size: 100%; block-size: 100%;
+                //inline-size: 100%; block-size: 100%;
             }
         }
     }
 
     #VCARD {
         z-index: calc(var(--base-i) + 1);
+        order: -1;
         position: sticky;
         inset-inline-start: 0;
+        block-size: var(--banner-block-size);
+        margin-inline-end: clamp(-1 * var(--banner-inline-size) * 3, var(--bp_s) * 99999, 0px);
     }
 
     main {
+        //container: main / size;
         position: relative;
+        max-block-size: min(var(--banner-block-size) * 4 + var(--grid-gutter) * 5, 100% - var(--banner-block-size));
         padding-block: var(--grid-gutter);
         &:not(.collapsed) { z-index:calc(var(--base-i) + 1); }
 
         #CAMPAIGN {
             z-index: calc(var(--base-i) - 1);
             position: absolute;
-            //inset-block-end: calc(var(--grid-gutter) * 1.5 + var(--block-offset));
             overflow: hidden;
         }
 
         #MENU { --translate:
-            calc(-1 * var(--grid-gutter) - var(--block-offset) * 2) 
+            calc(-1 * var(--grid-gutter) - var(--banner-block-size) - clamp(
+                0px, var(--bp_l) * 99999, var(--grid-gutter) + var(--banner-block-size)))
             calc(50cqi - var(--grid-gutter) - var(--s1));
         }
     }
@@ -126,10 +137,11 @@
         --visibility: hidden;
         --padding: calc(var(--grid-gutter) * .5);
         block-size: fit-content;
-        margin-inline-start: calc(-100% + var(--grid-gutter));
-        align-self: center;
+        max-block-size: 100%; overflow-x: scroll;
+        margin-inline-start: var(--grid-gutter);
+        margin-inline-end: -100%;
         position: sticky;
-        inset-inline-start: calc(var(--grid-gutter) + var(--compensate));
+        translate: calc(var(--banner-block-size) * .5);
         //overflow:clip; overflow-clip-margin:border-box; //overflow-clip-margin:calc(2.5em + 1.25em);
 
         legend { display:none; } //TODO: a11y
@@ -150,7 +162,7 @@
      */
     :global{
         figure > img {
-            &::before {
+            &::before { //as image ploceholder
                 content:''; position:absolute; inset:0;
                 background: hsl(0, 0%, 93.3%);
                 border-radius: var(--border-radius);
@@ -185,7 +197,7 @@
 
         #VCARD > [style*="contents"] > *, #TASTY, #DRINKS {
             //overflow: visible;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+            box-shadow: var(--shadow1);
             will-change: transform;
         }
         //#TASTY, #DRINKS { transform: scale(calc(var(--sw) * 0.01 + 1)); }

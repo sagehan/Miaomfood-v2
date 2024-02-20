@@ -88,7 +88,7 @@
   :global(:has(> .this\.vcard)) {
     --numcards: 3;
     display:flex;
-    align-items:center;
+    align-items:start;
   }
 
   .this\.vcard > * {

@@ -51,6 +51,7 @@
   /**Layout
    */
   :global(:has(> .this\.campaign)) {
+    padding: .5em;
     display: flex;
     flex-flow: column-reverse;
     justify-content: center;
@@ -58,21 +59,29 @@
   }
 
   .this\.campaign > * {
-    min-inline-size: calc(18ic * 5);
-    padding-inline: var(--padding-inline);
+    block-size: var(--banner-block-size);
+    padding: var(--padding-inline) .5em;
     align-items: center;
     gap: var(--grid-gutter);
   }
 
   .this\.campaign section > h1 ~ * {display: contents;}
-  .this\.campaign section > h1 ~ * > * {inline-size: 16ic;}
+  .this\.campaign section > h1 ~ * > * {max-inline-size:22ic; max-block-size:var(--banner-block-size); min-block-size:0;}
   .this\.campaign section > h1 ~ * > * figcaption {display: none;}
+  .this\.campaign section figure img {block-size:100%;}
   
   .this\.campaign > :first-child  {
+    margin-block-start: clamp((var(--banner-block-size) + var(--grid-gutter)) * -1, var(--bp_m) * 99999, 0px);
     transform: translateY(calc(
       50cqi - var(--padding-inline)));
     //will-change: transform;
     display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-content: start;
+
+    &::before {content:"";block-size:100%;inline-size:0;} // simulate <hr>
+    & > :first-child {order:-1;}
   }
 
   .this\.campaign > :last-child {
@@ -89,7 +98,7 @@
 
   .this\.campaign figure img {
     border: var(--s-2) solid oklch(96% 0 0);
-    box-shadow: 0 0 4px oklch(0% 0 0 / 46%);
+    box-shadow: var(--shadow1);
   }
 
   /**Animation

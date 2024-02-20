@@ -81,7 +81,10 @@
 
 	/**Layout
    */
-	.this\.menu { --drinky-block-size: calc((var(--grid-max-width) - var(--grid-gutter) * 3) * 4 / 12); }
+	.this\.menu {
+		--drinky-block-size: calc((var(--grid-max-width) - var(--grid-gutter) * 3) * 4 / 12);
+		--tasty-block-size : calc((var(--grid-max-width) - var(--grid-gutter) * 3) * 8 / 12);		
+	}
 	.this\.menu :is(ul, li) {max-inline-size: none;}
 	.this\.menu .section    {padding:var(--grid-gutter); translate:var(--translate);}
 	.this\.menu .subsection {display: inline-block;}
@@ -95,23 +98,23 @@
 
 	.this\.menu > ul {
 		inline-size: max-content;
-		padding-inline-end: var(--s1);
+		//padding-inline-end:clamp(0px, var(--bp_m) * 99999, var(--s1));
 		display: flex;
 		flex-flow: wrap;
-		gap: calc(var(--grid-gutter) / 2);
+		gap: clamp(var(--grid-gutter) / 2, var(--bp_m) * -99999, var(--grid-gutter));
 
 		&::before {content: ''; flex-basis: 100%; width: 0;} // simulate <hr>
 	}
 
 	.this\.menu #TASTY {
-		--translate: calc(
-			var(--grid-gutter) + var(--drinky-block-size) - var(--block-offset) * .5);
+		--translate: clamp(0px, var(--bp_m) * 99999, var(--grid-gutter) + var(--drinky-block-size) - var(--block-offset) * .5);
 		position:sticky; inset-inline-start:var(--grid-gutter);
+		block-size: var(--tasty-block-size);
 		//will-change: transform;
 	}
 
 	.this\.menu #DRINKS {
-		--translate: 0 -0.5em;
+		--translate: 0 clamp(-0.5em, var(--bp_m) * -99999, 0px);
 		order: -1;
 		position:sticky; inset-inline-start:var(--grid-gutter);
 		block-size: var(--drinky-block-size);
@@ -134,7 +137,7 @@
 	/**Animation
 	 // TODO: optimization is needed
   */
-  .this\.menu #TASTY {
+  .this\.menu :is(#TASTY, #DRINKS) {
     animation: expand ease-out both;
 		animation-timeline: view(inline);
 		animation-range: entry 75% entry 85%;

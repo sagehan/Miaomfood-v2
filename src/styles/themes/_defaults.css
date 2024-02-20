@@ -2,7 +2,7 @@
     /* Layout
     */
     /* @link https://utopia.fyi/grid/calculator?c=320,18,1.2,1240,20,1.25,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
-    --grid-max-width: 77.50rem;
+    --grid-max-width: 80rem;
     --grid-gutter   : var(--space-s-l, clamp(1.125rem, 0.6467rem + 2.3913vw, 2.5rem));
     --grid-columns  : 12;
 
@@ -46,6 +46,7 @@
     --input_normal_cl: oklch(from var(--primary_cl) calc(l + 10) calc(c * .65) h);
     /*--border-radius: 50% 40% / 10% 20%;*/
     --border-radius: .2em / .2em;
+    --shadow1      : 0 1px 3px rgba(0,0,0,0.15);
     --poster-shadow:
         1.2px 1.2px 2.2px rgba(0, 0, 0, 0.02),
         3px 3px 5.3px rgba(0, 0, 0, 0.028),
