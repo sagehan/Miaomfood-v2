@@ -74,7 +74,7 @@
         /***/ //TODO: optimize the following properties formula
         --banner-inline-size: calc(100vh * 1 / 3);
         --banner-block-size: calc(var(--banner-inline-size) * 55 / 85);
-        --pannel-inline-size: 30em; //TODO: calculate on real time
+        --pannel-inline-size: calc(50cqi - var(--grid-gutter) - var(--s1));
         --padding-inline: calc(var(--grid-gutter) * 2);
         --block-offset: calc((var(--grid-gutter) + var(--s2) + var(--s1) + var(--s1, 1.5rem) * 2) * 2);
         --bp_l :calc(100vw - var(--banner-block-size) * 4 - var(--grid-gutter) * 4);
@@ -83,10 +83,9 @@
         --bp_xs:calc(100vw - var(--banner-block-size) * 1 - var(--grid-gutter) * 1);
         block-size: 100cqb;
         inline-size: fit-content;
-        //padding-inline-end: var(--pannel-inline-size);
+        padding-inline-end: var(--grid-gutter);
         overflow-x: hidden; // to fix browser scroll overflow bug ?
-        flex-flow: wrap;
-        align-content: center;
+        align-items: center;
     }
 
     :global{
@@ -105,18 +104,19 @@
 
     #VCARD {
         z-index: calc(var(--base-i) + 1);
-        order: -1;
         position: sticky;
-        inset-inline-start: 0;
+        inset-inline-start: 0; //clamp(auto, var(--bp_xs) * 99999, 0);
         block-size: var(--banner-block-size);
-        margin-inline-end: clamp(-1 * var(--banner-inline-size) * 3, var(--bp_s) * 99999, 0px);
+        margin-inline-end: clamp(-1 * var(--banner-inline-size) * 3, var(--bp_xs) * -99999, 0px);
+        translate: clamp(0px, var(--bp_xs) * 99999, min(
+            (var(--banner-block-size) * 4 + var(--grid-gutter) * 5) * .5, (100cqb - var(--banner-block-size)) * .5));
     }
 
     main {
-        //container: main / size;
         position: relative;
         max-block-size: min(var(--banner-block-size) * 4 + var(--grid-gutter) * 5, 100% - var(--banner-block-size));
         padding-block: var(--grid-gutter);
+        translate: clamp(var(--banner-block-size) * -0.5, var(--bp_xs) * -99999, 0px);
         &:not(.collapsed) { z-index:calc(var(--base-i) + 1); }
 
         #CAMPAIGN {
@@ -140,8 +140,8 @@
         max-block-size: 100%; overflow-x: scroll;
         margin-inline-start: var(--grid-gutter);
         margin-inline-end: -100%;
-        position: sticky;
-        translate: calc(var(--banner-block-size) * .5);
+        position: sticky; //inset-inline-end: auto; //TODO: calculate in run time
+        translate: calc((var(--banner-block-size) + var(--grid-gutter)) * -.5);
         //overflow:clip; overflow-clip-margin:border-box; //overflow-clip-margin:calc(2.5em + 1.25em);
 
         legend { display:none; } //TODO: a11y
@@ -234,6 +234,6 @@
     #MENU {
         animation: expand ease-out both;
 		animation-timeline: view(inline);
-		animation-range: contain calc(50cqi - var(--grid-gutter) - var(--s1)) contain 90%;
+		animation-range: contain var(--pannel-inline-size) contain 90%;
   }
 </style>

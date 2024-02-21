@@ -103,7 +103,7 @@
 		flex-flow: wrap;
 		gap: clamp(var(--grid-gutter) / 2, var(--bp_m) * -99999, var(--grid-gutter));
 
-		&::before {content: ''; flex-basis: 100%; width: 0;} // simulate <hr>
+		&::before {content: ''; flex-basis: clamp(0px, var(--bp_m) * 99999, 100%); width: 0;} // simulate <hr>
 	}
 
 	.this\.menu #TASTY {
