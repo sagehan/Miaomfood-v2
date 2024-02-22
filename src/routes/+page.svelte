@@ -7,7 +7,7 @@
     /**
      * @type {boolean}
      */
-    export let collapsed = true, isEmptyCart = true;
+    export let collapsed = true, isEmptyCart = false;
 
     $: open = !isEmptyCart;
 </script>
@@ -81,10 +81,14 @@
         --bp_m :calc(100vw - var(--banner-block-size) * 3 - var(--grid-gutter) * 3);
         --bp_s :calc(100vw - var(--banner-block-size) * 2 - var(--grid-gutter) * 2);
         --bp_xs:calc(100vw - var(--banner-block-size) * 1 - var(--grid-gutter) * 1);
+        --SW__SCREEN_L : min(var(--bp_l)  * 99999, 0px);
+        --SW__SCREEN_M : min(var(--bp_m)  * 99999, 0px);
+        --SW__SCREEN_S : min(var(--bp_s)  * 99999, 0px);
+        --SW__SCREEN_XS: min(var(--bp_xs) * 99999, 0px);
         block-size: 100cqb;
         inline-size: fit-content;
         padding-inline-end: var(--grid-gutter);
-        overflow-x: hidden; // to fix browser scroll overflow bug ?
+        overflow-x: clip; // to fix browser scroll overflow bug ?
         align-items: center;
     }
 
@@ -137,11 +141,13 @@
         --visibility: hidden;
         --padding: calc(var(--grid-gutter) * .5);
         block-size: fit-content;
-        max-block-size: 100%; overflow-x: scroll;
+        max-block-size: min(
+            var(--banner-block-size) * 4 + var(--grid-gutter) * 5, 100% - var(--banner-block-size));
+        inline-size: var(--banner-inline-size);
+        overflow-x: scroll;
         margin-inline-start: var(--grid-gutter);
-        margin-inline-end: -100%;
         position: sticky; //inset-inline-end: auto; //TODO: calculate in run time
-        translate: calc((var(--banner-block-size) + var(--grid-gutter)) * -.5);
+        translate: calc(var(--banner-block-size) * -.5);
         //overflow:clip; overflow-clip-margin:border-box; //overflow-clip-margin:calc(2.5em + 1.25em);
 
         legend { display:none; } //TODO: a11y
@@ -157,6 +163,10 @@
     }
 
     //[role="tab"] label:has([type="radio"]:checked) + [role="tabpanel"] {}
+
+    @container style(--SW__SCREEN_XS) {
+        #VCARD {position:static;}
+    }
 
     /**Appearance
      */
