@@ -181,7 +181,7 @@
 	.this\.cart {
 		position:static;
 		padding: var(--padding);
-		max-inline-size: calc(50cqi - var(--grid-gutter) * 2 - var(--s1));
+		//max-inline-size: calc(50cqi - var(--grid-gutter) * 2 - var(--s1));
 
 		caption, [id="addressLocality"] {
 			position:absolute;overflow:hidden;height:1px;width:1px;border:0;padding:0;white-space:nowrap;clip:rect(0 0 0 0);margin:-1px;}
@@ -244,8 +244,6 @@
 		:has(+ [role="cell"] > input:disabled) label { cursor:initial; }
 
 		[role="row"]:has(label,input) {
-			--outline_cl: oklch(from var(--primary_cl) calc(l + 10) calc(c * .65) h);
-
 			label {
 				border-radius: .35em .35em 0 0;
 				background: var(--drinks_bg);

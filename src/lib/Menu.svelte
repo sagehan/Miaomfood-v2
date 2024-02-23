@@ -92,7 +92,7 @@
 	.this\.menu :is(.section, .subsection) > h1 {
 		position: sticky;
 		inset-inline-start: var(--grid-gutter);
-		display: inline-block;
+		inline-size: max-content; // display: inline-block; // for older browsers
 		margin-inline-end: calc(var(--grid-gutter) * 5 / 2);
 	}
 

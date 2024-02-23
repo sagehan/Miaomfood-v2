@@ -66,7 +66,7 @@
   }
 
   .this\.campaign section > h1 ~ * {display: contents;}
-  .this\.campaign section > h1 ~ * > * {max-inline-size:22ic; max-block-size:var(--banner-block-size); min-block-size:0;}
+  .this\.campaign section > h1 ~ * > * {max-inline-size:22ic; max-block-size:var(--banner-block-size);}
   .this\.campaign section > h1 ~ * > * figcaption {display: none;}
   .this\.campaign section figure img {block-size:100%;}
   

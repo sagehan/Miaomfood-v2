@@ -81,12 +81,13 @@
         --bp_m :calc(100vw - var(--banner-block-size) * 3 - var(--grid-gutter) * 3);
         --bp_s :calc(100vw - var(--banner-block-size) * 2 - var(--grid-gutter) * 2);
         --bp_xs:calc(100vw - var(--banner-block-size) * 1 - var(--grid-gutter) * 1);
-        --SW__SCREEN_L : min(var(--bp_l)  * 99999, 0px);
-        --SW__SCREEN_M : min(var(--bp_m)  * 99999, 0px);
-        --SW__SCREEN_S : min(var(--bp_s)  * 99999, 0px);
-        --SW__SCREEN_XS: min(var(--bp_xs) * 99999, 0px);
+        --SW__SCREEN_L : min(var(--bp_l)  * 99999, 0px); //large-size screen breakpoint switcher, default: <turn-off>
+        --SW__SCREEN_M : min(var(--bp_m)  * 99999, 0px); //medium-size screen breakpoint switcher, default: <turn-off>
+        --SW__SCREEN_S : min((var(--bp_s)  * 99999), 0px); //small-size screen breakpoint switcher, default: <turn-off>
+        --SW__SCREEN_XS: min(var(--bp_xs) * 99999, 0px); //tiny screen breakpoint switcher, default: <turn-off>
         block-size: 100cqb;
         inline-size: fit-content;
+        inset: var(--SW__SCREEN_S);
         padding-inline-end: var(--grid-gutter);
         overflow-x: clip; // to fix browser scroll overflow bug ?
         align-items: center;
@@ -140,14 +141,13 @@
         --display: none;
         --visibility: hidden;
         --padding: calc(var(--grid-gutter) * .5);
-        block-size: fit-content;
+        position: sticky; //inset-inline-end: auto; //TODO: calculate in run time
         max-block-size: min(
             var(--banner-block-size) * 4 + var(--grid-gutter) * 5, 100% - var(--banner-block-size));
-        inline-size: var(--banner-inline-size);
-        overflow-x: scroll;
+        //inline-size: var(--banner-inline-size);
         margin-inline-start: var(--grid-gutter);
-        position: sticky; //inset-inline-end: auto; //TODO: calculate in run time
-        translate: calc(var(--banner-block-size) * -.5);
+        translate: calc(var(--banner-block-size) * -.5 - var(--compensate));
+        overflow-x: auto;
         //overflow:clip; overflow-clip-margin:border-box; //overflow-clip-margin:calc(2.5em + 1.25em);
 
         legend { display:none; } //TODO: a11y
@@ -231,6 +231,7 @@
             box-shadow: 0 0 0 var(--compensate) var(--primary_cl);
             background: oklch(from var(--page_bg) l c h / .65) content-box;
             backdrop-filter: blur(1px);
+            scrollbar-width: thin;
         }
         //label:has([type="radio"]:checked) {}
 
