@@ -111,20 +111,24 @@
   }
   
   figure:has(> figure > img) {
-    :nth-child(1 of figure) {
-      display: flex;
-      flex-flow: column;
-    }
-
-    :nth-child(2 of figure) {
-      display: flex;
-      flex-flow: column-reverse;
-
-      figcaption { display: flex; flex-flow: inherit; }
-    }
+    figure { display:flex; margin-inline-start:calc(var(--s0) + 1em) !important; figcaption { display:contents;} }
+    
+    :nth-child(1 of figure) { flex-flow:column; }
+    :nth-child(2 of figure) { flex-flow:column-reverse; }
 
     :nth-child(1 of figure) > img { inline-size: calc(100vh * 1 / 3 / 4 ); }
     :nth-child(2 of figure) > img { inline-size: calc(100vh * 1 / 3 / 4 / 1.618 ); }
+    
+    p:has(+ small) {
+      margin-block-start: -1lh;
+      text-indent: -1em;
+      transform-origin: top left;
+      transform: rotateZ(-90deg);
+    }
+    :nth-child(2 of figure) p {
+      transform-origin: bottom right; 
+      transform: translateY(calc(-100% - 1lh)) rotateZ(-90deg);
+    }
   }
 
   figure dl dd span { display: inline-block; }
