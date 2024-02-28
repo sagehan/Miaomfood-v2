@@ -118,24 +118,25 @@
             (var(--banner-block-size) * 4 + var(--grid-gutter) * 5) * .5, (100cqb - var(--banner-block-size)) * .5));
     }
 
-    main {
-        position: relative;
-        max-block-size: min(var(--banner-block-size) * 4 + var(--grid-gutter) * 5, 100% - var(--banner-block-size));
-        padding-block: var(--grid-gutter);
-        translate: clamp(var(--banner-block-size) * -0.5, var(--bp_xs) * -99999, 0px);
-        &:not(.collapsed) { z-index:calc(var(--base-i) + 1); }
+    main { display:contents; }
 
-        #CAMPAIGN {
-            z-index: calc(var(--base-i) - 1);
-            position: absolute;
-            overflow: hidden;
-        }
+    #CAMPAIGN {
+        //--z_index: calc(var(--base-i) - 1);
+        //z-index: var(--z_index);
+        position: absolute;
+        translate: clamp(var(--banner-block-size) * 0.5 - var(--grid-gutter), var(--bp_xs) * -99999, 0px); //TODO: revise this formula
 
-        #MENU { --translate:
-            calc(-1 * var(--grid-gutter) - var(--banner-block-size) - clamp(
+        overflow: hidden;
+    }
+
+    #MENU {
+        --translate1: calc(var(--banner-block-size) * -0.5);
+        --translate2:
+            calc(-1 * var(--grid-gutter) - var(--banner-block-size) - var(--banner-block-size) * 0.5 - clamp(
                 0px, var(--bp_l) * 99999, var(--grid-gutter) + var(--banner-block-size)))
             calc(50cqi - var(--grid-gutter) - var(--s1));
-        }
+        max-block-size: min(var(--banner-block-size) * 4 + var(--grid-gutter) * 5, 100% - var(--banner-block-size));
+        padding-block: var(--grid-gutter);
     }
 
     [role="tablist"] {
@@ -243,10 +244,10 @@
 
     /**Animation
     */
-    @keyframes -global-expand { from {translate:var(--translate);} to {translate:unset;} }
+    @keyframes -global-expand { from {translate:var(--translate2);} to {translate:var(--translate1);} }
 
     #MENU {
-        animation: expand ease-out both;
+        animation: expand linear both;
 		animation-timeline: view(inline);
 		animation-range: contain var(--pannel-inline-size) contain 90%;
   }

@@ -58,18 +58,20 @@
     gap:calc(var(--grid-gutter) * 1);
   }
 
-  .this\.campaign > * {
+  .this\.campaign > section {
+    z-index: 0;
+    inline-size: max-content;
     block-size: var(--banner-block-size);
     padding: var(--padding-inline) .5em;
     align-items: center;
     gap: var(--grid-gutter);
+
+    > h1 ~ * {display: contents;}
+    > h1 ~ * > * {max-inline-size:22ic; max-block-size:var(--banner-block-size);}
+    > h1 ~ * > * figcaption {display: none;}
+    figure img {block-size:100%;}
   }
 
-  .this\.campaign section > h1 ~ * {display: contents;}
-  .this\.campaign section > h1 ~ * > * {max-inline-size:22ic; max-block-size:var(--banner-block-size);}
-  .this\.campaign section > h1 ~ * > * figcaption {display: none;}
-  .this\.campaign section figure img {block-size:100%;}
-  
   .this\.campaign > :first-child  {
     margin-block-start: clamp((var(--banner-block-size) + var(--grid-gutter)) * -1, var(--bp_m) * 99999, 0px);
     transform: translateY(calc(
@@ -94,8 +96,6 @@
 
   /**Appearance
    */
-  //.this\.campaign > * { box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; }
-
   .this\.campaign figure img {
     border: var(--s-2) solid oklch(96% 0 0);
     box-shadow: var(--shadow1);
@@ -103,14 +103,21 @@
 
   /**Animation
    */
+  .this\.campaign > :first-child {
+    > h1, article > *, .gallery > * {
+      z-index:calc(100000 * (1 - var(--y))); //TODO: play with 'Position-Driven-Styles'(https://kizu.dev/position-driven-styles/)
+      animation: y-lerp linear reverse both;
+      animation-timeline: view();
+      animation-range: cover;
+    }
+  }
+
   @keyframes move-up   { to {transform:translateY(-100%);} }
   @keyframes move-down { to {transform:translateY(350%);} }
-
   .this\.campaign > :first-child {
     animation: move-up linear forwards;
 		animation-timeline: scroll(root inline);
   }
-
   .this\.campaign > :last-child {
     animation: move-down linear forwards;
 		animation-timeline: scroll(root inline);

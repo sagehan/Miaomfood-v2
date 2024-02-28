@@ -3,6 +3,11 @@
 @property --SW__SCREEN_S    {syntax:"<length>"; inherits:true;  initial-value:0px;  } /*small-size screen breakpoint switcher, default: <turn-off> */
 @property --SW__SCREEN_XS   {syntax:"<length>"; inherits:true;  initial-value:0px;  } /*tiny screen breakpoint switcher, default: <turn-off> */
 
+@property --x               {syntax:"<number>"; inherits:true;  initial-value:0;    }
+@property --y               {syntax:"<number>"; inherits:true;  initial-value:0;    }
+@keyframes -global-x-lerp   {to { --x:1 } }
+@keyframes -global-y-lerp   {to { --y:1 } }
+
 @container not style(--debug: false) { * {outline:var(--outline_cl) var(--outline_size) dashed;} }
 
 :root {

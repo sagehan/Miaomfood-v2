@@ -75,7 +75,7 @@
 
 <style lang="scss">
 	/**Typesetting
-   */
+	 */
 	.this\.menu .section > h1    {font-size: var(--s2);}
 	.this\.menu .subsection > h1 {font-size: var(--s1);}
 
@@ -136,10 +136,10 @@
 
 	/**Animation
 	 // TODO: optimization is needed
-  */
-  .this\.menu :is(#TASTY, #DRINKS) {
-    animation: expand ease-out both;
+	*/
+	.this\.menu :is(#TASTY, #DRINKS) {
+		//animation: expand ease-out both;
 		animation-timeline: view(inline);
-		animation-range: entry 75% entry 85%;
+		animation-range: entry 85% entry 90%;
 	}
 </style>
