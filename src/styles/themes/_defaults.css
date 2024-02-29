@@ -8,14 +8,23 @@
 @keyframes -global-x-lerp   {to { --x:1 } }
 @keyframes -global-y-lerp   {to { --y:1 } }
 
-@container not style(--debug: false) { * {outline:var(--outline_cl) var(--outline_size) dashed;} }
+@container not style(--debug    : false) { * {outline:var(--outline_cl) var(--outline_size) dashed;} }
+@container not style(--showGrid : false) { body {
+    background-image            : var(--grid);
+    background-size             : var(--grid_sz);
+    /*background-position         : top center, top center;*/ 
+    background-attachment       : local; }
+}
 
 :root {
     /* Layout
     */
     --debug         : false;
+    --showGrid      : false;
     --outline_size  : 1px;
     --outline_cl    : oklch(80% 0 0 / 50%);
+    --grid          : conic-gradient(from 90deg at 2px 2px, transparent 90deg, var(--outline_cl) 0), conic-gradient(from 90deg at 1px 1px, transparent 90deg, var(--outline_cl) 0);
+    --grid_sz       : var(--grid-gutter) var(--grid-gutter), calc(var(--grid-gutter)/4) calc(var(--grid-gutter)/4);
     /* @link https://utopia.fyi/grid/calculator?c=320,18,1.2,1240,20,1.25,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
     --grid-max-width: 80rem;
     --grid-gutter   : var(--space-s-l, clamp(1.125rem, 0.6467rem + 2.3913vb, 2.5rem));

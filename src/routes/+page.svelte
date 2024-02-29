@@ -175,7 +175,7 @@
 
     /**Appearance
      */
-    :global(:has(> [style*="contents"] > header + main)) { color:var(--activity_bg); background:var(--page_bg); }
+    :global(:has(> [style*="contents"] > header + main)) { color:var(--activity_bg); background-color:var(--page_bg); }
 
     :global{
         figure > img {
