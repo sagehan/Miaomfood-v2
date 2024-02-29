@@ -175,7 +175,14 @@
 
     /**Appearance
      */
-    :global(:has(> [style*="contents"] > header + main)) { color:var(--activity_bg); background-color:var(--page_bg); }
+    :global(:has(> [style*="contents"] > header + main)) {
+        color: var(--activity_bg);
+        background-color: var(--page_bg);
+        background-image: var(--showGrid, var(--grid));
+        background-size: var(--grid_sz);
+        /*background-position: top center, top center;*/ 
+        background-attachment: local;
+    }
 
     :global{
         figure > img {
@@ -184,7 +191,7 @@
                 background: hsl(0, 0%, 93.3%);
                 border-radius: var(--border-radius);
                 box-shadow: inset 0 0 0
-                    calc(var(--outline_size) * .5 * var(--OUTLINE_SWITCH))
+                    var(--debug, calc(var(--outline_size) * .5))
                     currentcolor;
             }
             &::after {
@@ -205,16 +212,13 @@
                 outline-offset: calc(var(--outline_size) * 3);
             }
         }
-        /*:is(#MENU, .submenu, .section, .subsection, article):hover {
-        outline: calc(var(--outline_size) * var(--OUTLINE_SWITCH)) solid;
-        } /*for debuging*/
 
         #TASTY  { background: var(--tasty_bg ); }
         #DRINKS { background: var(--drinks_bg); }
 
         #VCARD > [style*="contents"] > *, #TASTY, #DRINKS {
             //overflow: visible;
-            box-shadow: var(--shadow1);
+            box-shadow: var(--shadowy, var(--shadow1));
             will-change: transform;
         }
         //#TASTY, #DRINKS { transform: scale(calc(var(--sw) * 0.01 + 1)); }
@@ -224,7 +228,7 @@
             z-index: -1;
             opacity: calc(var(--sw) + 0);
             transition: all 0.6s cubic-bezier(.165, .84, .44, 1);
-            box-shadow: var(--poster-shadow);
+            box-shadow: var(--shadowy, var(--poster-shadow));
         }
         #VCARD > [style*="contents"]:hover > *::after,
         #TASTY:hover, #DRINKS:hover,
@@ -235,7 +239,7 @@
             --compensate:.2em;
             border: solid calc(var(--padding)) oklch(from var(--page_bg) l c h / .65);
             border-radius: var(--border-radius);
-            box-shadow: 0 0 0 var(--compensate) var(--primary_cl);
+            box-shadow: var(--shadowy, 0 0 var(--compensate) var(--primary_cl));
             background: oklch(from var(--page_bg) l c h / .65) content-box;
             backdrop-filter: blur(1px);
             scrollbar-width: thin; //scrollbar-width: none;

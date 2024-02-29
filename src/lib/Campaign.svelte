@@ -98,7 +98,7 @@
    */
   .this\.campaign figure img {
     border: var(--s-2) solid oklch(96% 0 0);
-    box-shadow: var(--shadow1);
+    box-shadow: var(--shadowy, var(--shadow1));
   }
 
   /**Animation

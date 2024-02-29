@@ -199,7 +199,7 @@
 		}
 
 		[role="rowheader"]:has(+ [role="cell"] > input) { display:contents; }
-		:is([role="cell"],[role="columnheader"]):has(label,input) { padding:0; }
+		:is([role="cell"],[role="columnheader"]):has(label,input) { padding:0; display:inline-flex; }
 		:is([role="cell"],[role="columnheader"],[role="rowheader"]):not(:has(label,input)), label, input { padding:.35em; }
 
 		[role="cell"]:has(> input:is([type="text"],[type="tel"],[type="time"])) {
@@ -262,7 +262,7 @@
 			padding-block-start:  .2em;
 			padding-inline-start: .5em;
 			border-radius: .35em 0 0 .35em;
-			box-shadow:0 0 .35em rgba(0, 0, 0, 0.2);
+			box-shadow: 0 0 .35em rgba(0, 0, 0, 0.2);
 			background: var(--drinks_bg);
 		}
 	}
