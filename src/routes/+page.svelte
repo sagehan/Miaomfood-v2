@@ -13,9 +13,9 @@
 </script>
 
 <header id="VCARD"><StickyBanner /></header>
-<main class:collapsed>
+<main>
     <div id="CAMPAIGN"><Campaign /></div>
-    <div id="MENU"><Menu /></div>
+    <div id="MENU" class:collapsed><Menu /></div>
 </main>
 <div role="tablist" aria-labelledby="tablist_controls">
     <!--tabs group-->
@@ -72,19 +72,21 @@
     :global(:has(> [style*="contents"] > header + main)) {
         --base-i: 0;
         /***/ //TODO: optimize the following properties formula
-        --banner-inline-size: calc(100vh * 1 / 3);
-        --banner-block-size: calc(var(--banner-inline-size) * 55 / 85);
+        --banner-inline-size: calc(100vh * 1/3);
+        --banner-block-size : calc(var(--banner-inline-size) * 55/85);
+        --main-block-size   : min(var(--banner-block-size) * 4 + var(--grid-gutter) * 5,
+                                100cqb - var(--banner-block-size));
         --pannel-inline-size: calc(50cqi - var(--grid-gutter) - var(--s1));
-        --padding-inline: calc(var(--grid-gutter) * 2);
-        --block-offset: calc((var(--grid-gutter) + var(--s2) + var(--s1) + var(--s1, 1.5rem) * 2) * 2);
-        --bp_l :calc(100cqb - var(--banner-block-size) * 4 - var(--grid-gutter) * 4);
-        --bp_m :calc(100cqb - var(--banner-block-size) * 3 - var(--grid-gutter) * 3);
-        --bp_s :calc(100cqb - var(--banner-block-size) * 2 - var(--grid-gutter) * 2);
-        --bp_xs:calc(100cqb - var(--banner-block-size) * 1 - var(--grid-gutter) * 1);
-        --SW__SCREEN_L : min(var(--bp_l)  * 99999, 0px); //large-size screen breakpoint switcher, default: <turn-off>
-        --SW__SCREEN_M : min(var(--bp_m)  * 99999, 0px); //medium-size screen breakpoint switcher, default: <turn-off>
-        --SW__SCREEN_S : min(var(--bp_s)  * 99999, 0px); //small-size screen breakpoint switcher, default: <turn-off>
-        --SW__SCREEN_XS: min(var(--bp_xs) * 99999, 0px); //tiny screen breakpoint switcher, default: <turn-off>
+        --padding-inline    : calc(var(--grid-gutter) * 2);
+        --block-offset      : calc((var(--grid-gutter) + var(--s2) + var(--s1) + var(--s1, 1.5rem) * 2) * 2);
+        --bp_l              : calc(100cqb - var(--banner-block-size) * 4 - var(--grid-gutter) * 4);
+        --bp_m              : calc(100cqb - var(--banner-block-size) * 3 - var(--grid-gutter) * 3);
+        --bp_s              : calc(100cqb - var(--banner-block-size) * 2 - var(--grid-gutter) * 2);
+        --bp_xs             : calc(100cqb - var(--banner-block-size) * 1 - var(--grid-gutter) * 1);
+        --SW__SCREEN_L      : min(var(--bp_l)  * 99999, 0px); //large-size screen breakpoint switcher, default: <turn-off>
+        --SW__SCREEN_M      : min(var(--bp_m)  * 99999, 0px); //medium-size screen breakpoint switcher, default: <turn-off>
+        --SW__SCREEN_S      : min(var(--bp_s)  * 99999, 0px); //small-size screen breakpoint switcher, default: <turn-off>
+        --SW__SCREEN_XS     : min(var(--bp_xs) * 99999, 0px); //tiny screen breakpoint switcher, default: <turn-off>
         block-size: 100cqb; //align-content: center;
         inline-size: fit-content;
         inset: var(--SW__SCREEN_S);
@@ -113,26 +115,27 @@
         position: sticky;
         inset-inline-start: 0; //clamp(auto, var(--bp_xs) * 99999, 0);
         block-size: var(--banner-block-size);
-        margin-inline-end: clamp(-1 * var(--banner-inline-size) * 3, var(--bp_xs) * -99999, 0px);
-        translate: clamp(0px, var(--bp_xs) * 99999, min(
-            (var(--banner-block-size) * 4 + var(--grid-gutter) * 5) * .5, (100cqb - var(--banner-block-size)) * .5));
+        margin-inline-end: clamp(var(--banner-inline-size) * -3, var(--bp_xs) * -99999, 0px);
+        translate: clamp(0px, var(--bp_xs) * 99999, var(--main-block-size) * .5);
     }
 
     main { display:contents; }
 
     #CAMPAIGN {
-        //--z_index: calc(var(--base-i) - 1);
-        //z-index: var(--z_index);
         position: absolute;
-        translate: clamp(var(--banner-block-size) * 0.5 - var(--grid-gutter), var(--bp_xs) * -99999, 0px); //TODO: revise this formula
-
+        translate:
+            clamp(var(--main-block-size) * .5 - var(--banner-block-size) - var(--grid-gutter) - (100% - var(--banner-block-size)) * .5,
+                var(--bp_m) * -99999,
+                    clamp(var(--main-block-size) * .5 - var(--banner-block-size) - var(--grid-gutter),
+                        var(--bp_xs) * -99999,
+                        0px));
         overflow: hidden;
     }
 
     #MENU {
-        --translate1: calc(var(--banner-block-size) * -0.5);
+        --translate1: calc(var(--banner-block-size) * -.5);
         --translate2:
-            calc(-1 * var(--grid-gutter) - var(--banner-block-size) - var(--banner-block-size) * 0.5 - clamp(
+            calc(-1 * var(--grid-gutter) - var(--banner-block-size) - var(--banner-block-size) * .5 - clamp(
                 0px, var(--bp_l) * 99999, var(--grid-gutter) + var(--banner-block-size)))
             calc(50cqi - var(--grid-gutter) - var(--s1));
         max-block-size: min(var(--banner-block-size) * 4 + var(--grid-gutter) * 5, 100% - var(--banner-block-size));
@@ -181,7 +184,7 @@
                 background: hsl(0, 0%, 93.3%);
                 border-radius: var(--border-radius);
                 box-shadow: inset 0 0 0
-                    calc(var(--outline_size) * 0.5 * var(--OUTLINE_SWITCH))
+                    calc(var(--outline_size) * .5 * var(--OUTLINE_SWITCH))
                     currentcolor;
             }
             &::after {
@@ -220,7 +223,7 @@
             content:""; position:absolute; inset:0;
             z-index: -1;
             opacity: calc(var(--sw) + 0);
-            transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+            transition: all 0.6s cubic-bezier(.165, .84, .44, 1);
             box-shadow: var(--poster-shadow);
         }
         #VCARD > [style*="contents"]:hover > *::after,
