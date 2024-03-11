@@ -100,16 +100,19 @@
 		inline-size: max-content;
 		//padding-inline-end:clamp(0px, var(--bp_m) * 99999, var(--s1));
 		display: flex;
-		flex-flow: wrap;
+		flex-flow: column wrap;
 		gap: clamp(var(--grid-gutter) / 2, var(--bp_m) * -99999, var(--grid-gutter));
 
-		&::before {content: ''; flex-basis: clamp(0px, var(--bp_m) * 99999, 100%); width: 0;} // simulate <hr>
+		> * { flex: calc(var(--bp_s) * -99999); }
+
+		//&::before {content: ''; flex-basis: clamp(0px, var(--bp_m) * 99999, 100%); width: 0;} // simulate <hr>
 	}
 
 	.this\.menu #TASTY {
 		--translate: clamp(0px, var(--bp_m) * 99999, var(--grid-gutter) + var(--drinky-block-size) - var(--block-offset) * .5);
 		position:sticky; inset-inline-start:var(--grid-gutter);
-		block-size: var(--tasty-block-size);
+		flex-grow: 2;
+		//block-size: var(--tasty-block-size);
 		//will-change: transform;
 	}
 
@@ -117,7 +120,9 @@
 		--translate: 0 clamp(-0.5em, var(--bp_m) * -99999, 0px);
 		order: -1;
 		position:sticky; inset-inline-start:var(--grid-gutter);
-		block-size: var(--drinky-block-size);
+		max-inline-size: max-content;
+		flex-grow: 1; 
+		//block-size: var(--drinky-block-size);
 		//will-change: transform;
 	}
 

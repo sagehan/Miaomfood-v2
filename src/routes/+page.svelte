@@ -89,7 +89,6 @@
         --SW__SCREEN_XS     : min(var(--bp_xs) * 99999, 0px); //tiny screen breakpoint switcher, default: <turn-off>
         block-size: 100cqb; //align-content: center;
         inline-size: fit-content;
-        inset: var(--SW__SCREEN_S);
         padding-inline-end: var(--grid-gutter);
         overflow: auto;
         overflow-x: clip; // to fix browser scroll overflow bug ?
@@ -181,7 +180,6 @@
         background-image: var(--showGrid, var(--grid));
         background-size: var(--grid_sz);
         /*background-position: top center, top center;*/ 
-        background-attachment: local;
     }
 
     :global{

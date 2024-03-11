@@ -158,7 +158,6 @@
   figure figcaption:first-child ~ figure :is(p, small),
   dt, dd { mix-blend-mode: exclusion; }
   
-
   //figure figcaption:first-child,
   figure > :nth-child(-n+2 of figure) > img {
     filter: invert(0.85);
