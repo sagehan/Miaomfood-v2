@@ -49,7 +49,7 @@ async function init (quadStream) {
 
 /**
  * get single object values of a single predict term, return a single string value
- * 'SVMV' -> 'Single Variable Multiple Values'
+ * 'SVSV' -> 'Single Variable Single Values'
  *
  * @param {string} queryStr
  * @returns {Promise<String>}
@@ -64,7 +64,9 @@ async function SVSVQuery(queryStr) {
         .then(bindingsStream => bindingsStream.toArray())
         .then(bindingsArr => [...bindingsArr[0].entries][0][1].value)
     } else {
-        return Promise.resolve('loading...');
+        return Promise.resolve(
+            quotes[(Math.floor(Math.random() * quotes.length))]
+        );
     }
 }
 
@@ -162,4 +164,17 @@ async function MVMVQuery(queryStr) {
     }
 }
 
-export { entity, init, SVSVQuery, SVMVQuery, MVSVQuery, MVMVQuery }
+const quotes = [
+    '人世间，酸甜苦辣，若长良川。',
+    '人生忽如寄，莫辜负茶、汤和好天气。',
+    '一城一夜一滋味，见食见人见江湖。',
+    '人间烟火气，最抚凡人心',
+    '好吃的东西要吃进肚子里，可爱的人要放在心里',
+    '让我们红尘作伴，吃的白白胖胖',
+    '人是铁，饭是钢，吃货总比痴货好',
+    '人生苦短别苦了你的胃',
+    '正在充值卡路里.....',
+    '出来混总是要胖的',
+    '生死有命 胖瘦在天'];
+
+export { entity, quotes, init, SVSVQuery, SVMVQuery, MVSVQuery, MVMVQuery }

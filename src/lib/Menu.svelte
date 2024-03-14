@@ -1,6 +1,8 @@
 <script>
-	import { entity, SVMVQuery, MVMVQuery } from '$lib/store/entitiesStore';
+	import { entity, quotes, SVMVQuery, MVMVQuery } from '$lib/store/entitiesStore';
 	import ProductItem from '$lib/ProductItem.svelte';
+
+	let loadingText = quotes[(Math.floor(Math.random() * quotes.length))];
 
 	/**
 	 * get ':name' & ':identifier' of all the top ':MenuSection's
@@ -43,7 +45,7 @@
 	{#if $entity.loading}
 	<h1>loading data ...</h1>
 	{:else} {#await getSections()}
-	<p>loading menu...</p> {:then menuSections}
+	<p>{loadingText}</p> {:then menuSections}
   <ul>
     {#each menuSections as section}
       <li id={section.identifier} class="section">

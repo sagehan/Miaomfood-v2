@@ -1,8 +1,10 @@
 <script>
-  import { entity, MVSVQuery } from '$lib/store/entitiesStore';
+  import { entity, quotes, MVSVQuery } from '$lib/store/entitiesStore';
 
   /** @type {Object} */
-  let eateryInfo = {}, addrInfo = {};
+  let loadingText = quotes[(Math.floor(Math.random() * quotes.length))],
+      eateryInfo = {},
+      addrInfo = {};
 
   /**
    * sully the 'openingHours' string by wrapping each date(time) unit with a span tag
@@ -31,11 +33,11 @@
 
 <div class="this.vcard" style="display:contents;">
 {#if $entity.loading}
-<p>loading data ...</p>
+<p>{loadingText}</p>
 {:else}
   <figure class="card--cover">
     <img src="./src/lib/assets/logo.svg" alt="logo"/>
-    <figcaption>{eateryInfo[':name']}<small>{eateryInfo[':description']}</small></figcaption>
+    <figcaption>{eateryInfo[':name'] ? eateryInfo[':name'] : loadingText}<small>{eateryInfo[':description']}</small></figcaption>
   </figure>
   <figure>
     <figcaption class="stamped">关注微信</figcaption>
