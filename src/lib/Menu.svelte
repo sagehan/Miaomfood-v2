@@ -100,18 +100,18 @@
 
 	.this\.menu > ul {
 		inline-size: max-content;
-		//padding-inline-end:clamp(0px, var(--bp_m) * infinity, var(--s1));
+		//padding-inline-end:clamp(0px, var(--bp_m) * 99999, var(--s1));
 		display: flex;
 		flex-flow: column wrap;
-		gap: clamp(var(--grid-gutter) / 2, var(--bp_m) * -infinity, var(--grid-gutter));
+		gap: clamp(var(--grid-gutter) / 2, var(--bp_m) * -99999, var(--grid-gutter));
 
-		> * { flex: calc(var(--bp_s) * -infinity); }
+		> * { flex: calc(var(--bp_s) * -99999); }
 
-		//&::before {content: ''; flex-basis: clamp(0px, var(--bp_m) * infinity, 100%); width: 0;} // simulate <hr>
+		//&::before {content: ''; flex-basis: clamp(0px, var(--bp_m) * 99999, 100%); width: 0;} // simulate <hr>
 	}
 
 	.this\.menu #TASTY {
-		--translate: clamp(0px, var(--bp_m) * infinity, var(--grid-gutter) + var(--drinky-block-size) - var(--block-offset) * .5);
+		--translate: clamp(0px, var(--bp_m) * 99999, var(--grid-gutter) + var(--drinky-block-size) - var(--block-offset) * .5);
 		position:sticky; inset-inline-start:var(--grid-gutter);
 		flex-grow: 2;
 		//block-size: var(--tasty-block-size);
@@ -119,7 +119,7 @@
 	}
 
 	.this\.menu #DRINKS {
-		--translate: 0 clamp(-0.5em, var(--bp_m) * -infinity, 0px);
+		--translate: 0 clamp(-0.5em, var(--bp_m) * -99999, 0px);
 		order: -1;
 		position:sticky; inset-inline-start:var(--grid-gutter);
 		max-inline-size: max-content;

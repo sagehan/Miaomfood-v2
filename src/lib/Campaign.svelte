@@ -73,7 +73,7 @@
   }
 
   .this\.campaign > :first-child  {
-    margin-block-start: clamp((var(--banner-block-size) + var(--grid-gutter)) * -1, var(--bp_m) * infinity, 0px);
+    margin-block-start: clamp((var(--banner-block-size) + var(--grid-gutter)) * -1, var(--bp_m) * 99999, 0px);
     transform: translateY(calc(
       50cqi - var(--padding-inline)));
     //will-change: transform;

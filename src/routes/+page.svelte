@@ -83,16 +83,16 @@
         --bp_m              : calc(100cqb - var(--banner-block-size) * 3 - var(--grid-gutter) * 3);
         --bp_s              : calc(100cqb - var(--banner-block-size) * 2 - var(--grid-gutter) * 2);
         --bp_xs             : calc(100cqb - var(--banner-block-size) * 1 - var(--grid-gutter) * 1);
-        --SW__SCREEN_L      : min(var(--bp_l)  * infinity, 0px); //large-size screen breakpoint switcher, default: <turn-off>
-        --SW__SCREEN_M      : min(var(--bp_m)  * infinity, 0px); //medium-size screen breakpoint switcher, default: <turn-off>
-        --SW__SCREEN_S      : min(var(--bp_s)  * infinity, 0px); //small-size screen breakpoint switcher, default: <turn-off>
-        --SW__SCREEN_XS     : min(var(--bp_xs) * infinity, 0px); //tiny screen breakpoint switcher, default: <turn-off>
-        block-size: 100cqb;
+        --SW__SCREEN_L      : min(var(--bp_l)  * 99999, 0px); //large-size screen breakpoint switcher, default: <turn-off>
+        --SW__SCREEN_M      : min(var(--bp_m)  * 99999, 0px); //medium-size screen breakpoint switcher, default: <turn-off>
+        --SW__SCREEN_S      : min(var(--bp_s)  * 99999, 0px); //small-size screen breakpoint switcher, default: <turn-off>
+        --SW__SCREEN_XS     : min(var(--bp_xs) * 99999, 0px); //tiny screen breakpoint switcher, default: <turn-off>
+        block-size: 100cqb; //align-content: center;
         inline-size: fit-content;
         padding-inline-end: var(--grid-gutter);
         overflow: auto;
         overflow-x: clip; // to fix browser scroll overflow bug ?
-        display:flex; align-items:center; //TODO: use centeded align-content property to peplace flexbox layout; 
+        display:flex; align-items:center; //align-content: center; waiting for widely browser supports
     }
 
     :global{
@@ -112,10 +112,10 @@
     #VCARD {
         z-index: calc(var(--base-i) + 1);
         position: sticky;
-        inset-inline-start: 0; //clamp(auto, var(--bp_xs) * infinity, 0);
+        inset-inline-start: 0; //clamp(auto, var(--bp_xs) * 99999, 0);
         block-size: var(--banner-block-size);
-        margin-inline-end: clamp(var(--banner-inline-size) * -3, var(--bp_xs) * -infinity, 0px);
-        translate: clamp(0px, var(--bp_xs) * infinity, var(--main-block-size) * .5);
+        margin-inline-end: clamp(var(--banner-inline-size) * -3, var(--bp_xs) * -99999, 0px);
+        translate: clamp(0px, var(--bp_xs) * 99999, var(--main-block-size) * .5);
     }
 
     main { display:contents; }
@@ -124,9 +124,9 @@
         position: absolute;
         translate:
             clamp(var(--main-block-size) * .5 - var(--banner-block-size) - var(--grid-gutter) - (100% - var(--banner-block-size)) * .5,
-                var(--bp_m) * -infinity,
+                var(--bp_m) * -99999,
                     clamp(var(--main-block-size) * .5 - var(--banner-block-size) - var(--grid-gutter),
-                        var(--bp_xs) * -infinity,
+                        var(--bp_xs) * -99999,
                         0px));
         overflow: hidden;
     }
@@ -135,7 +135,7 @@
         --translate1: calc(var(--banner-block-size) * -.5);
         --translate2:
             calc(-1 * var(--grid-gutter) - var(--banner-block-size) - var(--banner-block-size) * .5 - clamp(
-                0px, var(--bp_l) * infinity, var(--grid-gutter) + var(--banner-block-size)))
+                0px, var(--bp_l) * 99999, var(--grid-gutter) + var(--banner-block-size)))
             calc(50cqi - var(--grid-gutter) - var(--s1));
         max-block-size: min(var(--banner-block-size) * 4 + var(--grid-gutter) * 5, 100% - var(--banner-block-size));
         padding-block: var(--grid-gutter);
