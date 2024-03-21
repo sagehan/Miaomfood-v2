@@ -82,7 +82,7 @@
 	.this\.menu .subsection > h1 {font-size: var(--s1);}
 
 	/**Layout
-   */
+	 */
 	.this\.menu {
 		--drinky-block-size: calc((var(--grid-max-width) - var(--grid-gutter) * 3) * 4 / 12);
 		--tasty-block-size : calc((var(--grid-max-width) - var(--grid-gutter) * 3) * 8 / 12);		

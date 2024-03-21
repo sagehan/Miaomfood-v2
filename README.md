@@ -1,5 +1,8 @@
+[![Bun](https://img.shields.io/badge/bun-1.0.33-black.svg?logo=Bun)](https://bun.sh)
+[![Svelte](https://img.shields.io/badge/svelte-4.0.5-FF3E00.svg?logo=svelte)](https://svelte.dev/)
+
 # Intro
-Now only Chrome browsers are well supported!
+WIP - now only Chrome browsers are well supported!
 
 
 ## Developing
