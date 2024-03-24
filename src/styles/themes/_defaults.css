@@ -72,7 +72,7 @@
     accent-color    : var(--primary_cl);
     scrollbar-color : var(--primary_cl) transparent;
     scrollbar-gutter: stable;
-    scrollbar-width : none;
+    scrollbar-width : thin;
     /*}*/
 }
 :root::-webkit-scrollbar { width:0px; }

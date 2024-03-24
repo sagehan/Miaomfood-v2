@@ -1,8 +1,14 @@
 <script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+    import Lenis from '@studio-freight/lenis';
+
+    import { onMount } from 'svelte';
+    import { get } from 'svelte/store';
+
     import rdfParser from 'rdf-parse';
     import Streamify from 'streamify-string';
     import { init, entity, SVSVQuery } from '$lib/store/entitiesStore';
-    import { get } from 'svelte/store';
     export let data;
 
     /** @type { string } */
@@ -22,6 +28,22 @@
             console.error('Error init rdfStore:', error);
         }
     })();
+
+    onMount(() => {
+        const lenis = new Lenis({
+            infinite: true
+        });
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        gsap.ticker.add((time)=>{
+            lenis.raf(time * 1000)
+        })
+
+        gsap.ticker.lagSmoothing(0)
+
+        lenis.on('scroll', ScrollTrigger.update)
+    })
 </script>
 
 <slot></slot>
