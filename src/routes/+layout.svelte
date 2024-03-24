@@ -4,20 +4,15 @@
     import Lenis from '@studio-freight/lenis';
 
     import { onMount } from 'svelte';
-    import { get } from 'svelte/store';
 
     import rdfParser from 'rdf-parse';
     import Streamify from 'streamify-string';
     import { init, entity, SVSVQuery } from '$lib/store/entitiesStore';
     export let data;
 
-    /** @type { string } */
-    let name;
-
     (async function state() {
         try {
-            const store = get(entity);
-            if (store.loading) {
+            if ($entity.loading) {
                 const quadStream = rdfParser.parse(Streamify(data.result),
                     {contentType: 'text/turtle', baseIRI: 'http://schema.org/' });
                 /*quadStream.on('end', () => {

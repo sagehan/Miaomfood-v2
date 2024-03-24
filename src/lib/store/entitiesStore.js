@@ -3,7 +3,7 @@ import PrefixMap from '@rdfjs/prefix-map';
 import { storeStream } from "rdf-store-stream";
 import { RdfStore } from 'rdf-stores';
 import { QueryEngine } from '@comunica/query-sparql-rdfjs';
-import { get, readonly, writable } from 'svelte/store';
+import { map } from 'nanostores';
 
 const sparqlEngine = new QueryEngine();
 
@@ -14,36 +14,32 @@ const prefixes = new PrefixMap([
     ['miaomfood', rdf.namedNode('https://miaomfood.com/')]
 ], { factory: rdf });
 
-// reload rdf data exported from server into memory on the client-side
-const entityStore = (() => {
-    const { subscribe, set, update } = writable({
-        loading: true,
-        rdfStore: RdfStore.createDefault()
-    });
-    return {
-        subscribe,
-        set,
-        update,
-    }
-})();
+/**
+ * @typedef entityObj
+ * @prop {boolean} loading indicate loading status for the RDF store
+ * @prop {RdfStore<Quad>} rdfStore the in-memory RDF store itself
+ */
 
-const entity = readonly(entityStore);
+/**
+ * @type {import('nanostores').MapStore<entityObj>}
+ */
+const entity = map({
+    loading: true,
+    rdfStore: RdfStore.createDefault()
+})
 
 /**
  *
  * @param {import('@rdfjs/types').Stream} quadStream
+ * @returns {Promise<void>}
  */
 async function init (quadStream) {
-    const store = get(entityStore);
-    if (store.loading) {
-        entityStore.set({
+    if (entity.get().loading) {
+        entity.set({
             loading: false,
             rdfStore: await storeStream(quadStream)});
-        return entityStore;
     } else {
-        //this should be never happen
-        console.log('you have been catched!');
-        return entityStore;
+        console.log('you have been catched!'); //this should be never happen
     }
 }
 
@@ -55,7 +51,7 @@ async function init (quadStream) {
  * @returns {Promise<String>}
  */
 async function SVSVQuery(queryStr) {
-    const store = get(entity);
+    const store = entity.get();
     if (!store.loading) {
         return await sparqlEngine.queryBindings(`
             PREFIX : <http://schema.org/>
@@ -78,7 +74,7 @@ async function SVSVQuery(queryStr) {
  * @returns {Promise<Array<string>>}
  */
 async function SVMVQuery(queryStr) {
-    const store = get(entity);
+    const store = entity.get();
     if (!store.loading) {
         return await sparqlEngine.queryBindings(`
             PREFIX : <http://schema.org/>
@@ -105,7 +101,7 @@ async function SVMVQuery(queryStr) {
  * @returns {Promise<object>}
  */
 async function MVSVQuery(queryStr) {
-    const store = get(entity);
+    const store = entity.get();
     if (!store.loading) {
         return await sparqlEngine.queryBindings(`
             PREFIX : <http://schema.org/>
@@ -137,7 +133,7 @@ async function MVSVQuery(queryStr) {
  * @returns {Promise<Array<Array<object>>>}
  */
 async function MVMVQuery(queryStr) {
-    const store = get(entity);
+    const store = entity.get();
     if (!store.loading) {
         return await sparqlEngine.queryBindings(`
             PREFIX : <http://schema.org/>
