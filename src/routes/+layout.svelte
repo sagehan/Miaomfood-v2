@@ -8,6 +8,7 @@
     import rdfParser from 'rdf-parse';
     import Streamify from 'streamify-string';
     import { init, entity, SVSVQuery } from '$lib/store/entitiesStore';
+    import { lenisStore as lenis } from '$lib/store/lenis';
     export let data;
 
     (async function state() {
@@ -25,19 +26,20 @@
     })();
 
     onMount(() => {
-        const lenis = new Lenis({
+        const lenisInstance = new Lenis({
             infinite: true
         });
+        lenis.set(lenisInstance);
 
         gsap.registerPlugin(ScrollTrigger);
 
         gsap.ticker.add((time)=>{
-            lenis.raf(time * 1000)
+            $lenis.raf(time * 1000)
         })
 
         gsap.ticker.lagSmoothing(0)
 
-        lenis.on('scroll', ScrollTrigger.update)
+        $lenis.on('scroll', ScrollTrigger.update)
     })
 </script>
 

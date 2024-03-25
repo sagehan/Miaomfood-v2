@@ -37,7 +37,7 @@
 {:else}
   <figure class="card--cover">
     <img src="./src/lib/assets/logo.svg" alt="logo"/>
-    <figcaption>{eateryInfo[':name'] ? eateryInfo[':name'] : loadingText}<small>{eateryInfo[':description']}</small></figcaption>
+    <figcaption>{eateryInfo[':name'] ?? loadingText}<small>{eateryInfo[':description'] ?? ''}</small></figcaption>
   </figure>
   <figure>
     <figcaption class="stamped">关注微信</figcaption>
