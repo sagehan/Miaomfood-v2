@@ -7,7 +7,7 @@ const rdfDB = await storeStream(rdfParser.parse(createReadStream(
     'src/lib/store/miaomfood.n3'), { contentType: 'text/n3' }));
 const sparqlEngine = new QueryEngine();
 
-async function state () {
+async function state() {
     return await sparqlEngine.query(`
         PREFIX : <http://schema.org/>
         CONSTRUCT WHERE  { ?s ?p ?o }`,

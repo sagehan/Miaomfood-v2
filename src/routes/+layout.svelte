@@ -3,13 +3,13 @@
     import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
     import Lenis from '@studio-freight/lenis';
 
-    import { onMount } from 'svelte';
-
     import rdfParser from 'rdf-parse';
     import Streamify from 'streamify-string';
     import { init, entity, SVSVQuery } from '$lib/store/entitiesStore';
     import { lenisStore as lenis } from '$lib/store/lenis';
-    export let data;
+
+    /** @type {{data: import('./$types').LayoutData}} */
+    let { data } = $props();
 
     (async function state() {
         try {
@@ -25,7 +25,7 @@
         }
     })();
 
-    onMount(() => {
+    $effect(() => {
         const lenisInstance = new Lenis({
             infinite: true
         });

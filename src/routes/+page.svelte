@@ -5,11 +5,17 @@
     import Cart from '$lib/Cart.svelte';
 
     /**
-     * @type {boolean}
+     * @typedef PageProps
+     * @prop {boolean} collapsed
+     * @prop {boolean} isEmptyCart
      */
-    export let collapsed = true, isEmptyCart = false;
 
-    $: open = !isEmptyCart;
+    let {
+        collapsed   = true,
+        isEmptyCart = false
+    } = /** @type {PageProps} */ ($props());
+
+    let open = $derived(!isEmptyCart);
 </script>
 
 <header id="VCARD"><StickyBanner /></header>

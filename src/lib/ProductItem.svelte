@@ -1,8 +1,12 @@
 <script>
     import { MVSVQuery, MVMVQuery } from '$lib/store/entitiesStore';
 
-    /** @type { string } */
-    export let productID;
+    /**
+     * @typedef ItemProps
+     * @prop { string} productID
+     */
+
+    let { productID } = /** @type {ItemProps} */ ($props());
 
     /**
      * get all the ':MenuItem's of a specific ':MenuSection',

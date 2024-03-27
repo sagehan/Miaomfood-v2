@@ -38,7 +38,10 @@
         :position ?pos}
       ORDER BY ?pos`);
 
-	$: $entity.rdfStore, getSections();
+	$effect(() => {
+		getSections();
+		console.log('in effect:', $effect.active());
+	});
 </script>
 
 <div class="this.menu" style="display:contents;">

@@ -1,12 +1,12 @@
 <script>
-	/**
-     * @type {boolean}
-     */
-	export let open;
-	export let
-		DateRange = new Date().toISOString().slice(0, -8), //TODO: get local ISO datetime string
-		min = DateRange,
-		max = DateRange;
+	/** @type {{open: boolean}} */
+	let { open } = $props();
+
+	/** @this {HTMLInputElement} */
+	function oninput() {
+		const parentNode = /** @type {HTMLElement} */ (this?.parentNode);
+		if (parentNode) {parentNode.dataset.content = this.value}
+	}
 </script>
 
 <dialog {open} class="this.cart">
@@ -26,7 +26,7 @@
 						id="coupon-code" name="coupon-code"
 						type="text"
 						size="1"
-						oninput="this.parentNode.dataset.content = this.value" />
+						{oninput}/>
 					<td role="cell" class="numerical">-3</td>
 				<tr role="row">
 					<th role="rowheader" colspan="3">总计
@@ -37,7 +37,7 @@
 						id="comment" name="comment"
 						type="text"
 						size="1"
-						oninput="this.parentNode.dataset.content = this.value" />
+						{oninput} />
 					<td role="cell"></td>
 			</tfoot>
 			<tbody role="rowgroup">
@@ -65,7 +65,7 @@
 							id="preorder-date" name="preorder-date"
 							size="2"
 							aria-describedby="date_confirm"
-							oninput="this.parentNode.dataset.content = this.value" />
+							{oninput} />
 						<!--TODO: a11y-->
 						<output
 							id="date_confirm"
@@ -81,7 +81,7 @@
 							type="time"
 							id="preorder-time" name="preorder-time"
 							size="4"
-							oninput="this.parentNode.dataset.content = this.value" />
+							{oninput} />
 					<td role="cell"></td>
 				<tr role="row">
 					<th role="rowheader"><label for="addressLocality">城市</label><td role="cell" colspan="2"><input
@@ -97,20 +97,20 @@
 						type="text"						
 						required
 						size="1"
-						oninput="this.parentNode.dataset.content = this.value" /><td role="cell"></td>
+						{oninput} /><td role="cell"></td>
 				<tr role="row">
 					<th role="rowheader"><label for="customer-residential">建筑</label><td role="cell" colspan="2"><input
 						id="customer-residential" name="customer-residential"
 						type="text"
 						required
 						size="1"
-						oninput="this.parentNode.dataset.content = this.value" /><td role="cell"></td>
+						{oninput} /><td role="cell"></td>
 				<tr role="row">
 					<th role="rowheader"><label for="customer-room">房号</label><td role="cell" colspan="2"><input
 						id="customer-room" name="customer-room"
 						type="text"
 						size="1"
-						oninput="this.parentNode.dataset.content = this.value" /><td role="cell"></td>
+						{oninput} /><td role="cell"></td>
 				<tr role="row">
 					<th role="rowheader"><label for="customer-telephone">电话</label><td role="cell" colspan="2"><input
 						id="customer-telephone" name="customer-telephone"
@@ -121,7 +121,7 @@
 						inputmode="tel" autocomplete="tel"
 						pattern="^1[3|5|7|8][0-9]{9}$" title="须为11位手机号或7位乌市座机号!"
 						size="7"
-						oninput="this.parentNode.dataset.content = this.value" />
+						{oninput} />
 						<output><small>须为<span class="numerical">11</span>位手机号，<br/>或7位乌市座机号！</small></output>
 						<td role="cell"></td>
 				<tr role="row">
@@ -133,7 +133,7 @@
 						spellcheck="false"
 						pattern="^[a-zA-Z\u4e00-\u9fa5]{2,8}$" title="须为字数二至八的中文或英文!"
 						size="4"
-						oninput="this.parentNode.dataset.content = this.value" /><td role="cell"></td>
+						{oninput} /><td role="cell"></td>
 				</tr>
 			<tbody role="rowgroup">
 				<tr role="row"><th role="columnheader" colspan="4" scope="rowgroup" id="payment">付款方式</th>
