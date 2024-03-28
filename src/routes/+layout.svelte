@@ -8,8 +8,12 @@
     import { init, entity, SVSVQuery } from '$lib/store/entitiesStore';
     import { lenisStore as lenis } from '$lib/store/lenis';
 
-    /** @type {{data: import('./$types').LayoutData}} */
-    let { data } = $props();
+    /** @type {{
+     * data: import('./$types').LayoutData,
+     * children: import('svelte').Snippet
+     * }}
+     */
+    let { data, children } = $props();
 
     (async function state() {
         try {
@@ -43,4 +47,4 @@
     })
 </script>
 
-<slot></slot>
+{@render children()}
