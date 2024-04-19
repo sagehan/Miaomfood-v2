@@ -30,7 +30,7 @@
   },
   "type": "module",
   "dependencies": {
-    "@comunica/query-sparql-rdfjs": "^2.10.0",
+    "@comunica/query-sparql-rdfjs": "^3.0.3",
     "@rdfjs/data-model": "^2.0.1",
     "@rdfjs/prefix-map": "^0.1.1",
     "@studio-freight/lenis": "^1.0.42",
